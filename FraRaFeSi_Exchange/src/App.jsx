@@ -1,11 +1,16 @@
 import "./App.css";
+import { useState } from "react";
 import Splash from "./components/Splash";
-import { WalletCard } from "./components/WalletCard";
-
+import AppContent from "./components/AppContent";
 function App() {
+  const [page, setPage] = useState("splash");
   return (
-    <div className="max-w-4xl mx-auto bg-grayBG">
-      <Splash />
+    <div className="h-screen  bg-grayBG w-full ">
+      {page === "splash" ? (
+        <Splash setPageHandler={setPage} />
+      ) : (
+        <AppContent page={page} setPage={setPage} />
+      )}
     </div>
   );
 }

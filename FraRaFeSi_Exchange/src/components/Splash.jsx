@@ -1,7 +1,7 @@
 import LogoApp from "../assets/logoApp.png";
-export default function Splash() {
+export default function Splash({ setPageHandler }) {
   return (
-    <div className="flex justify-center items-center m-auto">
+    <div className="flex  h-full ">
       <div className="flex flex-col justify-evenly p-4">
         <div>
           <img className="w-full max-w-xs" src={LogoApp} />
@@ -11,7 +11,10 @@ export default function Splash() {
           <h1 className="text-4xl font-bold text-center">FraRaFeSi</h1>
           <div className="flex flex-col gap-10">
             <p className="text-center text-2xl">Exchange</p>
-            <button className="w-full rounded-full bg-blue-500 px-6 py-2 font-bold text-grayBG">
+            <button
+              className="w-full px-6 py-2 font-bold text-violet border-2 rounded-full hover:bg-grayBG"
+              onClick={() => setPageHandler("wallet")}
+            >
               Entra
             </button>
           </div>
