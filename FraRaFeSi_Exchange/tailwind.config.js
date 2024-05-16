@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {},
     colors: {
-      grayBG: "#1b1b35",
+      grayBG: "#19182f",
       bluelight: "#27c4ff",
       greenwater: "#27c3ff",
       violet: "#653ffe",

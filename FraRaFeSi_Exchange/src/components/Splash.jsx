@@ -1,7 +1,7 @@
 import LogoApp from "../assets/logoApp.png";
 export default function Splash({ setPageHandler }) {
   return (
-    <div className="flex  h-full ">
+    <div className="flex  h-full justify-center">
       <div className="flex flex-col justify-evenly p-4">
         <div>
           <img className="w-full max-w-xs" src={LogoApp} />

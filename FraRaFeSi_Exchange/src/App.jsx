@@ -5,7 +5,7 @@ import AppContent from "./components/AppContent";
 function App() {
   const [page, setPage] = useState("splash");
   return (
-    <div className="h-screen  bg-grayBG w-full ">
+    <div className="h-screen  bg-grayBG max-w-xl mx-auto">
       {page === "splash" ? (
         <Splash setPageHandler={setPage} />
       ) : (

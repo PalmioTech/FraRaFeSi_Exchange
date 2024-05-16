@@ -24,7 +24,7 @@ export default function Navbar({ page, setPage }) {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 mx-auto max-w-3xl w-full px-4 bg-violet shadow rounded-t-3xl">
+    <div className="fixed bottom-0 left-0 right-0 max-w-xl mx-auto px-4 bg-violet shadow rounded-t-3xl">
       <div className=" flex justify-between mt-auto py-4">
         {navbar.map((nav, index) => (
           <button
