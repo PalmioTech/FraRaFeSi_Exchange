@@ -1,4 +1,4 @@
-export function BuyButtonIcon() {
+export function SwapIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@ export function BuyButtonIcon() {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25"
+        d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
       />
     </svg>
   );
