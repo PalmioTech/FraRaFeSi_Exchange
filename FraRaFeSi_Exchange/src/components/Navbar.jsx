@@ -1,6 +1,6 @@
-import WalletIcon from "./WalletIcon";
-import HomeIcon from "./HomeIcon.jsx";
-import ProfileIcon from "./ProfileIcon";
+import WalletIcon from "../assets/WalletIcon";
+import HomeIcon from "../assets/HomeIcon.jsx";
+import ProfileIcon from "../assets/ProfileIcon";
 
 import clsx from "clsx";
 
