@@ -24,9 +24,7 @@ export function RegisterForm() {
           type="name"
           name="email"
           id="email"
-          className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-          data-rounded="rounded-lg"
-          data-primary="blue-500"
+          className="block w-full px-4 py-3 mb-4 border  border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 text-blackText "
           placeholder="Nominativo"
         />
         <input
@@ -35,10 +33,8 @@ export function RegisterForm() {
           name="email"
           id="email"
           className="block w-full px-4
-        py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg
-        focus:ring focus:ring-blue-500 focus:outline-none"
-          data-rounded="rounded-lg"
-          data-primary="blue-500"
+        py-3 mb-4 border  border-transparent border-gray-200 rounded-lg
+        focus:ring focus:ring-blue-500 text-blackText "
           placeholder="Indirizzo Email"
         />
         <input
@@ -46,17 +42,11 @@ export function RegisterForm() {
           type="password"
           name="password"
           id="password"
-          className="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-          data-rounded="rounded-lg"
-          data-primary="blue-500"
+          className="block w-full px-4 py-3 mb-4 border  border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 text-blackText "
           placeholder="Password"
         />
         <div className="block">
-          <button
-            className="w-full px-3 py-4 font-medium text-white bg-violet rounded-lg"
-            data-primary="blue-600"
-            data-rounded="rounded-lg"
-          >
+          <button className="w-full px-3 py-4 font-medium text-white bg-violet rounded-lg">
             Registrati
           </button>
         </div>

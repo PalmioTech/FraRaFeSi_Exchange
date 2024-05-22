@@ -11,6 +11,8 @@ export default {
       green: "#25b461",
       redlight: "#eb4747",
       whiteText: "#e4eeff",
+      blackText: "#1b1b35",
+      lime: "#ccff00",
     },
   },
   plugins: [],

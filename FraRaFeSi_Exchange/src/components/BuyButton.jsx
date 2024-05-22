@@ -1,6 +1,6 @@
 import { BuyButtonIcon } from "../assets/BuyButtonIcon";
 import { DepositIcon } from "../assets/DepositIcon";
-import { SellIcon } from "./SellIcon";
+import { SellIcon } from "../assets/SellIcon";
 import { SwapIcon } from "../assets/SwapIcon";
 
 export function BuyButton() {
