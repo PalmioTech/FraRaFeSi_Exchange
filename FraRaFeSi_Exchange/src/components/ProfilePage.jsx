@@ -5,16 +5,13 @@ export default function ProfilePage() {
     <div className="py-8 px-4">
       <div className="flex justify-center mb-8">
         <button>
-          <img src={avatarBatman} alt="Avatar" className="max-w-10" />
+          <img src={avatarBatman} alt="Avatar" className="max-w-32" />
         </button>
       </div>
       <div className="max-w-3xl mx-auto">
-        <div className="shadow-lg rounded-lg mb-8 border border-violet">
-          <div className="px-6 py-5 border-b border-violet">
+        <div className="shadow-lg rounded-lg mb-6 border border-violet">
+          <div className="p-4 border-b border-violet">
             <h2 className="text-xl font-bold ">Profile</h2>
-            <p className="mt-1 text-sm">
-              Personal details and contact information.
-            </p>
           </div>
           <div className="px-6 py-5">
             <div className="grid grid-cols-1 gap-x-4 gap-y-6">
@@ -36,7 +33,7 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="shadow-lg rounded-lg mb-8  border border-violet">
-          <div className="px-6 py-5 border border-violet">
+          <div className="px-6 py-5 border-b border-violet">
             <h2 className="text-lg font-bold">Wallet</h2>
             <p className="mt-1 text-sm ">Your crypto wallet details.</p>
           </div>
