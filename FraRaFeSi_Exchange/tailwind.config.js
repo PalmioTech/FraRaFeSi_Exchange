@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "custom-gradient":
+          "linear-gradient(90deg, rgba(101,63,254,1) 51%, rgba(39,196,255,1) 100%)",
+      },
+    },
     colors: {
       grayBG: "#19182f",
       bluelight: "#27c4ff",
