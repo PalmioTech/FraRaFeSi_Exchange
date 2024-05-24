@@ -10,25 +10,25 @@ export function BuyButton() {
         <button className="flex justify-center max-w-10 rounded-full bg-violet w-full py-2 mx-2 mt-3 hover:outline hover:outline-2 hover:outline-greenwater">
           <BuyButtonIcon />
         </button>
-        <span className="mt-2 text-whiteText">Buy</span>
+        <span className="mt-2 text-blackText">Buy</span>
       </div>
       <div className="flex flex-col items-center mx-4 my-3">
         <button className="flex justify-center max-w-10 rounded-full bg-violet w-full py-2 mx-2 mt-3 hover:outline hover:outline-2 hover:outline-greenwater">
           <SellIcon />
         </button>
-        <span className="mt-2 text-whiteText">Sell</span>
+        <span className="mt-2 text-blackText">Sell</span>
       </div>
       <div className="flex flex-col items-center mx-4 my-3">
         <button className="flex justify-center max-w-10 rounded-full bg-violet w-full py-2 mx-2 mt-3 hover:outline hover:outline-2 hover:outline-greenwater">
           <SwapIcon />
         </button>
-        <span className="mt-2 text-whiteText">Swap</span>
+        <span className="mt-2 text-blackText">Swap</span>
       </div>
       <div className="flex flex-col items-center mx-4 my-3">
         <button className="flex justify-center max-w-10 rounded-full bg-violet w-full py-2 mx-2 mt-3 hover:outline hover:outline-2 hover:outline-greenwater">
           <DepositIcon />
         </button>
-        <span className="mt-2 text-whiteText">Deposit</span>
+        <span className="mt-2 text-blackText">Deposit</span>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { Assets } from "./Assets";
 import { BuyButton } from "./BuyButton";
 import ProfilePage from "./ProfilePage";
 import { Sidebar } from "./Sidebar";
@@ -9,6 +10,7 @@ export default function WalletPage() {
       <Sidebar />
       <WalletCard />
       <BuyButton />
+      <Assets />
     </div>
   );
 }
