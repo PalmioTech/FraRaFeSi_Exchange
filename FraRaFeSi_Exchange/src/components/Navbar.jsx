@@ -9,7 +9,7 @@ export default function Navbar({ page, setPage }) {
     {
       name: "Home",
       icon: HomeIcon,
-      page: "splash",
+      page: "home",
     },
     {
       name: "Wallet",

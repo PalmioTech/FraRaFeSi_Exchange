@@ -4,12 +4,25 @@ export function RegisterForm() {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+
   function handleSubmit(event) {
     event.preventDefault();
     const name = nameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password, name);
+    registerUser({ name, email, password });
+  }
+  function registerUser({ name, email, password }) {
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    })
+      .then((response) => response.json())
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   }
 
   return (

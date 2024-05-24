@@ -3,7 +3,14 @@
     {
       "name": "Simone Nataloni",
       "email": "simone.nataloni@gmail.com",
-      "password": "carbonara"
+      "password": "carbonara",
+      "id": "2ffe"
+    },
+    {
+      "id": "91ee",
+      "name": "Raffuz",
+      "email": "raffaele11596@gmail.com",
+      "password": "pizza"
     }
   ]
 }
