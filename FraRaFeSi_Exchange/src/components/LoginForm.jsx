@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 
-export function LoginForm() {
+export function LoginForm({ setIsAuthenticated, setPageHandler }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [posts, setPosts] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
     const email = emailRef.current.value;
@@ -23,6 +23,7 @@ export function LoginForm() {
     );
     if (user) {
       setIsAuthenticated(true);
+      setPageHandler("wallet");
     } else {
       setIsAuthenticated(false);
     }

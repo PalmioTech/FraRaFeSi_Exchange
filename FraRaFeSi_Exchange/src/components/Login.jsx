@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LogoApp from "../assets/logoApp.png";
 import { LoginForm } from "./LoginForm";
-export default function Login({ setView }) {
+export default function Login({ setView, setIsAuthenticated, setPageHandler }) {
   return (
     <div className="flex  h-full justify-center">
       <div className="flex flex-col justify-evenly p-4">
@@ -14,7 +14,10 @@ export default function Login({ setView }) {
             <h3 className="mb-2 text-2xl font-medium text-center">
               Effettua l'accesso
             </h3>
-            <LoginForm />
+            <LoginForm
+              setIsAuthenticated={setIsAuthenticated}
+              setPageHandler={setPageHandler}
+            />
             <button
               className="w-full px-6 py-2"
               onClick={() => setView("register")}
