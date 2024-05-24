@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+import ProfilePage from "./ProfilePage";
 import WalletPage from "./WalletPage";
 
 export default function AppContent({ page, setPage }) {
@@ -6,6 +7,7 @@ export default function AppContent({ page, setPage }) {
     <main>
       <div>{page === "wallet" && <WalletPage />}</div>
       <Navbar page={page} setPage={setPage} />
+      <div>{page === "profile" && <ProfilePage />}</div>
     </main>
   );
 }

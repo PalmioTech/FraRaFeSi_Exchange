@@ -1,4 +1,5 @@
 import { BuyButton } from "./BuyButton";
+import ProfilePage from "./ProfilePage";
 import { Sidebar } from "./Sidebar";
 import { WalletCard } from "./WalletCard";
 

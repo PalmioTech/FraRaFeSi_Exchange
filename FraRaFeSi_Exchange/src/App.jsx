@@ -6,7 +6,7 @@ function App() {
   const [page, setPage] = useState("splash");
   return (
     <div className="h-screen bg-gradient-to-r from-grayBG max-w-xl mx-auto">
-      {page === "splash" ? (
+      {page === "walletpage" ? (
         <Splash setPageHandler={setPage} />
       ) : (
         <AppContent page={page} setPage={setPage} />
