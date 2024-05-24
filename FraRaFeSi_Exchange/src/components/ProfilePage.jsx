@@ -8,7 +8,7 @@ export default function ProfilePage() {
           <img src={avatarBatman} alt="Avatar" className="max-w-32" />
         </button>
       </div>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto text-whiteText">
         <div className="shadow-lg rounded-lg mb-6 border border-violet">
           <div className="p-4 border-b border-violet">
             <h2 className="text-xl font-bold ">Profile</h2>

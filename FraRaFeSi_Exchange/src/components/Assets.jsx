@@ -8,21 +8,19 @@ import doge from "../assets/doge.svg";
 export function Assets() {
   return (
     <div className="max-h-screen flex items-center justify-center px-3 py-5">
-      <div className="w-full border-4  rounded-3xl shadow-lg relative">
-        <div className="w-full pt-3 pb-8 px-4 text-white">
-          <div className="mb-5">
-            <input
-              type="text"
-              className="w-full text-white rounded-full border-2 px-3 py-1 text-sm"
-              placeholder="Search..."
-            />
-          </div>
-          <h1 className="text-3xl mb-4 p-2 border-b-2 border-gray-400">
+      <div className="w-full rounded-3xl shadow-xl shadow-violet relative">
+        <div className="w-full p-4 text-white">
+          <input
+            type="text"
+            className="w-full text-white rounded-full border-2 p-2 pl-4 text-sm"
+            placeholder="Search..."
+          />
+        </div>
+        <div className="bg-gray-50 px-2 text-whiteText">
+          <h1 className="text-3xl p-2 border-b-2 border-gray-400 mb-2">
             Market Overview
           </h1>
-        </div>
-        <div className="bg-gray-50 px-2">
-          <ul className="relative -top-10">
+          <ul>
             <li className="mb-2 p-3 shadow-lg rounded border-b-2 hover:border-violet flex items-center">
               <div className="w-16 text-3xl mr-3">
                 <img src={bitcoin} alt="Bitcoin" className="max-w-8" />

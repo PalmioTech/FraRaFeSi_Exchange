@@ -1,13 +1,31 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export function LoginForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [posts, setPosts] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   function handleSubmit(event) {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password);
+    fetch("http://localhost:3000/users")
+      .then((response) => response.json())
+      .then((posts) => {
+        setPosts(posts);
+        checkAuthentication(posts, email, password);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }
+  function checkAuthentication(users, email, password) {
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (user) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
   }
 
   return (

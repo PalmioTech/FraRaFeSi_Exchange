@@ -2,7 +2,7 @@ import pointed from "../assets/pointed.svg";
 import cryptoCoin from "../assets/crypto.svg";
 export function WalletCard() {
   return (
-    <div className="rounded-lg p-4 bg-gradient-to-r from-bluelight via-violet text-whiteText w-10/12 shadow-violet shadow-md self-center m-2">
+    <div className="rounded-lg p-4 bg-gradient-to-r from-whiteText to-violet text-blackText w-10/12 shadow-violet shadow-md self-center m-2">
       <div className="flex justify-between mb-2">
         <p className="text-xs ">Multi-Coin Wallet</p>
         <button className="max-w-6 ">

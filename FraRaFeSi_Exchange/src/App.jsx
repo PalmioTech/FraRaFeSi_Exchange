@@ -5,7 +5,7 @@ import AppContent from "./components/AppContent";
 function App() {
   const [page, setPage] = useState("splash");
   return (
-    <div className="min-h-screen bg-gradient-to-r from-grayBG max-w-xl mx-auto">
+    <div className="min-h-screen bg-blackText max-w-xl mx-auto">
       {page === "walletpage" ? (
         <Splash setPageHandler={setPage} />
       ) : (
