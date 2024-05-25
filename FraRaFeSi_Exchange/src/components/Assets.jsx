@@ -4,7 +4,7 @@ export function Assets() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(`https://api.geckoterminal.com/api/v2/tokens/info_recently_updated`, {
+    fetch(`	https://api.coincap.io/v2/assets`, {
       method: "GET",
       headers: { Accept: "application/json;version=20230302" },
     })
@@ -27,28 +27,27 @@ export function Assets() {
             placeholder="Search..."
           />
         </div>
-        <div className="bg-gray-50 px-2 text-whiteText border-t-violet shadow-xl shadow-violet">
+        <div className=" px-2 text-whiteText border-t-violet shadow-xl shadow-violet">
           <ul>
             {data &&
               data.slice(0, 6).map((token, index) => (
                 <li
                   key={index}
-                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center"
-                >
+                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center">
                   <div className="w-16 text-3xl mr-3">
-                    <img
+                    {/* <img
                       src={token.attributes.image_url}
-                      alt={token.attributes.name}
+                      alt={token.name}
                       className="max-w-8"
-                    />
+                    /> */}
                   </div>
                   <div className="w-full">
-                    {token.attributes.name}{" "}
+                    {token.name}{" "}
                     <span className="ml-3 text-gray-400">
-                      {token.attributes.symbol}
+                      {/* {token.attributes.symbol} */}
                     </span>
                   </div>
-                  <div className="text-green">+0.65%</div>
+                  <div className="text-green">{token.priceUsd}</div>
                 </li>
               ))}
           </ul>
