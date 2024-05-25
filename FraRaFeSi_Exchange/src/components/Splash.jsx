@@ -2,7 +2,11 @@ import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 
-export default function Splash({ setPageHandler, setIsAuthenticated }) {
+export default function Splash({
+  setPageHandler,
+  setIsAuthenticated,
+  setUserData,
+}) {
   const [view, setView] = useState("login");
 
   return (
@@ -12,6 +16,7 @@ export default function Splash({ setPageHandler, setIsAuthenticated }) {
           setIsAuthenticated={setIsAuthenticated}
           setView={setView}
           setPageHandler={setPageHandler}
+          setUserData={setUserData}
         />
       ) : (
         <Register setView={setView} />

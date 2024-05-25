@@ -28,10 +28,9 @@ export function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="w-full">
       <div
-        className="relative z-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg"
+        className="relative z-10 overflow-hidden  border-b-2 border-gray-300 rounded-lg"
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full"
-      >
+        data-rounded-max="rounded-full">
         <input
           ref={nameRef}
           type="name"

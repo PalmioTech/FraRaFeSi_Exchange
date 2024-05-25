@@ -1,7 +1,12 @@
 import { useState } from "react";
 import LogoApp from "../assets/logoApp.png";
 import { LoginForm } from "./LoginForm";
-export default function Login({ setView, setIsAuthenticated, setPageHandler }) {
+export default function Login({
+  setView,
+  setIsAuthenticated,
+  setPageHandler,
+  setUserData,
+}) {
   return (
     <div className="flex  h-full justify-center">
       <div className="flex flex-col justify-evenly p-4">
@@ -17,11 +22,11 @@ export default function Login({ setView, setIsAuthenticated, setPageHandler }) {
             <LoginForm
               setIsAuthenticated={setIsAuthenticated}
               setPageHandler={setPageHandler}
+              setUserData={setUserData}
             />
             <button
               className="w-full px-6 py-2"
-              onClick={() => setView("register")}
-            >
+              onClick={() => setView("register")}>
               Non hai l'account? Registrati!
             </button>
           </div>

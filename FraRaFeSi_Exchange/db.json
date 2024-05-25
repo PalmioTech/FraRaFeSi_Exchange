@@ -4,13 +4,17 @@
       "name": "Simone Nataloni",
       "email": "simone.nataloni@gmail.com",
       "password": "carbonara",
-      "id": "2ffe"
+      "id": "2ffe",
+      "balance": 740000,
+      "hash": "1A6dw3QrPmFDb6Cpy4CpU1Z2TzzMTJTezx"
     },
     {
       "id": "91ee",
       "name": "Raffuz",
       "email": "raffaele11596@gmail.com",
-      "password": "pizza"
+      "password": "pizza",
+      "balance": 1245000,
+      "hash": "1EhqCsVXaY5FqejW7dB5FrsgUZYGkqc6F3"
     }
   ]
 }
