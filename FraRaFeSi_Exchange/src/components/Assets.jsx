@@ -44,24 +44,32 @@ export function Assets() {
               filteredData.slice(0, 10).map((token, index) => (
                 <li
                   key={index}
-                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center"
-                >
-                  <div className="w-16 text-3xl mr-3">
-                    {/* <img
+                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center">
+                  {/* <div className="w-16 text-3xl mr-3">
+                    <img
                       src={token.attributes.image_url}
                       alt={token.name}
                       className="max-w-8"
-                    /> */}
-                  </div>
-                  <div className="w-full flex justify-between">
-                    <p>{token.name}</p>
-                    <p>{token.symbol}</p>
-                    <span className="ml-3 text-gray-400">
-                      {/* {token.attributes.symbol} */}
-                    </span>
-                  </div>
-                  <div className="text-green">
-                    {parseFloat(token.priceUsd).toFixed(4)}
+                    />
+                  </div> */}
+                  <div className="w-full flex justify-between items-center">
+                    <p className="w-16">
+                      {token.name}({token.symbol})
+                    </p>
+                    <p>
+                      {new Intl.NumberFormat("it-IT", {
+                        style: "decimal",
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).format(token.priceUsd)}
+                    </p>
+
+                    <p className="text-green">
+                      {parseFloat(token.changePercent24Hr)
+                        .toFixed(2)
+                        .replace(".", ",")}
+                      %
+                    </p>
                   </div>
                 </li>
               ))}
