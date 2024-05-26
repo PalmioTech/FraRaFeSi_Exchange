@@ -1,9 +1,20 @@
-export default function Exchange() {
+export default function Exchange({ setPage, userData }) {
+  const handleClick = () => {
+    setPage("wallet");
+  };
+  const { name, balance } = userData;
+
   return (
     <div className="flex items-center justify-center min-h-screen p-2">
-      <div className="flex flex-col gap-8 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
+      <div className="relative flex flex-col gap-8 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
+        <button
+          className="absolute top-0 right-2 p-2 font-bold  text-white"
+          onClick={handleClick}
+        >
+          x
+        </button>
         <h1 className="text-3xl text-center text-white font-semibold">
-          Crypto Exchange
+          {name}'s Crypto Exchange
         </h1>
 
         <div className="flex flex-col gap-6">

@@ -7,6 +7,7 @@ import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import WalletPage from "./WalletPage"; // Assicurati che il percorso sia corretto
 import Exchange from "./Exchange";
+import { useState } from "react";
 
 export default function AppContent({
   page,
@@ -27,8 +28,14 @@ export default function AppContent({
       </div>
       <div>{page === "profile" && <ProfilePage userData={userData} />}</div>
       <div>{page === "home" && <Home />}</div>
-      <div>{page === "exchange" && <Exchange setPage={setPage} />}</div>
-      <Navbar page={page} setPage={setPage} />
+      <div>
+        {page === "exchange" && (
+          <Exchange setPage={setPage} userData={userData} />
+        )}
+      </div>
+      <div>
+        {page !== "exchange" && <Navbar page={page} setPage={setPage} />}
+      </div>
     </main>
   );
 }

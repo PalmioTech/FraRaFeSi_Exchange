@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export function Assets() {
   const [data, setData] = useState(null);
+
   const [searchToken, setSearchToken] = useState("");
 
   useEffect(() => {
@@ -16,6 +17,7 @@ export function Assets() {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
   const handleSearchChange = (event) => {
     setSearchToken(event.target.value);
   };
@@ -46,7 +48,8 @@ export function Assets() {
               filteredData.slice(0, 10).map((token, index) => (
                 <li
                   key={index}
-                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center">
+                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center"
+                >
                   {/* <div className="w-16 text-3xl mr-3">
                     <img
                       src={token.attributes.image_url}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Assets } from "./Assets";
 import { BuyButton } from "./BuyButton";
 import ProfilePage from "./ProfilePage";
