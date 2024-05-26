@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export function RegisterForm() {
+  const [isRegistered, setIsRegistered] = useState(false);
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -12,17 +13,27 @@ export function RegisterForm() {
     const password = passwordRef.current.value;
     registerUser({ name, email, password });
   }
+
   function registerUser({ name, email, password }) {
     fetch("http://localhost:3000/users", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
     })
-      .then((response) => response.json())
-      .then((user) => {
-        console.log(user);
+      .then((response) => {
+        if (response.ok) {
+          setIsRegistered(true);
+        }
+        return response.json();
       })
       .catch((error) => console.error("Error fetching data:", error));
+  }
+  if (isRegistered) {
+    return (
+      <div className="w-full p-4 text-center bg-green-100 rounded-lg">
+        <p className="text-green-800">Registrazione avvenuta con successo!</p>
+      </div>
+    );
   }
 
   return (

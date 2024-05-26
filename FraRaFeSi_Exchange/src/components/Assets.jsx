@@ -26,13 +26,15 @@ export function Assets() {
       )
     : [];
   return (
-    <div className="max-h-screen flex items-center justify-center px-3 py-5">
-      <div className="w-full rounded-3xl  relative">
-        <h1 className="text-2xl p-2 underline mb-2 text-whiteText">Assets</h1>
+    <div className="max-h-screen flex items-center justify-center px-3 py-5 ">
+      <div className="w-full rounded-xl  relative shadow-lg shadow-violet">
+        <h1 className="text-2xl p-2   mb-2 ml-3 mt-3 text-whiteText">
+          Crypto Market
+        </h1>
         <div className="w-full p-4 text-white ">
           <input
             type="text"
-            className="w-full rounded-lg bg-transparent outline-violet p-3 pl-4 text-sm shadow-md shadow-violet  "
+            className="w-full rounded-lg bg-transparent outline-violet shadow-sm shadow-violet p-3 pl-4 text-sm   "
             placeholder="Search..."
             value={searchToken}
             onChange={handleSearchChange}
