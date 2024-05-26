@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export function Assets() {
   const [data, setData] = useState(null);
+  const [searchToken, setSearchToken] = useState("");
 
   useEffect(() => {
     fetch(`	https://api.coincap.io/v2/assets`, {
@@ -15,7 +16,15 @@ export function Assets() {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+  const handleSearchChange = (event) => {
+    setSearchToken(event.target.value);
+  };
 
+  const filteredData = data
+    ? data.filter((token) =>
+        token.name.toLowerCase().includes(searchToken.toLowerCase())
+      )
+    : [];
   return (
     <div className="max-h-screen flex items-center justify-center px-3 py-5">
       <div className="w-full rounded-3xl  relative">
@@ -23,17 +32,20 @@ export function Assets() {
         <div className="w-full p-4 text-white ">
           <input
             type="text"
-            className="w-full text-white rounded-full border-2 p-3 pl-4 text-sm shadow-lg shadow-violet"
+            className="w-full rounded-lg bg-transparent outline-violet p-3 pl-4 text-sm shadow-md shadow-violet  "
             placeholder="Search..."
+            value={searchToken}
+            onChange={handleSearchChange}
           />
         </div>
-        <div className=" px-2 text-whiteText border-t-violet shadow-xl shadow-violet">
+        <div className=" px-2 text-whiteText ">
           <ul>
             {data &&
-              data.slice(0, 6).map((token, index) => (
+              filteredData.slice(0, 10).map((token, index) => (
                 <li
                   key={index}
-                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center">
+                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center"
+                >
                   <div className="w-16 text-3xl mr-3">
                     {/* <img
                       src={token.attributes.image_url}
@@ -41,13 +53,16 @@ export function Assets() {
                       className="max-w-8"
                     /> */}
                   </div>
-                  <div className="w-full">
-                    {token.name}{" "}
+                  <div className="w-full flex justify-between">
+                    <p>{token.name}</p>
+                    <p>{token.symbol}</p>
                     <span className="ml-3 text-gray-400">
                       {/* {token.attributes.symbol} */}
                     </span>
                   </div>
-                  <div className="text-green">{token.priceUsd}</div>
+                  <div className="text-green">
+                    {parseFloat(token.priceUsd).toFixed(4)}
+                  </div>
                 </li>
               ))}
           </ul>

@@ -20,7 +20,7 @@ export default function AppContent({
           <WalletPage isAuthenticated={isAuthenticated} userData={userData} />
         )}
       </div>
-      <div>{page === "profile" && <ProfilePage />}</div>
+      <div>{page === "profile" && <ProfilePage userData={userData} />}</div>
       <div>{page === "home" && <Home />}</div>
       <Navbar page={page} setPage={setPage} />
     </main>

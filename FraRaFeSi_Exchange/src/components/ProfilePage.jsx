@@ -1,6 +1,7 @@
 import avatarBatman from "../assets/avatarBatman.svg";
 
-export default function ProfilePage() {
+export default function ProfilePage({ userData }) {
+  const { name, email, balance, hash } = userData;
   return (
     <div className="py-8 px-4">
       <div className="flex justify-center mb-8">
@@ -16,15 +17,15 @@ export default function ProfilePage() {
           <div className="px-6 py-5">
             <div className="grid grid-cols-1 gap-x-4 gap-y-6">
               <div>
-                <div className="text-sm font-medium">Username</div>
-                <div className="mt-1 text-sm ">johndoe</div>
+                <div className="text-sm font-bold ">Username</div>
+                <div className="mt-1 text-sm ">{name}</div>
               </div>
               <div>
-                <div className="text-sm font-medium ">Email address</div>
-                <div className="mt-1 text-sm">johndoe@example.com</div>
+                <div className="text-sm font-bold ">Email address</div>
+                <div className="mt-1 text-sm">{email}</div>
               </div>
               <div className="sm:col-span-2">
-                <div className="text-sm font-medium">Bio</div>
+                <div className="text-sm font-bold">Bio</div>
                 <div className="mt-1 text-sm ">
                   Crypto enthusiast and blockchain developer.
                 </div>
@@ -40,12 +41,12 @@ export default function ProfilePage() {
           <div className="px-6 py-5">
             <div className="grid grid-cols-1 gap-x-4 gap-y-6">
               <div className="sm:col-span-2">
-                <div className="text-sm font-medium">Wallet Address</div>
-                <div className="mt-1 text-sm">0x123456789abcdef</div>
+                <div className="text-sm font-bold">Wallet Address</div>
+                <div className="mt-1 text-sm">{hash}</div>
               </div>
               <div>
-                <div className="text-sm font-medium">Balance</div>
-                <div className="mt-1 text-sm">2.5 ETH</div>
+                <div className="text-sm font-bold">Balance</div>
+                <div className="mt-1 text-sm">$ {balance}</div>
               </div>
             </div>
           </div>

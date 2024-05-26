@@ -1,6 +1,7 @@
-import iconMenu from "../assets/icon-menu.svg";
+import logoApp from "../assets/logoApp.png";
 import cryptoImage from "../assets/crypto.svg";
 import avatarBatman from "../assets/avatarBatman.svg";
+
 export function Sidebar({ userData }) {
   const { name } = userData;
 
@@ -8,7 +9,7 @@ export function Sidebar({ userData }) {
     <div className="flex justify-between flex-row max-w-xl m-4">
       <div>
         <button>
-          <img src={iconMenu} className="max-w-8" />
+          <img src={logoApp} className="max-w-8" />
         </button>
       </div>
       <div>

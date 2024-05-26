@@ -1,7 +1,7 @@
 import pointed from "../assets/pointed.svg";
 import cryptoCoin from "../assets/crypto.svg";
 
-export function WalletCard({ isAuthenticated, userData }) {
+export function WalletCard({ userData }) {
   const { hash, balance } = userData;
 
   return (
@@ -13,7 +13,7 @@ export function WalletCard({ isAuthenticated, userData }) {
         </button>
       </div>
       <div className="flex justify-start mb-8">
-        <h1 className="text-3xl font-bold">${balance}</h1>
+        <h1 className="text-3xl font-bold">$ {balance}</h1>
       </div>
       <div className="flex justify-between">
         <p className="text-xs">{hash}</p>
