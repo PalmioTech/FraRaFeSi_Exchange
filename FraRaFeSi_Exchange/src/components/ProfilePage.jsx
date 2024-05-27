@@ -1,15 +1,29 @@
 import avatarBatman from "../assets/avatarBatman.svg";
 
-export default function ProfilePage({ userData }) {
+export default function ProfilePage({
+  setIsAuthenticated,
+  setUserData,
+  setPage,
+  userData,
+}) {
   const { name, email, balance, hash } = userData;
 
+  function handleLogout() {
+    sessionStorage.removeItem("userData");
+    setIsAuthenticated(false);
+    setUserData(null);
+    setPage("splash");
+  }
   return (
     <div className="py-8 px-4">
       <div className="flex flex-col items-center justify-center mb-8">
         <button>
           <img src={avatarBatman} alt="Avatar" className="max-w-32" />
         </button>
-        <button className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full ">
+        <button
+          onClick={handleLogout}
+          className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full "
+        >
           Log out
         </button>
       </div>

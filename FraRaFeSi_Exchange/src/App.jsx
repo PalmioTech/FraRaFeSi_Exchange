@@ -20,6 +20,8 @@ function App() {
           setPage={setPage}
           isAuthenticated={isAuthenticated}
           userData={userData}
+          setIsAuthenticated={setIsAuthenticated}
+          setUserData={setUserData}
         />
       )}
     </div>

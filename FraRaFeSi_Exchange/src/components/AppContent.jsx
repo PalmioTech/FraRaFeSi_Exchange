@@ -14,6 +14,8 @@ export default function AppContent({
   setPage,
   isAuthenticated,
   userData,
+  setIsAuthenticated,
+  setUserData,
 }) {
   return (
     <main>
@@ -26,7 +28,16 @@ export default function AppContent({
           />
         )}
       </div>
-      <div>{page === "profile" && <ProfilePage userData={userData} />}</div>
+      <div>
+        {page === "profile" && (
+          <ProfilePage
+            setIsAuthenticated={setIsAuthenticated}
+            setUserData={setUserData}
+            setPage={setPage}
+            userData={userData}
+          />
+        )}
+      </div>
       <div>{page === "home" && <Home />}</div>
       <div>
         {page === "exchange" && (
