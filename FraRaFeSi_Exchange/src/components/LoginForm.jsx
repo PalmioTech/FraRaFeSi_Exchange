@@ -1,10 +1,21 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export function LoginForm({ setIsAuthenticated, setPageHandler, setUserData }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isShaking, setIsShaking] = useState(false);
   const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const storedUserData = sessionStorage.getItem("userData");
+    if (storedUserData) {
+      const userData = JSON.parse(storedUserData);
+
+      setIsAuthenticated(true);
+      setUserData(userData);
+      setPageHandler("wallet");
+    }
+  }, [setIsAuthenticated, setPageHandler, setUserData]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -33,10 +44,11 @@ export function LoginForm({ setIsAuthenticated, setPageHandler, setUserData }) {
       };
       setIsAuthenticated(true);
       setUserData(userData);
-      console.log(userData); //da cancellare, solo per provo
+      sessionStorage.setItem("userData", JSON.stringify(userData));
       setPageHandler("wallet");
+      console.log(userData);
     } else {
-      setIsAuthenticated(true);
+      setIsAuthenticated(false);
       setIsShaking(true);
       setTimeout(() => {
         setIsShaking(false);
@@ -51,7 +63,8 @@ export function LoginForm({ setIsAuthenticated, setPageHandler, setUserData }) {
           isShaking ? "animate-shake" : ""
         }`}
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full">
+        data-rounded-max="rounded-full"
+      >
         <input
           ref={emailRef}
           type="text"

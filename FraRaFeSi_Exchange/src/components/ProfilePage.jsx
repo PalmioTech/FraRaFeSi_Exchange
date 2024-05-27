@@ -2,11 +2,15 @@ import avatarBatman from "../assets/avatarBatman.svg";
 
 export default function ProfilePage({ userData }) {
   const { name, email, balance, hash } = userData;
+
   return (
     <div className="py-8 px-4">
-      <div className="flex justify-center mb-8">
+      <div className="flex flex-col items-center justify-center mb-8">
         <button>
           <img src={avatarBatman} alt="Avatar" className="max-w-32" />
+        </button>
+        <button className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full ">
+          Log out
         </button>
       </div>
       <div className="max-w-3xl mx-auto text-whiteText">
