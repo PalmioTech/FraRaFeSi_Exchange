@@ -5,7 +5,7 @@ export function Assets() {
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
-
+  const [selectedCoin, setSelectedCoin] = useState(null);
   useEffect(() => {
     axios
       .get("/api/cryptocurrency/listings/latest")
@@ -18,6 +18,11 @@ export function Assets() {
         setError(error.message);
       });
   }, []);
+
+  const handleClickCoin = (coin) => {
+    setSelectedCoin(coin);
+    console.log(coin);
+  };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -46,11 +51,12 @@ export function Assets() {
         </div>
         <div className="px-2 text-whiteText border-t-violet shadow-xl shadow-violet mt-2">
           {error && <p className="text-red-500">{error}</p>}
-          <ul>
+          <ul className="max-h-96 overflow-y-auto">
             {filteredData &&
-              filteredData.slice(0, 10).map((token, index) => (
+              filteredData.slice(0, 50).map((token, index) => (
                 <li
                   key={index}
+                  onClick={handleClickCoin}
                   className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center justify-between truncate"
                 >
                   <div className=" text-xl mr-3 flex gap-4">
