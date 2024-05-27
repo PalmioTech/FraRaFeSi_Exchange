@@ -5,6 +5,7 @@ export function Assets() {
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     axios
@@ -21,6 +22,10 @@ export function Assets() {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+  const handleItemClick = (coin) => {
+    setSelectedItem(coin);
+    console.log(coin);
   };
 
   const filteredData = data?.filter(
@@ -46,12 +51,17 @@ export function Assets() {
         </div>
         <div className="px-2 text-whiteText border-t-violet shadow-xl shadow-violet mt-2">
           {error && <p className="text-red-500">{error}</p>}
-          <ul>
+          <ul className="max-h-96 overflow-y-auto">
             {filteredData &&
               filteredData.slice(0, 10).map((token, index) => (
                 <li
                   key={index}
-                  className="mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center justify-between truncate"
+                  onClick={() => handleItemClick(token)}
+                  className={`mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center justify-between truncate cursor-pointer ${
+                    selectedItem?.id === token.id
+                      ? "bg-custom-selected"
+                      : "bg-transparent"
+                  }`}
                 >
                   <div className=" text-xl mr-3 flex gap-4">
                     <img
