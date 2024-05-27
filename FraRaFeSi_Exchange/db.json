@@ -69,6 +69,14 @@
       "name": "prova@gmail.com",
       "email": "prova@gmail.com",
       "password": "prova"
+    },
+    {
+      "id": "8db5",
+      "name": "Federico Palmieri",
+      "email": "fede-palma@hotmail.it",
+      "password": "ciao1234",
+      "balance": 245000,
+      "hash": "1EhqCsVXaY5FqejW7dB5FrsgUZYGkqc6F3"
     }
   ]
 }
