@@ -9,41 +9,13 @@ import WalletPage from "./WalletPage"; // Assicurati che il percorso sia corrett
 import Exchange from "./Exchange";
 import { useState } from "react";
 
-export default function AppContent({
-  page,
-  setPage,
-  isAuthenticated,
-  userData,
-  setIsAuthenticated,
-  setUserData,
-}) {
+export default function AppContent({ page, setPage }) {
   return (
     <main>
-      <div>
-        {page === "wallet" && (
-          <WalletPage
-            isAuthenticated={isAuthenticated}
-            userData={userData}
-            setPage={setPage}
-          />
-        )}
-      </div>
-      <div>
-        {page === "profile" && (
-          <ProfilePage
-            setIsAuthenticated={setIsAuthenticated}
-            setUserData={setUserData}
-            setPage={setPage}
-            userData={userData}
-          />
-        )}
-      </div>
+      <div>{page === "wallet" && <WalletPage setPage={setPage} />}</div>
+      <div>{page === "profile" && <ProfilePage setPage={setPage} />}</div>
       <div>{page === "home" && <Home />}</div>
-      <div>
-        {page === "exchange" && (
-          <Exchange setPage={setPage} userData={userData} />
-        )}
-      </div>
+      <div>{page === "exchange" && <Exchange setPage={setPage} />}</div>
       <div>
         {page !== "exchange" && <Navbar page={page} setPage={setPage} />}
       </div>

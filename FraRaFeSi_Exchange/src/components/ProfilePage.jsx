@@ -1,17 +1,18 @@
 import avatarBatman from "../assets/avatarBatman.svg";
+import { logout } from "../actions/actions";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-export default function ProfilePage({
-  setIsAuthenticated,
-  setUserData,
-  setPage,
-  userData,
-}) {
+export default function ProfilePage({ setPage }) {
+  const userData = useSelector((state) => state.user);
+
   const { name, email, balance, hash } = userData;
+  const dispatch = useDispatch();
 
   function handleLogout() {
     sessionStorage.removeItem("userData");
-    setIsAuthenticated(false);
-    setUserData(null);
+    dispatch(logout()); // Dispatch dell'azione di logout
+
     setPage("splash");
   }
   return (
@@ -22,8 +23,7 @@ export default function ProfilePage({
         </button>
         <button
           onClick={handleLogout}
-          className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full "
-        >
+          className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full ">
           Log out
         </button>
       </div>

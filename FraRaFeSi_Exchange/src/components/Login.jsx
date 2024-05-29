@@ -3,7 +3,7 @@ import LogoApp from "../assets/logoApp.png";
 import { LoginForm } from "./LoginForm";
 export default function Login({
   setView,
-  setIsAuthenticated,
+
   setPageHandler,
   setUserData,
 }) {
@@ -20,7 +20,6 @@ export default function Login({
               Effettua l'accesso
             </h3>
             <LoginForm
-              setIsAuthenticated={setIsAuthenticated}
               setPageHandler={setPageHandler}
               setUserData={setUserData}
             />

@@ -4,7 +4,7 @@ import Register from "./Register";
 
 export default function Splash({
   setPageHandler,
-  setIsAuthenticated,
+
   setUserData,
 }) {
   const [view, setView] = useState("login");
@@ -13,7 +13,6 @@ export default function Splash({
     <div>
       {view === "login" ? (
         <Login
-          setIsAuthenticated={setIsAuthenticated}
           setView={setView}
           setPageHandler={setPageHandler}
           setUserData={setUserData}

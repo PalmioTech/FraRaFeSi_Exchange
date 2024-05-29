@@ -1,7 +1,10 @@
 import pointed from "../assets/pointed.svg";
 import cryptoCoin from "../assets/crypto.svg";
+import { useSelector } from "react-redux";
 
-export function WalletCard({ userData }) {
+export function WalletCard() {
+  const userData = useSelector((state) => state.user); // Assicurati che il nome dello stato in Redux corrisponda
+
   const { hash, balance } = userData;
 
   return (

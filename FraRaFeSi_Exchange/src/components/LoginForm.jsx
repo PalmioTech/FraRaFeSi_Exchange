@@ -1,6 +1,10 @@
 import { useRef, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../actions/actions";
+import { setUser } from "../actions/actions";
 
-export function LoginForm({ setIsAuthenticated, setPageHandler, setUserData }) {
+export function LoginForm({ setPageHandler, setUserData }) {
+  const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isShaking, setIsShaking] = useState(false);
@@ -11,11 +15,11 @@ export function LoginForm({ setIsAuthenticated, setPageHandler, setUserData }) {
     if (storedUserData) {
       const userData = JSON.parse(storedUserData);
 
-      setIsAuthenticated(true);
-      setUserData(userData);
+      dispatch(login());
+      dispatch(setUser(userData));
       setPageHandler("wallet");
     }
-  }, [setIsAuthenticated, setPageHandler, setUserData]);
+  }, [dispatch, setPageHandler, setUserData]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -42,13 +46,12 @@ export function LoginForm({ setIsAuthenticated, setPageHandler, setUserData }) {
         balance: user.balance,
         hash: user.hash,
       };
-      setIsAuthenticated(true);
-      setUserData(userData);
+      dispatch(login());
+      dispatch(setUser(userData));
       sessionStorage.setItem("userData", JSON.stringify(userData));
       setPageHandler("wallet");
       console.log(userData);
     } else {
-      setIsAuthenticated(false);
       setIsShaking(true);
       setTimeout(() => {
         setIsShaking(false);
@@ -63,8 +66,7 @@ export function LoginForm({ setIsAuthenticated, setPageHandler, setUserData }) {
           isShaking ? "animate-shake" : ""
         }`}
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full"
-      >
+        data-rounded-max="rounded-full">
         <input
           ref={emailRef}
           type="text"

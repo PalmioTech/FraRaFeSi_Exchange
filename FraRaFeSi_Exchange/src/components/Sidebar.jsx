@@ -1,8 +1,10 @@
 import logoApp from "../assets/logoApp.png";
 import cryptoImage from "../assets/crypto.svg";
 import avatarBatman from "../assets/avatarBatman.svg";
+import { useSelector } from "react-redux";
 
-export function Sidebar({ userData }) {
+export function Sidebar() {
+  const userData = useSelector((state) => state.user); // Assicurati che il nome dello stato in Redux corrisponda
   const { name } = userData;
 
   return (
