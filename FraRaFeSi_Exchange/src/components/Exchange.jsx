@@ -1,8 +1,11 @@
-export default function Exchange({ setPage, userData }) {
+import { useSelector } from "react-redux";
+
+export default function Exchange({ setPage }) {
   const handleClick = () => {
     setPage("wallet");
   };
-  const { name, balance } = userData;
+  const userData = useSelector((state) => state.user);
+  const { name } = userData;
 
   return (
     <div className="flex items-center justify-center min-h-screen p-2">
