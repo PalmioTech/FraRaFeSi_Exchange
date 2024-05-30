@@ -11,7 +11,7 @@ export default function ProfilePage({ setPage }) {
 
   function handleLogout() {
     sessionStorage.removeItem("userData");
-    dispatch(logout()); // Dispatch dell'azione di logout
+    dispatch(logout());
 
     setPage("splash");
   }
@@ -23,7 +23,8 @@ export default function ProfilePage({ setPage }) {
         </button>
         <button
           onClick={handleLogout}
-          className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full ">
+          className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full "
+        >
           Log out
         </button>
       </div>

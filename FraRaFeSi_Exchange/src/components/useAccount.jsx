@@ -35,13 +35,12 @@ export function useAccount({ username, password }) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [username, password]); // Esegui l'effetto solo quando cambia il nome utente
+  }, [username, password]);
 
   if (isLoading) {
     return <div>Caricamento...</div>;
   }
   if (error) {
-    // Se si verifica un errore, non renderizzare nulla
     return { error };
   }
 

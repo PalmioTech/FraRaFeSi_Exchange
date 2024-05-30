@@ -1,4 +1,3 @@
-import { useState } from "react";
 import LogoApp from "../assets/logoApp.png";
 import { RegisterForm } from "./RegisterForm";
 export default function Register({ setView }) {

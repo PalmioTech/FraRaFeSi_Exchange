@@ -1,4 +1,3 @@
-import { useState } from "react";
 import LogoApp from "../assets/logoApp.png";
 import { LoginForm } from "./LoginForm";
 export default function Login({
@@ -25,7 +24,8 @@ export default function Login({
             />
             <button
               className="w-full px-6 py-2"
-              onClick={() => setView("register")}>
+              onClick={() => setView("register")}
+            >
               Non hai l'account? Registrati!
             </button>
           </div>

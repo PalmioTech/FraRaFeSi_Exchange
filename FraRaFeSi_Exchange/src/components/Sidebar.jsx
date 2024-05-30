@@ -4,7 +4,7 @@ import avatarBatman from "../assets/avatarBatman.svg";
 import { useSelector } from "react-redux";
 
 export function Sidebar() {
-  const userData = useSelector((state) => state.user); // Assicurati che il nome dello stato in Redux corrisponda
+  const userData = useSelector((state) => state.user);
   const { name } = userData;
 
   return (
