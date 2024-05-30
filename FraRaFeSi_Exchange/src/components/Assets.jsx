@@ -11,7 +11,6 @@ export function Assets() {
     axios
       .get("/api/cryptocurrency/listings/latest")
       .then((response) => {
-        // console.log("API Response:", response.data);
         setData(response.data.data);
       })
       .catch((error) => {
@@ -19,11 +18,6 @@ export function Assets() {
         setError(error.message);
       });
   }, []);
-
-  // const handleClickCoin = (coin) => {
-  //   setSelectedCoin(coin);
-  //   console.log(coin);
-  // };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -66,7 +60,8 @@ export function Assets() {
                     selectedItem?.id === token.id
                       ? "bg-custom-selected"
                       : "bg-transparent"
-                  }`}>
+                  }`}
+                >
                   <div className=" text-xl mr-3 flex gap-4">
                     <img
                       src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${token.id}.png`}

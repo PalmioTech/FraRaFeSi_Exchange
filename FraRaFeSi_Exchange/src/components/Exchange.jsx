@@ -17,7 +17,7 @@ export default function Exchange({ setPage }) {
           x
         </button>
         <h1 className="text-3xl text-center text-white font-semibold">
-          {name}'s Crypto Exchange
+          {name}'s <br /> Crypto Exchange
         </h1>
 
         <div className="flex flex-col gap-6">
