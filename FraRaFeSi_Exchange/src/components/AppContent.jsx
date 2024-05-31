@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import ProfilePage from "./ProfilePage";
 import Home from "./Home";
-import WalletPage from "./WalletPage"; // Assicurati che il percorso sia corretto
+import WalletPage from "./WalletPage";
 import Exchange from "./Exchange";
 
 export default function AppContent({ page, setPage }) {

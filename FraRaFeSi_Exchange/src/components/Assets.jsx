@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedAsset } from "../reducers/selectedAsset";
 
 export function Assets() {
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const dispatch = useDispatch();
+  const selectedAsset = useSelector((state) => state.assetSelected);
 
   useEffect(() => {
     axios
-      .get("/api/cryptocurrency/listings/latest")
+      .get("api/cryptocurrency/listings/latest")
       .then((response) => {
         setData(response.data.data);
       })
@@ -23,8 +26,7 @@ export function Assets() {
     setSearchTerm(event.target.value);
   };
   const handleItemClick = (coin) => {
-    setSelectedItem(coin);
-    // console.log(coin);
+    dispatch(setSelectedAsset(coin));
   };
 
   const filteredData = data?.filter(
@@ -52,12 +54,12 @@ export function Assets() {
           {error && <p className="text-red-500">{error}</p>}
           <ul className="max-h-96 overflow-y-auto">
             {filteredData &&
-              filteredData.slice(0, 50).map((token, index) => (
+              filteredData.slice(0, 10).map((token, index) => (
                 <li
                   key={index}
                   onClick={() => handleItemClick(token)}
                   className={`mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center justify-between truncate cursor-pointer ${
-                    selectedItem?.id === token.id
+                    selectedAsset?.id === token.id
                       ? "bg-custom-selected"
                       : "bg-transparent"
                   }`}

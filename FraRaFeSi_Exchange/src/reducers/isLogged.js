@@ -5,7 +5,7 @@ const loggedReducer = (state = false, action) => {
     case "SIGN_OUT":
       return false;
     default:
-      return state; // Restituisce lo stato attuale per azioni sconosciute
+      return state;
   }
 };
 
