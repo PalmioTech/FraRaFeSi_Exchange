@@ -30,6 +30,7 @@ export function LoginForm({ setPageHandler, setUserData }) {
     );
     if (user) {
       const userData = {
+        id: user.id,
         name: user.name,
         email: user.email,
         password: user.password,

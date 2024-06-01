@@ -1,3 +1,4 @@
+import { MD5 } from "crypto-js";
 import { useRef, useState } from "react";
 
 export function RegisterForm() {
@@ -13,12 +14,30 @@ export function RegisterForm() {
     const password = passwordRef.current.value;
     registerUser({ name, email, password });
   }
+  function generateRandomString() {
+    var passwordHash = "";
+    var randomCaracter =
+      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    for (var i = 0; i < 25; i++) {
+      var randomPoz = Math.floor(Math.random() * randomCaracter.length);
+      passwordHash += randomCaracter.substring(randomPoz, randomPoz + 1);
+    }
+    return passwordHash;
+  }
 
   function registerUser({ name, email, password }) {
+    const hashCode = generateRandomString();
+    const cryptedPassword = MD5(password).toString();
     fetch("http://localhost:3000/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({
+        name,
+        email,
+        password: cryptedPassword,
+        balance: 0,
+        hash: hashCode,
+      }),
     })
       .then((response) => {
         if (response.ok) {
@@ -41,7 +60,8 @@ export function RegisterForm() {
       <div
         className="relative z-10 overflow-hidden  border-b-2 border-gray-300 rounded-lg"
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full">
+        data-rounded-max="rounded-full"
+      >
         <input
           ref={nameRef}
           type="name"
