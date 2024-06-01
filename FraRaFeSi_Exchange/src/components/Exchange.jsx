@@ -8,14 +8,12 @@ export default function Exchange({ setPage }) {
     setPage("wallet");
   };
 
-  const selectedAsset = useSelector(
-    (state) => state.selectedAsset.selectedAsset
-  );
+  const selectedAsset = useSelector((state) => state.assets.selectedAsset);
 
   const { slug, symbol } = selectedAsset;
   const { price, percent_change_1h } = selectedAsset.quote.USD;
 
-  const userData = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.user.data);
   const { name, balance } = userData;
   const amountRef = useRef();
 
