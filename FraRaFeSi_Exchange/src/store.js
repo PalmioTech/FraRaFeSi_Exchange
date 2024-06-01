@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import isLogged from "../src/reducers/isLogged";
-import userReducer from "../src/reducers/userReducer";
-import selectedItemReducer from "../src/reducers/selectedAsset";
+import assetsSliceReducer from "../src/reducers/assetsSlice";
+import userSliceReducer from "../src/reducers/userSlice";
 
 const store = configureStore({
   reducer: {
-    isLogged,
-    user: userReducer,
-    selectedAsset: selectedItemReducer,
+    user: userSliceReducer,
+    assets: assetsSliceReducer,
   },
 });
 

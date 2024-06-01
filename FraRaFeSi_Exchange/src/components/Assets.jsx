@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedAsset } from "../reducers/selectedAsset";
+import { setSelectedAsset } from "../reducers/assetsSlice";
 
 export function Assets() {
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const selectedAsset = useSelector((state) => state.assetSelected);
+  const selectedAsset = useSelector((state) => state.assets.selectedAsset);
 
   useEffect(() => {
     axios

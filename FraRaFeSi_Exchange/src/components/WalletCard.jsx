@@ -3,7 +3,7 @@ import cryptoCoin from "../assets/crypto.svg";
 import { useSelector } from "react-redux";
 
 export function WalletCard() {
-  const userData = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.user.data);
 
   const { hash, balance } = userData;
 

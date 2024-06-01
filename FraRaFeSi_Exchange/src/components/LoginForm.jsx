@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../actions/actions";
-import { setUser } from "../actions/actions";
+import { setUser } from "../reducers/userSlice";
+import MD5 from "crypto-js/md5";
 
 export function LoginForm({ setPageHandler, setUserData }) {
   const dispatch = useDispatch();
@@ -10,22 +10,11 @@ export function LoginForm({ setPageHandler, setUserData }) {
   const [isShaking, setIsShaking] = useState(false);
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    const storedUserData = sessionStorage.getItem("userData");
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
-
-      dispatch(login());
-      dispatch(setUser(userData));
-      setPageHandler("wallet");
-    }
-  }, [dispatch, setPageHandler, setUserData]);
-
   function handleSubmit(event) {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    fetch("http://localhost:3000/users")
+    fetch("http://localhost:3000/users?email=" + email)
       .then((response) => response.json())
       .then((posts) => {
         setPosts(posts);
@@ -35,8 +24,9 @@ export function LoginForm({ setPageHandler, setUserData }) {
   }
 
   function checkAuthentication(users, email, password) {
+    const encryptedPassword = MD5(password).toString();
     const user = users.find(
-      (user) => user.email === email && user.password === password
+      (user) => user.email === email && user.password === encryptedPassword
     );
     if (user) {
       const userData = {
@@ -46,7 +36,6 @@ export function LoginForm({ setPageHandler, setUserData }) {
         balance: user.balance,
         hash: user.hash,
       };
-      dispatch(login());
       dispatch(setUser(userData));
       sessionStorage.setItem("userData", JSON.stringify(userData));
       setPageHandler("wallet");
@@ -66,7 +55,8 @@ export function LoginForm({ setPageHandler, setUserData }) {
           isShaking ? "animate-shake" : ""
         }`}
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full">
+        data-rounded-max="rounded-full"
+      >
         <input
           ref={emailRef}
           type="text"

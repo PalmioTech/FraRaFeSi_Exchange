@@ -5,7 +5,7 @@ import { SellIcon } from "../assets/SellIcon";
 import { SwapIcon } from "../assets/SwapIcon";
 
 export function BuyButton({ setPage }) {
-  const selectedAsset = useSelector((state) => state.selectedAsset);
+  const selectedAsset = useSelector((state) => state.assets.selectedAsset);
   const handleClick = () => {
     setPage("exchange");
   };
@@ -15,9 +15,9 @@ export function BuyButton({ setPage }) {
       <div className="flex flex-col items-center mx-4 my-3">
         <button
           onClick={handleClick}
-          disabled={!selectedAsset.selectedAsset}
+          disabled={!selectedAsset}
           className={`flex justify-center max-w-10 rounded-full bg-violet w-full py-2 mx-2 mt-3 hover:outline hover:outline-2 hover:outline-greenwater ${
-            !selectedAsset.selectedAsset ? "opacity-50 cursor-not-allowed" : ""
+            !selectedAsset ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
           <BuyButtonIcon />

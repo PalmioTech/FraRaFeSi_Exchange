@@ -2,16 +2,17 @@ import avatarBatman from "../assets/avatarBatman.svg";
 import { logout } from "../actions/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { setUser } from "../reducers/userSlice";
 
 export default function ProfilePage({ setPage }) {
-  const userData = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.user.data);
 
   const { name, email, balance, hash } = userData;
   const dispatch = useDispatch();
 
   function handleLogout() {
     sessionStorage.removeItem("userData");
-    dispatch(logout());
+    dispatch(setUser(null));
 
     setPage("splash");
   }

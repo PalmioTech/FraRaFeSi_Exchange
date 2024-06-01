@@ -4,8 +4,8 @@ const initialState = {
   selectedAsset: null,
 };
 
-export const selectedAssetSlice = createSlice({
-  name: "selectedAsset",
+export const assetsSlice = createSlice({
+  name: "assets",
   initialState,
   reducers: {
     setSelectedAsset: (state, action) => {
@@ -14,6 +14,6 @@ export const selectedAssetSlice = createSlice({
   },
 });
 
-export const { setSelectedAsset } = selectedAssetSlice.actions;
+export const { setSelectedAsset } = assetsSlice.actions;
 
-export default selectedAssetSlice.reducer;
+export default assetsSlice.reducer;
