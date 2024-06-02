@@ -1,19 +1,43 @@
-import { MD5 } from "crypto-js";
 import { useRef, useState } from "react";
+import { useRegisterUserMutation } from "../reducers/apiSlice";
+import { MD5 } from "crypto-js";
+
+function generateRandomNumber() {
+  return Math.floor(Math.random() * 1000000) + 1;
+}
 
 export function RegisterForm() {
   const [isRegistered, setIsRegistered] = useState(false);
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [registerUser] = useRegisterUserMutation();
 
   function handleSubmit(event) {
     event.preventDefault();
     const name = nameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    registerUser({ name, email, password });
+    const hashCode = generateRandomString();
+    const balance = generateRandomNumber(); // Genera un saldo casuale
+    const cryptedPassword = MD5(password).toString();
+
+    registerUser({
+      name,
+      email,
+      password: cryptedPassword,
+      balance,
+      hash: hashCode,
+    })
+      .unwrap()
+      .then(() => {
+        setIsRegistered(true);
+      })
+      .catch((error) => {
+        console.error("Error registering user:", error);
+      });
   }
+
   function generateRandomString() {
     var passwordHash = "";
     var randomCaracter =
@@ -25,28 +49,6 @@ export function RegisterForm() {
     return passwordHash;
   }
 
-  function registerUser({ name, email, password }) {
-    const hashCode = generateRandomString();
-    const cryptedPassword = MD5(password).toString();
-    fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        email,
-        password: cryptedPassword,
-        balance: 0,
-        hash: hashCode,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          setIsRegistered(true);
-        }
-        return response.json();
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }
   if (isRegistered) {
     return (
       <div className="w-full p-4 text-center bg-green-100 rounded-lg">
@@ -60,8 +62,7 @@ export function RegisterForm() {
       <div
         className="relative z-10 overflow-hidden  border-b-2 border-gray-300 rounded-lg"
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full"
-      >
+        data-rounded-max="rounded-full">
         <input
           ref={nameRef}
           type="name"

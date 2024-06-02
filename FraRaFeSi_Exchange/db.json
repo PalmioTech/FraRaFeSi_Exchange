@@ -1,14 +1,6 @@
 {
   "users": [
     {
-      "id": "9418",
-      "name": "Simone Nataloni",
-      "email": "simone.nataloni@gmail.com",
-      "password": "356a693c86f1fa1b612a9d369b1fc68f",
-      "balance": 0,
-      "hash": "RMmWUtTFHanHrSvgp48Beo0xc"
-    },
-    {
       "id": "660a",
       "name": "Raffuz",
       "email": "raffaele11596@gmail.com",
@@ -25,12 +17,20 @@
       "hash": "JmpIQw2D9wIcXUDcT6XPEb0x6"
     },
     {
-      "id": "c24b",
-      "name": "prova",
-      "email": "prova@gmail.com",
-      "password": "189bbbb00c5f1fb7fba9ad9285f193d1",
-      "balance": 0,
-      "hash": "wotqEalgF7xwy5VDw35XUzPiv"
+      "id": "9418",
+      "name": "Simone Nataloni",
+      "email": "simone.nataloni@gmail.com",
+      "password": "356a693c86f1fa1b612a9d369b1fc68f",
+      "balance": 742450,
+      "hash": "RMmWUtTFHanHrSvgp48Beo0xc"
+    },
+    {
+      "id": "34d5",
+      "name": "simona",
+      "email": "simona@gmail.com",
+      "password": "81dc9bdb52d04dc20036dbd8313ed055",
+      "balance": 895513,
+      "hash": "vWva0h9d2drEenzlIdXHyTzaG"
     }
   ]
 }

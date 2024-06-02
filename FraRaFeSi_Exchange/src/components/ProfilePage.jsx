@@ -1,5 +1,4 @@
 import avatarBatman from "../assets/avatarBatman.svg";
-import { logout } from "../actions/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setUser } from "../reducers/userSlice";
@@ -24,8 +23,7 @@ export default function ProfilePage({ setPage }) {
         </button>
         <button
           onClick={handleLogout}
-          className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full "
-        >
+          className="text-white border border-violet font-bold px-4 py-2 mt-2 rounded-full ">
           Log out
         </button>
       </div>

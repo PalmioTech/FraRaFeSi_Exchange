@@ -2,33 +2,42 @@ import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../reducers/userSlice";
 import MD5 from "crypto-js/md5";
+import { useGetUserByEmailQuery } from "../reducers/apiSlice";
 
-export function LoginForm({ setPageHandler, setUserData }) {
+export function LoginForm({ setPageHandler }) {
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isShaking, setIsShaking] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const [email, setEmail] = useState(null); // Aggiungi stato per email
+
+  const {
+    data: user,
+    error,
+    isLoading,
+  } = useGetUserByEmailQuery(email, {
+    skip: !email,
+  });
+
+  useEffect(() => {
+    if (user && user.length > 0) {
+      const user = user[0];
+      const password = passwordRef.current.value;
+      checkAuthentication(user, email, password);
+    } else if (user && user.length === 0) {
+      console.log("No users found with that email");
+    }
+  }, [user]);
 
   function handleSubmit(event) {
     event.preventDefault();
     const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    fetch("http://localhost:3000/users?email=" + email)
-      .then((response) => response.json())
-      .then((posts) => {
-        setPosts(posts);
-        checkAuthentication(posts, email, password);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+    setEmail(email); // Attiva la richiesta fetch impostando lo stato dell'email
   }
 
-  function checkAuthentication(users, email, password) {
+  function checkAuthentication(user, email, password) {
     const encryptedPassword = MD5(password).toString();
-    const user = users.find(
-      (user) => user.email === email && user.password === encryptedPassword
-    );
-    if (user) {
+    if (user.password === encryptedPassword) {
       const userData = {
         id: user.id,
         name: user.name,
@@ -56,8 +65,7 @@ export function LoginForm({ setPageHandler, setUserData }) {
           isShaking ? "animate-shake" : ""
         }`}
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full"
-      >
+        data-rounded-max="rounded-full">
         <input
           ref={emailRef}
           type="text"
@@ -84,6 +92,8 @@ export function LoginForm({ setPageHandler, setUserData }) {
           </button>
         </div>
       </div>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error fetching data: {error.message}</p>}
     </form>
   );
 }
