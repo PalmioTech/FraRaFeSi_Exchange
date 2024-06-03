@@ -38,9 +38,11 @@ export function Assets() {
   return (
     <div className="max-h-screen flex items-center justify-center px-3 py-5 mt-2">
       <div className="w-full rounded-3xl relative">
-        <h1 className="text-2xl p-2 underline mb-2 text-whiteText ">
-          Crypto Market
-        </h1>
+        <div className="flex justify-center">
+          <h1 class="mb-3 text-4xl font-extrabold  text-white">
+            Crypto <mark class="px-2 text-white bg-violet rounded">Market</mark>{" "}
+          </h1>
+        </div>
         <div className="w-full p-4 text-white">
           <input
             type="text"

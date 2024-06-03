@@ -31,6 +31,14 @@
       "password": "81dc9bdb52d04dc20036dbd8313ed055",
       "balance": 895513,
       "hash": "vWva0h9d2drEenzlIdXHyTzaG"
+    },
+    {
+      "id": "63aa",
+      "name": "Franco Mitrushi",
+      "email": "franco.mitrushi@gmail.com",
+      "password": "c2b242af10567e1d2b4b3173b255a915",
+      "balance": 111519,
+      "hash": "gQ6XcqHuxVH8gbTZiXXTJG9MP"
     }
   ]
 }
