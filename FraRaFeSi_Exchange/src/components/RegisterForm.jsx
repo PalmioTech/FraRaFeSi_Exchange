@@ -1,13 +1,14 @@
 import { useRef, useState } from "react";
 import { useRegisterUserMutation } from "../reducers/apiSlice";
 import { MD5 } from "crypto-js";
+import toast from "react-hot-toast";
+import { generateRandomString, validateEmail } from "../utils";
 
 function generateRandomNumber() {
   return Math.floor(Math.random() * 1000000) + 1;
 }
 
-export function RegisterForm() {
-  const [isRegistered, setIsRegistered] = useState(false);
+export function RegisterForm({ setView }) {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -22,38 +23,32 @@ export function RegisterForm() {
     const balance = generateRandomNumber(); // Genera un saldo casuale
     const cryptedPassword = MD5(password).toString();
 
-    registerUser({
-      name,
-      email,
-      password: cryptedPassword,
-      balance,
-      hash: hashCode,
-    })
-      .unwrap()
-      .then(() => {
-        setIsRegistered(true);
-      })
-      .catch((error) => {
-        console.error("Error registering user:", error);
-      });
-  }
-
-  function generateRandomString() {
-    var passwordHash = "";
-    var randomCaracter =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-    for (var i = 0; i < 25; i++) {
-      var randomPoz = Math.floor(Math.random() * randomCaracter.length);
-      passwordHash += randomCaracter.substring(randomPoz, randomPoz + 1);
+    if (name === "" || email === "" || password === "") {
+      toast.error("Tutti i campi sono obbligatori");
+      return;
     }
-    return passwordHash;
-  }
 
-  if (isRegistered) {
-    return (
-      <div className="w-full p-4 text-center bg-green-100 rounded-lg">
-        <p className="text-green-800">Registrazione avvenuta con successo!</p>
-      </div>
+    if (!validateEmail(email)) {
+      toast.error("Il tuo indirizzo email non è valido!");
+      return;
+    }
+
+    toast.promise(
+      registerUser({
+        name,
+        email,
+        password: cryptedPassword,
+        balance,
+        hash: hashCode,
+      }).unwrap(),
+      {
+        loading: "Registro utente...",
+        error: "Si è verificato un errore durante la tua registrazione",
+        success: () => {
+          setView("login");
+          return "Registrazione avvenuta con successo!";
+        },
+      }
     );
   }
 
@@ -62,10 +57,11 @@ export function RegisterForm() {
       <div
         className="relative z-10 overflow-hidden  border-b-2 border-gray-300 rounded-lg"
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full">
+        data-rounded-max="rounded-full"
+      >
         <input
           ref={nameRef}
-          type="name"
+          type="text"
           name="email"
           id="email"
           className="block w-full px-4 py-3 mb-4 border  border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 text-blackText "

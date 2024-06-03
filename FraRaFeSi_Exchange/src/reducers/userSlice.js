@@ -9,9 +9,12 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       state.data = action.payload;
     },
+    setBalance: (state, action) => {
+      state.data.balance = action.payload;
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setBalance } = userSlice.actions;
 
 export default userSlice.reducer;

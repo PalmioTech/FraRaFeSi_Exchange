@@ -3,6 +3,7 @@ import Splash from "./components/Splash";
 import AppContent from "./components/AppContent";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "./reducers/userSlice";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [page, setPage] = useState("splash");
@@ -21,6 +22,7 @@ function App() {
     sessionStorage.getItem("userData") !== null;
   return (
     <div className="min-h-screen bg-blackText max-w-xl mx-auto">
+      <Toaster />
       {page === "splash" && !isAuthenticated ? (
         <Splash setPageHandler={setPage} />
       ) : (

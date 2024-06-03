@@ -1,11 +1,13 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { setBalance } from "../reducers/userSlice";
+import toast from "react-hot-toast";
 
 export default function Deposit({ setPage }) {
   const [amount, setAmount] = useState("");
   const userData = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
-  const { hash, balance } = userData;
+  const { hash, balance, id } = userData;
 
   const handleClick = () => {
     setPage("wallet");
@@ -17,16 +19,18 @@ export default function Deposit({ setPage }) {
   const handleDeposit = () => {
     const newBalance = balance + amount;
 
-    fetch(`http://localhost:3000/users?hash=${hash}`, {
-      method: "POST",
+    fetch(`http://localhost:3000/users/${id}`, {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ balance: newBalance }),
     })
       .then((response) => {
         if (response.ok) {
-          dispatch({ type: "UPDATE_BALANCE", payload: newBalance });
+          dispatch(setBalance(newBalance));
+          toast.success("Il tuo deposito è avvenuto con successo");
         } else {
           console.error("Failed to update balance");
+          toast.error("Errore durante il tuo deposito");
         }
       })
       .catch((error) => console.error("Error fetching data:", error));

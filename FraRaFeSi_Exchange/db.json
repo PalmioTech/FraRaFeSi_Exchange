@@ -21,7 +21,7 @@
       "name": "Simone Nataloni",
       "email": "simone.nataloni@gmail.com",
       "password": "356a693c86f1fa1b612a9d369b1fc68f",
-      "balance": 442450,
+      "balance": 642450,
       "hash": "RMmWUtTFHanHrSvgp48Beo0xc"
     },
     {
@@ -39,6 +39,48 @@
       "password": "c2b242af10567e1d2b4b3173b255a915",
       "balance": 111519,
       "hash": "gQ6XcqHuxVH8gbTZiXXTJG9MP"
+    },
+    {
+      "id": "ddcf",
+      "name": "Marco",
+      "email": "marco.ingraiti@icloud.com",
+      "password": "356a693c86f1fa1b612a9d369b1fc68f",
+      "balance": 799464,
+      "hash": "FhmCNOrGnubLM8MnHmF6htFtZ"
+    },
+    {
+      "id": "7b2a",
+      "name": "pippo",
+      "email": "pippo@pippo.com",
+      "password": "0c88028bf3aa6a6a143ed846f2be1ea4",
+      "balance": 945277,
+      "hash": "C6Vv09xTzdDxtcPT9AC7fEvFo"
+    },
+    {
+      "id": "d937",
+      "name": "ciao",
+      "email": "",
+      "password": "d41d8cd98f00b204e9800998ecf8427e",
+      "balance": 149305,
+      "hash": "GLI9pxsRSSmlB5rpOqO6xggTI"
+    },
+    {
+      "id": "b738",
+      "name": "pizza",
+      "email": "pizza@pizza.it",
+      "password": "7cf2db5ec261a0fa27a502d3196a6f60",
+      "balance": 104701,
+      "hash": "ISibdKVx9yHyWMCgkqzGHdIz8"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "1",
+      "id_crypto": "1",
+      "id_user": "9418",
+      "amount": "200",
+      "previous_balance": "300",
+      "sign": "+"
     }
   ]
 }

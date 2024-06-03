@@ -11,7 +11,7 @@ export default function Register({ setView }) {
         <div className="flex flex-col items-center gap-3 text-whiteText">
           <div className="flex flex-col gap-10">
             <h3 className="mb-6 text-2xl font-medium text-center">Register </h3>
-            <RegisterForm />
+            <RegisterForm setView={setView} />
             <button
               className="w-full px-6 py-2 "
               onClick={() => setView("login")}
