@@ -1,21 +1,24 @@
-import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useUpdateUserBalanceMutation } from "../reducers/apiSlice";
 
 export default function Exchange({ setPage }) {
   const [cryptoReceived, setCryptoReceived] = useState(0);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     setPage("wallet");
   };
 
   const selectedAsset = useSelector((state) => state.assets.selectedAsset);
-
   const { slug, symbol } = selectedAsset;
   const { price, percent_change_1h } = selectedAsset.quote.USD;
 
   const userData = useSelector((state) => state.user.data);
-  const { name, balance } = userData;
+  const { id, name, balance, email } = userData;
   const amountRef = useRef();
+
+  const [updateUserBalance] = useUpdateUserBalanceMutation(); // Otteniamo la funzione di mutazione
 
   function handleInsertAmount(event) {
     event.preventDefault();
@@ -24,13 +27,32 @@ export default function Exchange({ setPage }) {
     setCryptoReceived(cryptoAmount);
   }
 
+  async function handleBuy() {
+    const amount = amountRef.current.value;
+    try {
+      const result = await updateUserBalance({
+        id,
+        newBalance: balance - amount,
+      });
+      // Log the result for debugging
+      console.log("Result from updateUserBalance:", result);
+
+      if (result.error) {
+        console.error("Failed to update balance:", result.error);
+      } else {
+        console.log("Balance updated successfully");
+        // Update local state or dispatch an action if necessary
+      }
+    } catch (error) {
+      console.error("Failed to update balance:", error);
+    }
+  }
   return (
     <div className="flex items-center justify-center min-h-screen p-2">
       <div className="relative flex flex-col gap-8 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
         <button
           className="absolute top-0 right-2 p-2 font-bold text-white"
-          onClick={handleClick}
-        >
+          onClick={handleClick}>
           x
         </button>
         <div className="flex flex-col items-center gap-2 text-white">
@@ -67,7 +89,9 @@ export default function Exchange({ setPage }) {
             />
           </div>
         </div>
-        <button className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
+        <button
+          onClick={handleBuy}
+          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
           BUY
         </button>
       </div>

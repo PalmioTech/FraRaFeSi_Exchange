@@ -21,9 +21,9 @@ export function LoginForm({ setPageHandler }) {
 
   useEffect(() => {
     if (user && user.length > 0) {
-      const user = user[0];
+      const currentUser = user[0];
       const password = passwordRef.current.value;
-      checkAuthentication(user, email, password);
+      checkAuthentication(currentUser, email, password);
     } else if (user && user.length === 0) {
       console.log("No users found with that email");
     }

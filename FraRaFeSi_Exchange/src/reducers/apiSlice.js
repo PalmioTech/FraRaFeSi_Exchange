@@ -1,5 +1,3 @@
-// usersApiSlice.js
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const usersApi = createApi({
@@ -16,7 +14,21 @@ export const usersApi = createApi({
         body: userData,
       }),
     }),
+    updateUserBalance: builder.mutation({
+      query: ({ id, newBalance }) => ({
+        url: `users/${id}`,
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ balance: newBalance }),
+      }),
+    }),
   }),
 });
 
-export const { useGetUserByEmailQuery, useRegisterUserMutation } = usersApi;
+export const {
+  useGetUserByEmailQuery,
+  useRegisterUserMutation,
+  useUpdateUserBalanceMutation,
+} = usersApi;
