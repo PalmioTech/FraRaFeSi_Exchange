@@ -39,8 +39,9 @@ export function Assets() {
     <div className="max-h-screen w-full flex items-center justify-center py-5 mt-2">
       <div className="w-full rounded-3xl relative">
         <div className="flex justify-center">
-          <h1 class="mb-3 text-xl font-extrabold  text-white">
-            Crypto <mark class="px-2 text-white bg-violet rounded">Market</mark>{" "}
+          <h1 className="mb-3 text-xl font-extrabold text-white">
+            Crypto{" "}
+            <mark className="px-2 text-white bg-violet rounded">Market</mark>
           </h1>
         </div>
         <div className="w-full p-4 text-white">
@@ -60,25 +61,24 @@ export function Assets() {
                 <li
                   key={index}
                   onClick={() => handleItemClick(token)}
-                  className={`mb-2 p-1 shadow-lg rounded border-b hover:border-violet flex items-center justify-between truncate cursor-pointer ${
+                  className={`mb-2 p-1 shadow-lg rounded border-b hover:border-violet grid grid-cols-3  truncate cursor-pointer ${
                     selectedAsset?.id === token.id
                       ? "bg-custom-selected"
                       : "bg-transparent"
-                  }`}
-                >
-                  <div className=" text-xl mr-3 flex gap-4">
+                  }`}>
+                  <div className="flex  items-center     text-xl">
                     <img
                       src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${token.id}.png`}
                       alt={token.name}
-                      className="max-w-8  object-contain"
+                      className="max-w-8 object-contain"
                     />
-                    {token.name}{" "}
+                    <span className="ml-2">{token.name}</span>
                   </div>
 
-                  <div className="">
+                  <div className="flex items-center  justify-end   ">
                     {parseFloat(token.quote.USD.percent_change_1h).toFixed(2)}%
                   </div>
-                  <div className="text-green">
+                  <div className="flex items-center  justify-end  text-green ">
                     ${parseFloat(token.quote.USD.price).toFixed(2)}
                   </div>
                 </li>
