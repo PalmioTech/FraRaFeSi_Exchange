@@ -18,22 +18,24 @@ export default function Deposit({ setPage }) {
   };
   const handleDeposit = () => {
     const newBalance = balance + amount;
-
-    fetch(`http://localhost:3000/users/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ balance: newBalance }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          dispatch(setBalance(newBalance));
-          toast.success("Il tuo deposito è avvenuto con successo");
-        } else {
-          console.error("Failed to update balance");
-          toast.error("Errore durante il tuo deposito");
-        }
+    if (amount != 0) {
+      fetch(`http://localhost:3000/users/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ balance: newBalance }),
       })
-      .catch((error) => console.error("Error fetching data:", error));
+        .then((response) => {
+          if (response.ok) {
+            dispatch(setBalance(newBalance));
+            toast.success("Il tuo deposito è avvenuto con successo");
+          } else {
+            toast.error("Errore durante il tuo deposito");
+          }
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    } else {
+      toast.error("Inserisci un deposito positivo");
+    }
   };
 
   return (

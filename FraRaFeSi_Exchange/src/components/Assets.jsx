@@ -36,10 +36,10 @@ export function Assets() {
   );
 
   return (
-    <div className="max-h-screen flex items-center justify-center px-3 py-5 mt-2">
+    <div className="max-h-screen w-full flex items-center justify-center py-5 mt-2">
       <div className="w-full rounded-3xl relative">
         <div className="flex justify-center">
-          <h1 class="mb-3 text-4xl font-extrabold  text-white">
+          <h1 class="mb-3 text-xl font-extrabold  text-white">
             Crypto <mark class="px-2 text-white bg-violet rounded">Market</mark>{" "}
           </h1>
         </div>
@@ -52,7 +52,7 @@ export function Assets() {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="px-2 text-whiteText border-t-violet shadow-xl shadow-violet mt-2">
+        <div className="px-1 text-whiteText border-t-violet shadow-xl shadow-violet mt-2">
           {error && <p className="text-red-500">{error}</p>}
           <ul className="max-h-96 overflow-y-auto">
             {filteredData &&
@@ -60,7 +60,7 @@ export function Assets() {
                 <li
                   key={index}
                   onClick={() => handleItemClick(token)}
-                  className={`mb-2 p-3 shadow-lg rounded border-b hover:border-violet flex items-center justify-between truncate cursor-pointer ${
+                  className={`mb-2 p-1 shadow-lg rounded border-b hover:border-violet flex items-center justify-between truncate cursor-pointer ${
                     selectedAsset?.id === token.id
                       ? "bg-custom-selected"
                       : "bg-transparent"
