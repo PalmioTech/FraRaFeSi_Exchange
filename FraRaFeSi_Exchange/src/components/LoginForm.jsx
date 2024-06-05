@@ -100,6 +100,8 @@ export function LoginForm({ setPageHandler }) {
           </button>
         </div>
       </div>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error fetching data: {error.message}</p>}
     </form>
   );
 }
