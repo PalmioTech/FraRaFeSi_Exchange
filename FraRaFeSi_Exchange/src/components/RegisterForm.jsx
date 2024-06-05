@@ -16,6 +16,7 @@ export function RegisterForm({ setView }) {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const hashCode = generateRandomString();
+    const balance = 0;
 
     const cryptedPassword = MD5(password).toString();
 
@@ -60,6 +61,7 @@ export function RegisterForm({ setView }) {
       );
     } catch (error) {
       toast.error("Errore durante il controllo dell'email");
+      console.log(error);
     }
   }
 
