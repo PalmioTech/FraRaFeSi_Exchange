@@ -50,9 +50,8 @@ export default function Exchange({ setPage }) {
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        dispatch(setError(error.message));
       });
-  }, [cryptoData, dispatch]);
+  }, [dispatch]);
 
   if (!userData) {
     return <div>Loading...</div>;
