@@ -45,7 +45,7 @@ export function RegisterForm({ setView }) {
           name,
           email,
           password: cryptedPassword,
-          balance: 0,
+          balance,
           hash: hashCode,
           wallet: [],
         }).unwrap(),

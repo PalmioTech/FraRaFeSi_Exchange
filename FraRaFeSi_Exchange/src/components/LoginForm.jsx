@@ -36,7 +36,7 @@ export function LoginForm({ setPageHandler }) {
     setEmail(email);
   }
 
-  function checkAuthentication(user, password) {
+  function checkAuthentication(user, email, password) {
     const encryptedPassword = MD5(password).toString();
     if (user.password === encryptedPassword) {
       const userData = {
@@ -46,6 +46,7 @@ export function LoginForm({ setPageHandler }) {
         password: user.password,
         balance: user.balance,
         hash: user.hash,
+        wallet: user.wallet,
       };
       dispatch(setUser(userData));
       sessionStorage.setItem("userData", JSON.stringify(userData));
