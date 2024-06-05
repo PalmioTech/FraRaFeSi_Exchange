@@ -2,15 +2,24 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useUpdateUserBalanceMutation } from "../reducers/apiSlice";
+import {
+  setCryptoReceived,
+  setCryptoData,
+  setFilteredCryptoData,
+  setSelectedCrypto,
+  setSearchTerm,
+  setError,
+} from "../reducers/exchangeSlice";
 
 export default function Exchange({ setPage }) {
-  const [cryptoReceived, setCryptoReceived] = useState(0);
-  const [cryptoData, setCryptoData] = useState([]);
-  const [filteredCryptoData, setFilteredCryptoData] = useState([]);
-  const [selectedCrypto, setSelectedCrypto] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [error, setError] = useState(null);
-
+  const cryptoReceived = useSelector((state) => state.exchange.cryptoReceived);
+  const cryptoData = useSelector((state) => state.exchange.cryptoData);
+  const filteredCryptoData = useSelector(
+    (state) => state.exchange.filteredCryptoData
+  );
+  const selectedCrypto = useSelector((state) => state.exchange.selectedCrypto);
+  const searchTerm = useSelector((state) => state.exchange.searchTerm);
+  const error = useSelector((state) => state.exchange.error);
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -23,27 +32,27 @@ export default function Exchange({ setPage }) {
   const [updateUserBalance] = useUpdateUserBalanceMutation();
 
   useEffect(() => {
-    axios
-      .get("api/cryptocurrency/listings/latest")
-      .then((response) => {
-        setCryptoData(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setError(error.message);
-      });
-  }, []);
-
-  useEffect(() => {
     if (searchTerm === "") {
-      setFilteredCryptoData([]);
+      dispatch(setFilteredCryptoData([]));
     } else {
       const filtered = cryptoData.filter((crypto) =>
         crypto.name.toLowerCase().startsWith(searchTerm.toLowerCase())
       );
-      setFilteredCryptoData(filtered);
+      dispatch(setFilteredCryptoData(filtered));
     }
-  }, [searchTerm, cryptoData]);
+  }, [searchTerm, cryptoData, dispatch]);
+
+  useEffect(() => {
+    axios
+      .get("api/cryptocurrency/listings/latest")
+      .then((response) => {
+        dispatch(setCryptoData(response.data.data));
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        dispatch(setError(error.message));
+      });
+  }, [cryptoData, dispatch]);
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -57,7 +66,7 @@ export default function Exchange({ setPage }) {
     const cryptoAmount = selectedCrypto
       ? amount / selectedCrypto.quote.USD.price
       : 0;
-    setCryptoReceived(cryptoAmount);
+    dispatch(setCryptoReceived(cryptoAmount));
   }
 
   async function handleBuy() {
@@ -103,7 +112,7 @@ export default function Exchange({ setPage }) {
             <input
               type="text"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
               placeholder="Type to search for a cryptocurrency"
             />
@@ -113,9 +122,9 @@ export default function Exchange({ setPage }) {
                   <li
                     key={crypto.id}
                     onClick={() => {
-                      setSelectedCrypto(crypto);
-                      setSearchTerm(crypto.name);
-                      setFilteredCryptoData([]);
+                      dispatch(setSelectedCrypto(crypto));
+                      dispatch(setSearchTerm(crypto.name));
+                      dispatch(setFilteredCryptoData([]));
                     }}
                     className="p-2 cursor-pointer hover:bg-violet-500 flex justify-between">
                     <span>
