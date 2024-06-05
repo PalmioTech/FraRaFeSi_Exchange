@@ -36,7 +36,7 @@ export function LoginForm({ setPageHandler }) {
     setEmail(email);
   }
 
-  function checkAuthentication(user, email, password) {
+  function checkAuthentication(user, password) {
     const encryptedPassword = MD5(password).toString();
     if (user.password === encryptedPassword) {
       const userData = {

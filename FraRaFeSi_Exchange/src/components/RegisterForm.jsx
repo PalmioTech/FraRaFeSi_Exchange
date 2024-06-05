@@ -1,12 +1,8 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useRegisterUserMutation } from "../reducers/apiSlice";
 import { MD5 } from "crypto-js";
 import toast from "react-hot-toast";
 import { generateRandomString, validateEmail } from "../utils";
-
-function generateRandomNumber() {
-  return Math.floor(Math.random() * 1000000) + 1;
-}
 
 export function RegisterForm({ setView }) {
   const nameRef = useRef();
@@ -14,13 +10,13 @@ export function RegisterForm({ setView }) {
   const passwordRef = useRef();
   const [registerUser] = useRegisterUserMutation();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const name = nameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const hashCode = generateRandomString();
-    const balance = generateRandomNumber(); // Genera un saldo casuale
+
     const cryptedPassword = MD5(password).toString();
 
     if (name === "" || email === "" || password === "") {
@@ -33,23 +29,37 @@ export function RegisterForm({ setView }) {
       return;
     }
 
-    toast.promise(
-      registerUser({
-        name,
-        email,
-        password: cryptedPassword,
-        balance,
-        hash: hashCode,
-      }).unwrap(),
-      {
-        loading: "Registro utente...",
-        error: "Si è verificato un errore durante la tua registrazione",
-        success: () => {
-          setView("login");
-          return "Registrazione avvenuta con successo!";
-        },
+    try {
+      const response = await fetch(
+        `http://localhost:3000/users?email=${email}`
+      );
+      const existingUsers = await response.json();
+
+      if (existingUsers.length > 0) {
+        toast.error("L'indirizzo email è già registrato!");
+        return;
       }
-    );
+
+      toast.promise(
+        registerUser({
+          name,
+          email,
+          password: cryptedPassword,
+          balance: 0,
+          hash: hashCode,
+        }).unwrap(),
+        {
+          loading: "Registro utente...",
+          error: "Si è verificato un errore durante la tua registrazione",
+          success: () => {
+            setView("login");
+            return "Registrazione avvenuta con successo!";
+          },
+        }
+      );
+    } catch (error) {
+      toast.error("Errore durante il controllo dell'email");
+    }
   }
 
   return (
@@ -62,8 +72,8 @@ export function RegisterForm({ setView }) {
         <input
           ref={nameRef}
           type="text"
-          name="email"
-          id="email"
+          name="name"
+          id="name"
           className="block w-full px-4 py-3 mb-4 border  border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 text-blackText "
           placeholder="Nominativo"
         />
@@ -72,9 +82,7 @@ export function RegisterForm({ setView }) {
           type="email"
           name="email"
           id="email"
-          className="block w-full px-4
-        py-3 mb-4 border  border-transparent border-gray-200 rounded-lg
-        focus:ring focus:ring-blue-500 text-blackText "
+          className="block w-full px-4 py-3 mb-4 border  border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 text-blackText "
           placeholder="Indirizzo Email"
         />
         <input
