@@ -47,6 +47,7 @@ export function RegisterForm({ setView }) {
           password: cryptedPassword,
           balance: 0,
           hash: hashCode,
+          wallet: [],
         }).unwrap(),
         {
           loading: "Registro utente...",

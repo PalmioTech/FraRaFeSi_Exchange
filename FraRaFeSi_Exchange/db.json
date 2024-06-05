@@ -6,7 +6,8 @@
       "email": "raffaele11596@gmail.com",
       "password": "7cf2db5ec261a0fa27a502d3196a6f60",
       "balance": 0,
-      "hash": "R4dzN1DREuDCcaiTgczoFZNJF"
+      "hash": "R4dzN1DREuDCcaiTgczoFZNJF",
+      "wallet": []
     },
     {
       "id": "9ac6",
@@ -14,7 +15,8 @@
       "email": "fede-palma@hotmail.it",
       "password": "fc2a36b07f5bf1c68ed52b636b74fe45",
       "balance": 0,
-      "hash": "JmpIQw2D9wIcXUDcT6XPEb0x6"
+      "hash": "JmpIQw2D9wIcXUDcT6XPEb0x6",
+      "wallet": []
     },
     {
       "id": "9418",
@@ -22,7 +24,8 @@
       "email": "simone.nataloni@gmail.com",
       "password": "356a693c86f1fa1b612a9d369b1fc68f",
       "balance": 642406,
-      "hash": "RMmWUtTFHanHrSvgp48Beo0xc"
+      "hash": "RMmWUtTFHanHrSvgp48Beo0xc",
+      "wallet": []
     },
     {
       "id": "34d5",
@@ -30,7 +33,8 @@
       "email": "simona@gmail.com",
       "password": "81dc9bdb52d04dc20036dbd8313ed055",
       "balance": 895513,
-      "hash": "vWva0h9d2drEenzlIdXHyTzaG"
+      "hash": "vWva0h9d2drEenzlIdXHyTzaG",
+      "wallet": []
     },
     {
       "id": "63aa",
@@ -38,7 +42,8 @@
       "email": "franco.mitrushi@gmail.com",
       "password": "c2b242af10567e1d2b4b3173b255a915",
       "balance": 140919,
-      "hash": "gQ6XcqHuxVH8gbTZiXXTJG9MP"
+      "hash": "gQ6XcqHuxVH8gbTZiXXTJG9MP",
+      "wallet": []
     },
     {
       "id": "ddcf",
@@ -46,7 +51,8 @@
       "email": "marco.ingraiti@icloud.com",
       "password": "356a693c86f1fa1b612a9d369b1fc68f",
       "balance": 799464,
-      "hash": "FhmCNOrGnubLM8MnHmF6htFtZ"
+      "hash": "FhmCNOrGnubLM8MnHmF6htFtZ",
+      "wallet": []
     },
     {
       "id": "7b2a",
@@ -54,7 +60,8 @@
       "email": "pippo@pippo.com",
       "password": "0c88028bf3aa6a6a143ed846f2be1ea4",
       "balance": 945277,
-      "hash": "C6Vv09xTzdDxtcPT9AC7fEvFo"
+      "hash": "C6Vv09xTzdDxtcPT9AC7fEvFo",
+      "wallet": []
     },
     {
       "id": "d937",
@@ -62,7 +69,8 @@
       "email": "",
       "password": "d41d8cd98f00b204e9800998ecf8427e",
       "balance": 149305,
-      "hash": "GLI9pxsRSSmlB5rpOqO6xggTI"
+      "hash": "GLI9pxsRSSmlB5rpOqO6xggTI",
+      "wallet": []
     },
     {
       "id": "b738",
@@ -70,7 +78,8 @@
       "email": "pizza@pizza.it",
       "password": "7cf2db5ec261a0fa27a502d3196a6f60",
       "balance": 104701,
-      "hash": "ISibdKVx9yHyWMCgkqzGHdIz8"
+      "hash": "ISibdKVx9yHyWMCgkqzGHdIz8",
+      "wallet": []
     }
   ],
   "transactions": [
