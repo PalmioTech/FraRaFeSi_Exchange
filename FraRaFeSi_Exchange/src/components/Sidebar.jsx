@@ -10,7 +10,7 @@ export function Sidebar({ setPage }) {
     setPage("profile");
   };
   const handleClickHome = () => {
-    setPage("Home");
+    setPage("home");
   };
   return (
     <div className="flex justify-between flex-row max-w-xl m-4">

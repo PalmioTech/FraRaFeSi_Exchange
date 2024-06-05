@@ -4,6 +4,7 @@ import Home from "./Home";
 import WalletPage from "./WalletPage";
 import Exchange from "./Exchange";
 import Deposit from "./DepositPage";
+import TransactionPage from "./TransactionPage";
 
 export default function AppContent({ page, setPage }) {
   return (
@@ -11,6 +12,9 @@ export default function AppContent({ page, setPage }) {
       <div>{page === "wallet" && <WalletPage setPage={setPage} />}</div>
       <div>{page === "profile" && <ProfilePage setPage={setPage} />}</div>
       <div>{page === "home" && <Home />}</div>
+      <div>
+        {page === "transaction" && <TransactionPage setPage={setPage} />}
+      </div>
       <div>{page === "exchange" && <Exchange setPage={setPage} />}</div>
       <div>{page === "deposit" && <Deposit setPage={setPage} />}</div>
       <div>
