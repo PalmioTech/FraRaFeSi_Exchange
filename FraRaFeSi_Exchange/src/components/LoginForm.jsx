@@ -3,13 +3,14 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../reducers/userSlice";
 import MD5 from "crypto-js/md5";
 import { useGetUserByEmailQuery } from "../reducers/apiSlice";
+import toast from "react-hot-toast";
 
 export function LoginForm({ setPageHandler }) {
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isShaking, setIsShaking] = useState(false);
-  const [email, setEmail] = useState(null); // Aggiungi stato per email
+  const [email, setEmail] = useState(null);
 
   const {
     data: user,
@@ -25,14 +26,14 @@ export function LoginForm({ setPageHandler }) {
       const password = passwordRef.current.value;
       checkAuthentication(currentUser, email, password);
     } else if (user && user.length === 0) {
-      console.log("No users found with that email");
+      errorForm();
     }
   }, [user]);
 
   function handleSubmit(event) {
     event.preventDefault();
     const email = emailRef.current.value;
-    setEmail(email); // Attiva la richiesta fetch impostando lo stato dell'email
+    setEmail(email);
   }
 
   function checkAuthentication(user, email, password) {
@@ -49,13 +50,19 @@ export function LoginForm({ setPageHandler }) {
       dispatch(setUser(userData));
       sessionStorage.setItem("userData", JSON.stringify(userData));
       setPageHandler("wallet");
-      console.log(userData);
     } else {
-      setIsShaking(true);
-      setTimeout(() => {
-        setIsShaking(false);
-      }, 500); // Fermiamo il tremolio dopo 0.5 secondi
+      errorForm();
     }
+  }
+
+  function errorForm() {
+    setIsShaking(true);
+    setTimeout(() => {
+      setIsShaking(false);
+    }, 500);
+    toast.error("Email e/o password errata");
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
   }
 
   return (
@@ -65,7 +72,8 @@ export function LoginForm({ setPageHandler }) {
           isShaking ? "animate-shake" : ""
         }`}
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full">
+        data-rounded-max="rounded-full"
+      >
         <input
           ref={emailRef}
           type="text"

@@ -1,6 +1,7 @@
 import WalletIcon from "../assets/WalletIcon";
 import HomeIcon from "../assets/HomeIcon.jsx";
 import ProfileIcon from "../assets/ProfileIcon";
+import TransactionIcon from "../assets/TransactionIcon.jsx";
 
 import clsx from "clsx";
 
@@ -15,6 +16,11 @@ export default function Navbar({ page, setPage }) {
       name: "Wallet",
       icon: WalletIcon,
       page: "wallet",
+    },
+    {
+      name: "Transaction",
+      icon: TransactionIcon,
+      page: "transaction",
     },
     {
       name: "Profile",

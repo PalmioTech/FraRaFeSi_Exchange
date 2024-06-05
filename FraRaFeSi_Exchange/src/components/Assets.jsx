@@ -65,7 +65,8 @@ export function Assets() {
                     selectedAsset?.id === token.id
                       ? "bg-custom-selected"
                       : "bg-transparent"
-                  }`}>
+                  }`}
+                >
                   <div className="flex  items-center     text-xl">
                     <img
                       src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${token.id}.png`}
@@ -75,7 +76,7 @@ export function Assets() {
                     <span className="ml-2">{token.name}</span>
                   </div>
 
-                  <div className="flex items-center  justify-end   ">
+                  <div className="flex items-center  justify-end  ">
                     {parseFloat(token.quote.USD.percent_change_1h).toFixed(2)}%
                   </div>
                   <div className="flex items-center  justify-end  text-green ">
