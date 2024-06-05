@@ -1,5 +1,6 @@
 import { BuyButton } from "./BuyButton";
 import { Sidebar } from "./Sidebar";
+import { Wallet } from "./Wallet";
 import { WalletCard } from "./WalletCard";
 
 export default function WalletPage({ setPage }) {
@@ -8,6 +9,7 @@ export default function WalletPage({ setPage }) {
       <Sidebar setPage={setPage} />
       <WalletCard />
       <BuyButton setPage={setPage} />
+      <Wallet />
     </div>
   );
 }
