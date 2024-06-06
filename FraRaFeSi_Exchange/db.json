@@ -16,11 +16,7 @@
       "password": "fc2a36b07f5bf1c68ed52b636b74fe45",
       "balance": -234,
       "hash": "JmpIQw2D9wIcXUDcT6XPEb0x6",
-      "wallet": [
-        { "name": "Bitcoin", "amount": 50 },
-        { "name": "Bitcoin", "amount": 50 },
-        { "name": "Bitcoin", "amount": 50 }
-      ]
+      "wallet": []
     },
     {
       "id": "9418",
