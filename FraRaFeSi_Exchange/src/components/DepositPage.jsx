@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setBalance } from "../reducers/userSlice";
 import toast from "react-hot-toast";
-
+import backArrow from "../assets/backArrow.svg";
 export default function Deposit({ setPage }) {
   const [amount, setAmount] = useState("");
   const userData = useSelector((state) => state.user.data);
@@ -41,12 +41,11 @@ export default function Deposit({ setPage }) {
   return (
     <div className="flex items-center justify-center min-h-screen p-2">
       <div className="relative flex flex-col gap-8 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
-        <button
-          className="absolute top-0 right-2 p-2 font-bold text-white"
+        <img
           onClick={handleClick}
-        >
-          x
-        </button>
+          src={backArrow}
+          className="absolute top-2 left-2 px-1 max-w-10 cursor-pointer"
+        />
         <div className="flex flex-col items-center gap-2 text-white">
           <h1 className="text-3xl font-semibold">Deposit Page</h1>
         </div>

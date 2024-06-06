@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-
+import backArrow from "../assets/backArrow.svg";
 export default function Sell({ setPage }) {
   const amountRef = useRef();
 
@@ -10,12 +10,11 @@ export default function Sell({ setPage }) {
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-gray-900">
       <div className="relative flex flex-col gap-6 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
-        <button
+        <img
           onClick={handleClick}
-          className="absolute top-2 right-2 p-2 text-white bg-red-500 rounded-full hover:bg-red-600"
-        >
-          &times;
-        </button>
+          src={backArrow}
+          className="absolute top-2 left-2 px-1 max-w-10 cursor-pointer"
+        />
         <div className="flex flex-col items-center gap-2 text-white">
           <h1 className="text-3xl font-semibold">Sell</h1>
         </div>
