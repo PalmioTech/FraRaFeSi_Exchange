@@ -3,6 +3,7 @@ import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import WalletPage from "./WalletPage";
 import Exchange from "./Exchange";
+import Sell from "./Sell";
 import Deposit from "./DepositPage";
 import TransactionPage from "./TransactionPage";
 
@@ -16,9 +17,12 @@ export default function AppContent({ page, setPage }) {
         {page === "transaction" && <TransactionPage setPage={setPage} />}
       </div>
       <div>{page === "exchange" && <Exchange setPage={setPage} />}</div>
+      <div>{page === "sell" && <Sell setPage={setPage} />}</div>{" "}
       <div>{page === "deposit" && <Deposit setPage={setPage} />}</div>
       <div>
-        {page !== "exchange" && <Navbar page={page} setPage={setPage} />}
+        {page !== "exchange" && page !== "sell" && (
+          <Navbar page={page} setPage={setPage} />
+        )}
       </div>
     </main>
   );

@@ -12,6 +12,9 @@ export function BuyButton({ setPage }) {
   const handleClickDeposit = () => {
     setPage("deposit");
   };
+  const handleCLickSell = () => {
+    setPage("sell");
+  };
 
   return (
     <div className="flex justify-around flex-wrap">
@@ -26,9 +29,8 @@ export function BuyButton({ setPage }) {
       </div>
       <div className="flex flex-col items-center mx-4 my-3">
         <button
-          className={`flex justify-center max-w-10 rounded-full bg-violet w-full py-2 mx-2 mt-3 hover:outline hover:outline-2 hover:outline-greenwater ${
-            !selectedAsset ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          onClick={handleCLickSell}
+          className="flex justify-center max-w-10 rounded-full bg-violet w-full py-2 mx-2 mt-3 hover:outline hover:outline-2 hover:outline-greenwater"
         >
           <SellIcon />
         </button>
