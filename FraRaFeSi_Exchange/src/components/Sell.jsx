@@ -17,7 +17,7 @@ export default function Sell({ setPage }) {
           &times;
         </button>
         <div className="flex flex-col items-center gap-2 text-white">
-          <h1 className="text-3xl font-semibold">Crypto Exchange - Sell</h1>
+          <h1 className="text-3xl font-semibold">Sell</h1>
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
