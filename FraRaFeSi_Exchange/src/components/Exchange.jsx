@@ -93,7 +93,8 @@ export default function Exchange({ setPage }) {
       <div className="relative flex flex-col gap-6 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
         <button
           className="absolute top-2 right-2 p-2 text-white bg-red-500 rounded-full hover:bg-red-600"
-          onClick={handleClick}>
+          onClick={handleClick}
+        >
           &times;
         </button>
         <div className="flex flex-col items-center gap-2 text-white">
@@ -101,6 +102,23 @@ export default function Exchange({ setPage }) {
             {name}'s <br /> Crypto Exchange
           </h1>
           <h2>Current Balance: USD {balance.toFixed(2)}</h2>
+
+          {selectedCrypto && (
+            <div className="flex justify-between items-center gap-2 mt-4 bg-opacity-30 bg-white rounded-lg p-2">
+              <img
+                src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${selectedCrypto.id}.png`}
+                className="max-w-5"
+              />
+              <h3 className="text-2xl font-semibold ">{selectedCrypto.name}</h3>
+              <p className="text-sm text-center">
+                Current Price: USD {selectedCrypto.quote.USD.price.toFixed(2)}
+              </p>
+              <p className="text-sm text-center">
+                1h Change:{" "}
+                {selectedCrypto.quote.USD.percent_change_1h.toFixed(2)}%
+              </p>
+            </div>
+          )}
         </div>
         {error && <div className="text-red-500 text-center">{error}</div>}
         <div className="flex flex-col gap-4">
@@ -125,7 +143,8 @@ export default function Exchange({ setPage }) {
                       dispatch(setSearchTerm(crypto.name));
                       dispatch(setFilteredCryptoData([]));
                     }}
-                    className="p-2 cursor-pointer hover:bg-violet-500 flex justify-between">
+                    className="p-2 cursor-pointer hover:bg-violet-500 flex justify-between"
+                  >
                     <span>
                       {crypto.name} ({crypto.symbol})
                     </span>
@@ -166,7 +185,8 @@ export default function Exchange({ setPage }) {
         </div>
         <button
           onClick={handleBuy}
-          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
+          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300"
+        >
           BUY
         </button>
       </div>
