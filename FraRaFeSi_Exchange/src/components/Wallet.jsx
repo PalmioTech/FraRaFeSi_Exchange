@@ -38,7 +38,7 @@ export function Wallet() {
             {cryptoCurrency.map((crypto, index) => (
               <li
                 key={index}
-                className="first-letter:mb-2 p-1 shadow-lg rounded border-b hover:border-violet truncate cursor-pointer flex justify-between px-2 text-xl mt-2"
+                className="first-letter:mb-2 p-1 shadow-lg rounded-xl border-b hover:border-violet truncate cursor-pointer flex justify-between px-2 text-xl mt-2"
               >
                 <div>{crypto.name}</div>
                 <div>{crypto.amount}</div>
