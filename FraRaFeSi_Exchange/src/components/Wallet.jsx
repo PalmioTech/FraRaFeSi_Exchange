@@ -28,7 +28,7 @@ export function Wallet() {
           </mark>
         </h1>
       </div>
-      <div className="text-whiteText border-t-violet shadow-xl shadow-violet mt-2 w-11/12">
+      <div className="text-whiteText border-t-violet shadow-xl shadow-violet mt-2 w-11/12 rounded-xl">
         {cryptoCurrency.length === 0 ? (
           <div className="text-center text-red-500 p-4 text-xl mt-2 cursor-default rounded-2xl">
             Il tuo wallet è vuoto. Vai subito a comprare Crypto!
