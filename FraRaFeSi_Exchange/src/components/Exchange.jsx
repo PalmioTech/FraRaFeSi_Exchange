@@ -10,6 +10,7 @@ import {
   setSearchTerm,
   setError,
 } from "../reducers/exchangeSlice";
+import toast from "react-hot-toast";
 
 export default function Exchange({ setPage }) {
   const cryptoReceived = useSelector((state) => state.exchange.cryptoReceived);
@@ -62,14 +63,25 @@ export default function Exchange({ setPage }) {
   function handleInsertAmount(event) {
     event.preventDefault();
     const amount = parseFloat(amountRef.current.value) || 0;
-    const cryptoAmount = selectedCrypto
-      ? amount / selectedCrypto.quote.USD.price
-      : 0;
-    dispatch(setCryptoReceived(cryptoAmount));
+    if (amount > balance) {
+      toast.error("Il tuo saldo è insufficente per l'aquisto");
+      dispatch(setError("Saldo insufficente"));
+      dispatch(setCryptoReceived(0));
+    } else {
+      dispatch(setError(null));
+      const cryptoAmount = selectedCrypto
+        ? amount / selectedCrypto.quote.USD.price
+        : 0;
+      dispatch(setCryptoReceived(cryptoAmount));
+    }
   }
 
   async function handleBuy() {
     const amount = parseFloat(amountRef.current.value) || 0;
+    if (amount > balance) {
+      dispatch(setError("Insufficient balance"));
+      return;
+    }
     try {
       const result = await updateUserBalance({
         id,
@@ -79,12 +91,17 @@ export default function Exchange({ setPage }) {
       console.log("Result from updateUserBalance:", result);
 
       if (result.error) {
-        console.error("Failed to update balance:", result.error);
+        toast.error("Errore nell'acquisto della crypto");
+        dispatch(setError("Failed to update balance"));
       } else {
-        console.log("Balance updated successfully");
+        toast.success("Crypto acquistata con successo!");
+
+        setPage("wallet");
+        dispatch(setError(null));
       }
     } catch (error) {
-      console.error("Failed to update balance:", error);
+      toast.error("Errore nell'acquisto della crypto");
+      dispatch(setError("Failed to update balance"));
     }
   }
 
@@ -167,6 +184,7 @@ export default function Exchange({ setPage }) {
                     type="number"
                     className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
                     placeholder="Enter amount"
+                    max={balance}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -186,6 +204,7 @@ export default function Exchange({ setPage }) {
         <button
           onClick={handleBuy}
           className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300"
+          disabled={balance === 0}
         >
           BUY
         </button>
