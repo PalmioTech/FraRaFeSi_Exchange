@@ -1,8 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../reducers/userSlice";
 import MD5 from "crypto-js/md5";
-import { useGetUserByEmailQuery } from "../reducers/apiSlice";
 import toast from "react-hot-toast";
 
 export function LoginForm({ setPageHandler }) {
@@ -10,33 +9,19 @@ export function LoginForm({ setPageHandler }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isShaking, setIsShaking] = useState(false);
-  const [email, setEmail] = useState(null);
-
-  const {
-    data: user,
-    error,
-    isLoading,
-  } = useGetUserByEmailQuery(email, {
-    skip: !email,
-  });
-
-  useEffect(() => {
-    if (user && user.length > 0) {
-      const currentUser = user[0];
-      const password = passwordRef.current.value;
-      checkAuthentication(currentUser, email, password);
-    } else if (user && user.length === 0) {
-      errorForm();
-    }
-  }, [user]);
 
   function handleSubmit(event) {
     event.preventDefault();
     const email = emailRef.current.value;
-    setEmail(email);
+    const password = passwordRef.current.value;
+    checkAuthentication(email, password);
   }
 
-  function checkAuthentication(user, email, password) {
+  async function checkAuthentication(email, password) {
+    const userArray = await fetch(
+      "http://localhost:3000/users?email=" + email
+    ).then((r) => r.json());
+    const user = userArray[0];
     const encryptedPassword = MD5(password).toString();
     if (user.password === encryptedPassword) {
       const userData = {
@@ -62,8 +47,6 @@ export function LoginForm({ setPageHandler }) {
       setIsShaking(false);
     }, 500);
     toast.error("Email e/o password errata");
-    emailRef.current.value = "";
-    passwordRef.current.value = "";
   }
 
   return (
@@ -101,8 +84,6 @@ export function LoginForm({ setPageHandler }) {
           </button>
         </div>
       </div>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error fetching data: {error.message}</p>}
     </form>
   );
 }
