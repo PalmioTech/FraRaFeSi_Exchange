@@ -21,7 +21,7 @@ export const usersApi = createApi({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ balance: newBalance, wallet: wallet }),
+        body: JSON.stringify({ balance: newBalance, wallet }),
       }),
     }),
   }),

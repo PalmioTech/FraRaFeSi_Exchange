@@ -41,7 +41,7 @@ export function Wallet() {
                 className="first-letter:mb-2 p-1 shadow-lg rounded-xl border-b hover:border-violet truncate cursor-pointer flex justify-between px-2 text-xl mt-2"
               >
                 <div>{crypto.name}</div>
-                <div>{crypto.amount}</div>
+                <div>{crypto.amount}$</div>
               </li>
             ))}
           </ul>

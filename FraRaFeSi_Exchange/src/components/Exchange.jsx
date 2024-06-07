@@ -108,7 +108,11 @@ export default function Exchange({ setPage }) {
       if (cryptoIndex >= 0) {
         updatedWallet[cryptoIndex].amount += cryptoAmount;
       } else {
-        updatedWallet.push({ id: selectedCrypto.id, amount: cryptoAmount });
+        updatedWallet.push({
+          id: selectedCrypto.id,
+          name: selectedCrypto.name,
+          amount: cryptoAmount,
+        });
       }
 
       const result = await updateUserBalance({
