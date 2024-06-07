@@ -1,18 +1,9 @@
 import { useSelector } from "react-redux";
-import { useGetUserByEmailQuery } from "../reducers/apiSlice";
-import { useEffect, useState } from "react";
 
 export function Wallet() {
-  const email = useSelector((state) => state.user.data.email);
-  const { data: user, error, isLoading } = useGetUserByEmailQuery(email);
-  const [cryptoCurrency, setCryptoCurrency] = useState([]);
-
-  useEffect(() => {
-    if (user && user.length > 0) {
-      const currentUser = user[0];
-      setCryptoCurrency(currentUser.wallet);
-    }
-  }, [user]);
+  const cryptoCurrency = useSelector((state) => state.user.data.wallet);
+  const isLoading = useSelector((state) => state.user.isLoading);
+  const error = useSelector((state) => state.user.error);
 
   if (isLoading)
     return <p className="flex justify-center text-whiteText">Loading...</p>;
@@ -40,8 +31,10 @@ export function Wallet() {
                 key={index}
                 className="first-letter:mb-2 p-1 shadow-lg rounded-xl border-b hover:border-violet truncate cursor-pointer flex justify-between px-2 text-xl mt-2"
               >
-                <div>{crypto.name}</div>
-                <div>{crypto.amount}$</div>
+                <div className="flex items-center">
+                  <div>{crypto.name}</div>
+                </div>
+                <div>{crypto.amount} $</div>
               </li>
             ))}
           </ul>

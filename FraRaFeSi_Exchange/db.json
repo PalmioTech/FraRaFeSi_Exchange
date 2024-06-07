@@ -5,9 +5,20 @@
       "name": "Raffuz",
       "email": "raffaele11596@gmail.com",
       "password": "7cf2db5ec261a0fa27a502d3196a6f60",
-      "balance": 15215153151185968,
+      "balance": 15215153151185952,
       "hash": "R4dzN1DREuDCcaiTgczoFZNJF",
-      "wallet": []
+      "wallet": [
+        {
+          "id": 1027,
+          "name": "Ethereum",
+          "amount": 0.004478861686058493
+        },
+        {
+          "id": 1839,
+          "name": "BNB",
+          "amount": 0
+        }
+      ]
     },
     {
       "id": "9ac6",
