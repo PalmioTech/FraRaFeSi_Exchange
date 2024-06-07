@@ -28,9 +28,9 @@ export function Assets() {
 
   const handleItemClick = (coin) => {
     if (selectedCrypto?.id === coin.id) {
-      dispatch(setSelectedCrypto(null)); // Deselect if the same coin is clicked
+      dispatch(setSelectedCrypto(null));
     } else {
-      dispatch(setSelectedCrypto(coin)); // Select the clicked coin
+      dispatch(setSelectedCrypto(coin));
     }
   };
 
