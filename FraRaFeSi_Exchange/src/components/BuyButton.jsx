@@ -5,7 +5,6 @@ import { SellIcon } from "../assets/SellIcon";
 import { SwapIcon } from "../assets/SwapIcon";
 
 export function BuyButton({ setPage }) {
-  const selectedAsset = useSelector((state) => state.assets.selectedAsset);
   const handleClickExchange = () => {
     setPage("exchange");
   };
