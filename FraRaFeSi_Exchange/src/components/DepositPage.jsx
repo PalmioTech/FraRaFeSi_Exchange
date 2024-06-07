@@ -28,6 +28,7 @@ export default function Deposit({ setPage }) {
           if (response.ok) {
             dispatch(setBalance(newBalance));
             toast.success("Il tuo deposito è avvenuto con successo");
+            setPage("wallet");
           } else {
             toast.error("Errore durante il tuo deposito");
           }

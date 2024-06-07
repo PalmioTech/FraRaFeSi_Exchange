@@ -15,13 +15,13 @@ export const usersApi = createApi({
       }),
     }),
     updateUserBalance: builder.mutation({
-      query: ({ id, newBalance }) => ({
+      query: ({ id, newBalance, wallet }) => ({
         url: `users/${id}`,
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ balance: newBalance }),
+        body: JSON.stringify({ balance: newBalance, wallet: wallet }),
       }),
     }),
   }),

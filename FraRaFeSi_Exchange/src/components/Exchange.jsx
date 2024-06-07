@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useUpdateUserBalanceMutation } from "../reducers/apiSlice";
@@ -6,8 +6,6 @@ import {
   setCryptoReceived,
   setCryptoData,
   setFilteredCryptoData,
-  setSelectedCrypto,
-  setSearchTerm,
   setError,
 } from "../reducers/exchangeSlice";
 import toast from "react-hot-toast";
@@ -15,6 +13,7 @@ import { Assets } from "./Assets";
 import backArrow from "../assets/backArrow.svg";
 
 export default function Exchange({ setPage }) {
+  const [userDetails, setUserDetails] = useState(null);
   const cryptoReceived = useSelector((state) => state.exchange.cryptoReceived);
   const cryptoData = useSelector((state) => state.exchange.cryptoData);
   const filteredCryptoData = useSelector(
@@ -56,11 +55,24 @@ export default function Exchange({ setPage }) {
       });
   }, [dispatch]);
 
-  if (!userData) {
+  useEffect(() => {
+    if (userData) {
+      axios
+        .get(`http://localhost:3000/users/${userData.id}`)
+        .then((response) => {
+          setUserDetails(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user details:", error);
+        });
+    }
+  }, [userData]);
+
+  if (!userDetails) {
     return <div>Loading...</div>;
   }
 
-  const { id, name, balance } = userData;
+  const { id, name, balance, wallet } = userDetails;
 
   function handleInsertAmount(event) {
     event.preventDefault();
@@ -85,9 +97,24 @@ export default function Exchange({ setPage }) {
       return;
     }
     try {
+      const cryptoAmount = selectedCrypto
+        ? amount / selectedCrypto.quote.USD.price
+        : 0;
+      let updatedWallet = [...wallet];
+      const cryptoIndex = updatedWallet.findIndex(
+        (crypto) => crypto.id === selectedCrypto.id
+      );
+
+      if (cryptoIndex >= 0) {
+        updatedWallet[cryptoIndex].amount += cryptoAmount;
+      } else {
+        updatedWallet.push({ id: selectedCrypto.id, amount: cryptoAmount });
+      }
+
       const result = await updateUserBalance({
         id,
         newBalance: balance - amount,
+        wallet: updatedWallet,
       });
 
       console.log("Result from updateUserBalance:", result);
@@ -97,9 +124,13 @@ export default function Exchange({ setPage }) {
         dispatch(setError("Failed to update balance"));
       } else {
         toast.success("Crypto acquistata con successo!");
-
         setPage("wallet");
         dispatch(setError(null));
+        setUserDetails((prevState) => ({
+          ...prevState,
+          balance: prevState.balance - amount,
+          wallet: updatedWallet,
+        }));
       }
     } catch (error) {
       toast.error("Errore nell'acquisto della crypto");

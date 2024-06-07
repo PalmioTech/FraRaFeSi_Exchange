@@ -18,25 +18,37 @@ export function LoginForm({ setPageHandler }) {
   }
 
   async function checkAuthentication(email, password) {
-    const userArray = await fetch(
-      "http://localhost:3000/users?email=" + email
-    ).then((r) => r.json());
-    const user = userArray[0];
-    const encryptedPassword = MD5(password).toString();
-    if (user.password === encryptedPassword) {
-      const userData = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        balance: user.balance,
-        hash: user.hash,
-        wallet: user.wallet,
-      };
-      dispatch(setUser(userData));
-      sessionStorage.setItem("userData", JSON.stringify(userData));
-      setPageHandler("wallet");
-    } else {
+    try {
+      const userArray = await fetch(
+        "http://localhost:3000/users?email=" + email
+      ).then((r) => r.json());
+      const user = userArray[0];
+      console.log(user);
+      const encryptedPassword = MD5(password).toString();
+      if (user.password === encryptedPassword) {
+        const userDataSaved = {
+          name: user.name,
+          email: user.email,
+          password: user.password,
+        };
+        const userData = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          balance: user.balance,
+          hash: user.hash,
+          wallet: user.wallet,
+        };
+        console.log(userDataSaved);
+
+        dispatch(setUser(userData));
+        sessionStorage.setItem("userDataSaved", JSON.stringify(userDataSaved));
+        setPageHandler("wallet");
+      } else {
+        errorForm();
+      }
+    } catch (error) {
+      console.error("Authentication error:", error);
       errorForm();
     }
   }
