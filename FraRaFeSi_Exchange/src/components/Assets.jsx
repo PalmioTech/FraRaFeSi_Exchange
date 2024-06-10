@@ -64,7 +64,7 @@ export function Assets() {
           {error && <p className="text-red-500">{error}</p>}
           <ul className="max-h-96 overflow-y-auto">
             {filteredData &&
-              filteredData.slice(0, 50).map((token, index) => (
+              filteredData.slice(0, 25).map((token, index) => (
                 <li
                   key={index}
                   onClick={() => handleItemClick(token)}

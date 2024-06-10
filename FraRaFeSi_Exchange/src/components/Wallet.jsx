@@ -1,10 +1,35 @@
-import { useSelector } from "react-redux";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCryptoData,
+  setSelectedCryptoSell,
+} from "../reducers/exchangeSlice";
 
 export function Wallet() {
   const cryptoCurrency = useSelector((state) => state.user.data.wallet);
   const isLoading = useSelector((state) => state.user.isLoading);
   const error = useSelector((state) => state.user.error);
+  const cryptoData = useSelector((state) => state.exchange.cryptoData);
+  const cryptoDataID = (id) => cryptoData.find((crypto) => crypto.id === id);
+  const dispatch = useDispatch();
+  const selectedCryptoSell = useSelector(
+    (state) => state.exchange.selectedCryptoSell
+  );
 
+  const handleCryptoClick = (crypto) => {
+    dispatch(setSelectedCryptoSell(crypto));
+  };
+  useEffect(() => {
+    axios
+      .get("api/cryptocurrency/listings/latest")
+      .then((response) => {
+        dispatch(setCryptoData(response.data.data));
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [dispatch]);
   if (isLoading)
     return <p className="flex justify-center text-whiteText">Loading...</p>;
   if (error) return <p>Error fetching data: {error.message}</p>;
@@ -26,17 +51,42 @@ export function Wallet() {
           </div>
         ) : (
           <ul className="max-h-96 overflow-y-auto">
-            {cryptoCurrency.map((crypto, index) => (
-              <li
-                key={index}
-                className="first-letter:mb-2 p-1 shadow-lg rounded-xl border-b hover:border-violet truncate cursor-pointer flex justify-between px-2 text-xl mt-2"
-              >
-                <div className="flex items-center">
-                  <div>{crypto.name}</div>
-                </div>
-                <div>{crypto.amount} $</div>
-              </li>
-            ))}
+            {cryptoCurrency.map((crypto, index) => {
+              const latestData = cryptoDataID(crypto.id);
+              if (!latestData) return null;
+
+              return (
+                <li
+                  key={index}
+                  onClick={() => handleCryptoClick(crypto)}
+                  className={`mb-4 p-1 shadow-lg rounded border-b hover:border-violet grid grid-cols-3 truncate cursor-pointer ${
+                    selectedCryptoSell && selectedCryptoSell.id === crypto.id
+                      ? "bg-custom-selected"
+                      : ""
+                  }`}
+                >
+                  <div className="flex items-center text-xl">
+                    <img
+                      src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
+                      alt={crypto.name}
+                      className="max-w-6 object-contain"
+                    />
+                    <span className="ml-2 text-xl font-semibold">
+                      {crypto.name}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-end">
+                    {crypto.amount.toFixed(4)}
+                  </div>
+                  <div className="flex items-center justify-end text-green">
+                    $
+                    {parseFloat(
+                      crypto.amount * latestData.quote.USD.price
+                    ).toFixed(2)}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>

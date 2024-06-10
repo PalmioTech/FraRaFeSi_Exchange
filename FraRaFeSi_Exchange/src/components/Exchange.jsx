@@ -7,6 +7,7 @@ import {
   setCryptoData,
   setFilteredCryptoData,
   setError,
+  setSelectedCrypto,
 } from "../reducers/exchangeSlice";
 import { setWallet, setBalance } from "../reducers/userSlice";
 import toast from "react-hot-toast";
@@ -17,6 +18,7 @@ export default function Exchange({ setPage }) {
   const [userDetails, setUserDetails] = useState(null);
   const cryptoReceived = useSelector((state) => state.exchange.cryptoReceived);
   const cryptoData = useSelector((state) => state.exchange.cryptoData);
+
   const filteredCryptoData = useSelector(
     (state) => state.exchange.filteredCryptoData
   );
@@ -113,7 +115,7 @@ export default function Exchange({ setPage }) {
           id: selectedCrypto.id,
           name: selectedCrypto.name,
           amount: cryptoAmount,
-          imageUrl: selectedCrypto.imageUrl, // Assicurati che l'URL dell'immagine sia incluso
+          imageUrl: selectedCrypto.imageUrl,
         });
       }
 
@@ -133,11 +135,13 @@ export default function Exchange({ setPage }) {
         dispatch(setError(null));
         dispatch(setWallet(updatedWallet));
         dispatch(setBalance(balance - amount));
+        dispatch(setSelectedCrypto(null));
         setPage("wallet");
       }
     } catch (error) {
       toast.error("Errore nell'acquisto della crypto");
       dispatch(setError("Failed to update balance"));
+      console.log(error);
     }
   }
 

@@ -9,6 +9,7 @@ const initialState = {
   selectedCrypto: null,
   searchTerm: "",
   error: null,
+  selectedCryptoSell: null,
 };
 
 export const exchangeSlice = createSlice({
@@ -27,6 +28,9 @@ export const exchangeSlice = createSlice({
     setSelectedCrypto: (state, action) => {
       state.selectedCrypto = action.payload;
     },
+    setSelectedCryptoSell: (state, action) => {
+      state.selectedCryptoSell = action.payload;
+    },
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
     },
@@ -43,6 +47,7 @@ export const {
   setSelectedCrypto,
   setSearchTerm,
   setError,
+  setSelectedCryptoSell,
 } = exchangeSlice.actions;
 
 export default exchangeSlice.reducer;
