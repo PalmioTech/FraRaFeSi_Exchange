@@ -13,6 +13,7 @@ import { setWallet, setBalance } from "../reducers/userSlice";
 import toast from "react-hot-toast";
 import { Assets } from "./Assets";
 import backArrow from "../assets/backArrow.svg";
+import { createTransaction } from "../utils";
 
 export default function Exchange({ setPage }) {
   const [userDetails, setUserDetails] = useState(null);
@@ -118,7 +119,13 @@ export default function Exchange({ setPage }) {
           imageUrl: selectedCrypto.imageUrl,
         });
       }
-
+      const transaction = await createTransaction(
+        selectedCrypto.id,
+        userDetails.id,
+        cryptoAmount,
+        balance,
+        "+"
+      );
       const result = await updateUserBalance({
         id,
         newBalance: balance - amount,
