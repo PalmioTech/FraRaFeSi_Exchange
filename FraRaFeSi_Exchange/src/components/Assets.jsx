@@ -7,6 +7,7 @@ export function Assets() {
   const [data, setData] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const selectedCrypto = useSelector((state) => state.exchange.selectedCrypto);
 
@@ -15,10 +16,12 @@ export function Assets() {
       .get("api/cryptocurrency/listings/latest")
       .then((response) => {
         setData(response.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
         setError(error.message);
+        setLoading(false);
       });
   }, []);
 
@@ -61,63 +64,71 @@ export function Assets() {
           </div>
         )}
         <div className="px-1 text-white mt-2">
+          {loading && (
+            <div className="flex items-center justify-center my-10">
+              <div className="border-gray-300 max-h-12 p-10 animate-spin rounded-full border-8 border-t-blue-600"></div>
+            </div>
+          )}
           {error && <p className="text-red-500">{error}</p>}
-          <ul className="max-h-96 overflow-y-auto">
-            {filteredData &&
-              filteredData.slice(0, 25).map((token, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleItemClick(token)}
-                  className={`mb-4 p-1 shadow-lg rounded border-b hover:border-violet grid grid-cols-3 truncate cursor-pointer ${
-                    selectedCrypto?.id === token.id
-                      ? "bg-white bg-opacity-30 text-black"
-                      : "bg-transparent"
-                  }`}
-                  style={{
-                    display:
-                      selectedCrypto && selectedCrypto.id !== token.id
-                        ? "none"
-                        : "grid",
-                  }}
-                >
-                  <div className="flex items-center text-xl">
-                    <img
-                      src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${token.id}.png`}
-                      alt={token.name}
-                      className="max-w-6 object-contain"
-                    />
-                    <span
-                      className={`ml-2 text-xl font-semibold ${
+          {!loading && (
+            <ul className="max-h-96 overflow-y-auto">
+              {filteredData &&
+                filteredData.slice(0, 25).map((token, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleItemClick(token)}
+                    className={`mb-4 p-1 shadow-lg rounded border-b hover:border-violet grid grid-cols-3 truncate cursor-pointer ${
+                      selectedCrypto?.id === token.id
+                        ? "bg-white bg-opacity-30 text-black"
+                        : "bg-transparent"
+                    }`}
+                    style={{
+                      display:
+                        selectedCrypto && selectedCrypto.id !== token.id
+                          ? "none"
+                          : "grid",
+                    }}
+                  >
+                    <div className="flex items-center text-xl">
+                      <img
+                        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${token.id}.png`}
+                        alt={token.name}
+                        className="max-w-6 object-contain"
+                      />
+                      <span
+                        className={`ml-2 text-xl font-semibold ${
+                          selectedCrypto?.id === token.id
+                            ? "text-black font-bold"
+                            : ""
+                        }`}
+                      >
+                        {token.name}
+                      </span>
+                    </div>
+
+                    <div
+                      className={`flex items-center justify-end ${
                         selectedCrypto?.id === token.id
                           ? "text-black font-bold"
                           : ""
                       }`}
                     >
-                      {token.name}
-                    </span>
-                  </div>
-
-                  <div
-                    className={`flex items-center justify-end ${
-                      selectedCrypto?.id === token.id
-                        ? "text-black font-bold"
-                        : ""
-                    }`}
-                  >
-                    {parseFloat(token.quote.USD.percent_change_1h).toFixed(2)}%
-                  </div>
-                  <div
-                    className={`flex items-center justify-end ${
-                      selectedCrypto?.id === token.id
-                        ? "text-black font-bold"
-                        : "text-green"
-                    }`}
-                  >
-                    ${parseFloat(token.quote.USD.price).toFixed(2)}
-                  </div>
-                </li>
-              ))}
-          </ul>
+                      {parseFloat(token.quote.USD.percent_change_1h).toFixed(2)}
+                      %
+                    </div>
+                    <div
+                      className={`flex items-center justify-end ${
+                        selectedCrypto?.id === token.id
+                          ? "text-black font-bold"
+                          : "text-green"
+                      }`}
+                    >
+                      ${parseFloat(token.quote.USD.price).toFixed(2)}
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
