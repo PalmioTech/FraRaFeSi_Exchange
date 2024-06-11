@@ -5,20 +5,9 @@
       "name": "Raffuz",
       "email": "raffaele11596@gmail.com",
       "password": "7cf2db5ec261a0fa27a502d3196a6f60",
-      "balance": 15215153151185952,
+      "balance": 15001939,
       "hash": "R4dzN1DREuDCcaiTgczoFZNJF",
-      "wallet": [
-        {
-          "id": 1027,
-          "name": "Ethereum",
-          "amount": 0.004478861686058493
-        },
-        {
-          "id": 1839,
-          "name": "BNB",
-          "amount": 0
-        }
-      ]
+      "wallet": []
     },
     {
       "id": "9ac6",
@@ -34,9 +23,15 @@
       "name": "Simone Nataloni",
       "email": "simone.nataloni@gmail.com",
       "password": "356a693c86f1fa1b612a9d369b1fc68f",
-      "balance": 642406,
+      "balance": 642400,
       "hash": "RMmWUtTFHanHrSvgp48Beo0xc",
-      "wallet": []
+      "wallet": [
+        {
+          "id": 1839,
+          "name": "BNB",
+          "amount": 0.00996655716845019
+        }
+      ]
     },
     {
       "id": "34d5",
@@ -100,6 +95,22 @@
       "id_user": "9418",
       "amount": "200",
       "previous_balance": "300",
+      "sign": "+"
+    },
+    {
+      "id": "c16c094d1443ff29d314f2abcc0b6442",
+      "id_crypto": 1839,
+      "id_user": "9418",
+      "amount": 0.00996655716845019,
+      "previous_balance": 642406,
+      "sign": "+"
+    },
+    {
+      "id": "099577fa4bb0f8416d153e069dfdcf9a",
+      "id_crypto": 1,
+      "id_user": "660a",
+      "amount": 3208987938.371268,
+      "previous_balance": 15215153151185952,
       "sign": "+"
     }
   ]
