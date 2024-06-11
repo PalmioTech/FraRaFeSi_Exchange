@@ -2,8 +2,11 @@ import React from "react";
 import avatarBatman from "../assets/avatarBatman.svg";
 import bitcoin from "../assets/bitcoin.svg";
 import ethereum from "../assets/ethereum.svg";
+import { useSelector } from "react-redux";
+import { transactionSlice } from "../reducers/transactionSlice";
+const { useGetTransactionByIDQuery } = transactionSlice;
 
-const ActivityRow = ({ action, conversion, positive, negative }) => (
+const ActivityRow = ({ sign, previousBalance, amount }) => (
   <div className="flex justify-between p-3 border-b border-gray-300 rounded-lg">
     <div className="relative w-8 h-8">
       <img
@@ -17,18 +20,29 @@ const ActivityRow = ({ action, conversion, positive, negative }) => (
         className="absolute top-3 -right-4 w-8 h-8"
       />
     </div>
-    <div className="flex flex-col justify-center">
-      <span className="text-lg font-bold text-white text-left">{action}</span>
-      <span className="text-sm text-gray-500 text-center">{conversion}</span>
+    <div className="flex  gap-4 justify-center">
+      <span className="text-lg font-bold text-white text-left">{sign}</span>
+      <span className="text-sm text-gray-500 text-center">
+        {previousBalance}
+      </span>
     </div>
     <div className="flex flex-col items-end justify-center">
-      <span className="text-lg font-bold text-white text-left">{positive}</span>
-      <span className="text-m text-gray-500 text-left">{negative}</span>
+      <span className="text-m text-gray-500 text-left">{amount}</span>
     </div>
   </div>
 );
 
 export default function TransactionPage() {
+  const userData = useSelector((state) => state.user.data);
+  const {
+    data,
+    // error,
+    // isLoading,
+  } = useGetTransactionByIDQuery(userData.id);
+
+  if (!data || !Array.isArray(data)) {
+    return <div>No transactions found.</div>;
+  }
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="flex justify-center mt-2 mb-5 border-b-2 border-violet">
@@ -39,60 +53,15 @@ export default function TransactionPage() {
           </mark>
         </h1>
       </div>
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
-      <ActivityRow
-        action="Sell"
-        conversion="BTC → USD"
-        positive="+60,000 USD"
-        negative="-1 BTC"
-      />
+      {data.map((transaction) => (
+        <ActivityRow
+          key={transaction.id}
+          sign={transaction.sign}
+          previousBalance={transaction.previous_balance}
+          idCrypto={transaction.id_crypto}
+          amount={transaction.amount}
+        />
+      ))}
     </div>
   );
 }

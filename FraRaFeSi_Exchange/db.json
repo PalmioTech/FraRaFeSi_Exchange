@@ -34,9 +34,30 @@
       "name": "Simone Nataloni",
       "email": "simone.nataloni@gmail.com",
       "password": "356a693c86f1fa1b612a9d369b1fc68f",
-      "balance": 642406,
+      "balance": 608276,
       "hash": "RMmWUtTFHanHrSvgp48Beo0xc",
-      "wallet": []
+      "wallet": [
+        {
+          "id": 1,
+          "name": "Bitcoin",
+          "amount": 0.00683034858060604
+        },
+        {
+          "id": 1027,
+          "name": "Ethereum",
+          "amount": 9.63907059987759
+        },
+        {
+          "id": 825,
+          "name": "Tether USDt",
+          "amount": 234.05552694084088
+        },
+        {
+          "id": 26081,
+          "name": "First Digital USD",
+          "amount": 77.0385272237305
+        }
+      ]
     },
     {
       "id": "34d5",
@@ -100,6 +121,86 @@
       "id_user": "9418",
       "amount": "200",
       "previous_balance": "300",
+      "sign": "+"
+    },
+    {
+      "id": "2371be1d4fb18946bdfa3aa6a1164718",
+      "id_crypto": 1,
+      "id_user": "9418",
+      "amount": 0.00666720172668903,
+      "previous_balance": 642406,
+      "sign": "+"
+    },
+    {
+      "id": "98c60935c13d6b10448ea0498d070f8f",
+      "id_crypto": 1027,
+      "id_user": "9418",
+      "amount": 9.630191090547488,
+      "previous_balance": 641962,
+      "sign": "+"
+    },
+    {
+      "id": "c00e512f1f9ea75cbaffe66bac57f16a",
+      "id_crypto": 825,
+      "id_user": "9418",
+      "amount": 234.05552694084088,
+      "previous_balance": 608629,
+      "sign": "+"
+    },
+    {
+      "id": "0fa13bc69dc810323d5798efcb89c9dc",
+      "id_crypto": 26081,
+      "id_user": "9418",
+      "amount": 77.0385272237305,
+      "previous_balance": 608395,
+      "sign": "+"
+    },
+    {
+      "id": "9e69f5bf30cd0aa297e8c2f1a0f98f8b",
+      "id_crypto": 1027,
+      "id_user": "9418",
+      "amount": 0.0005729982397390175,
+      "previous_balance": 608318,
+      "sign": "+"
+    },
+    {
+      "id": "ec5ca47da941c07fa7079fbf55901268",
+      "id_crypto": 1027,
+      "id_user": "9418",
+      "amount": 0.006302204890692879,
+      "previous_balance": 608316,
+      "sign": "+"
+    },
+    {
+      "id": "138b206e2bca1b1e598ac119392c84db",
+      "id_crypto": 1027,
+      "id_user": "9418",
+      "amount": 0.002004306199670221,
+      "previous_balance": 608294,
+      "sign": "+"
+    },
+    {
+      "id": "c40e5be359c3921e45b69bbc69ea985f",
+      "id_crypto": 1,
+      "id_user": "9418",
+      "amount": 0.00011866333158673052,
+      "previous_balance": 608287,
+      "sign": "+"
+    },
+    {
+      "id": "fd165500b0e043b329f61d2a92795247",
+      "id_crypto": 1,
+      "id_user": "9418",
+      "amount": 0.000029657902591505995,
+      "previous_balance": 608279,
+      "sign": "+"
+    },
+    {
+      "id": "70ca35a8a3dec765aa8e97d525f18e87",
+      "id_crypto": 1,
+      "id_user": "9418",
+      "amount": 0.000014825619738772776,
+      "previous_balance": 608277,
       "sign": "+"
     }
   ]

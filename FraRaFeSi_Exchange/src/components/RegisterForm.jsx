@@ -70,8 +70,7 @@ export function RegisterForm({ setView }) {
       <div
         className="relative z-10 overflow-hidden  border-b-2 border-gray-300 rounded-lg"
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full"
-      >
+        data-rounded-max="rounded-full">
         <input
           ref={nameRef}
           type="text"
