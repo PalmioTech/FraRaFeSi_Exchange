@@ -27,7 +27,7 @@ export default function Exchange({ setPage }) {
   const searchTerm = useSelector((state) => state.exchange.searchTerm);
   const error = useSelector((state) => state.exchange.error);
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
   const handleClick = () => {
     setPage("wallet");
   };
@@ -49,13 +49,16 @@ export default function Exchange({ setPage }) {
   }, [searchTerm, cryptoData, dispatch]);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("api/cryptocurrency/listings/latest")
       .then((response) => {
         dispatch(setCryptoData(response.data.data));
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setLoading(false);
       });
   }, [dispatch]);
 
@@ -155,56 +158,65 @@ export default function Exchange({ setPage }) {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <div className="relative flex flex-col gap-6 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 pt-8 px-4 rounded-lg w-full max-w-md">
-        <img
-          onClick={handleClick}
-          src={backArrow}
-          className="absolute top-2 left-2 px-1 max-w-10 cursor-pointer"
-        />
-
-        <div className="flex flex-col items-center gap-2 text-white">
-          <h1 className="text-3xl font-semibold">
-            {name}'s <br /> Crypto Exchange
-          </h1>
-          <h2>Current Balance: USD {balance.toFixed(2)}</h2>
-        </div>
-        {error && <div className="text-red-500 text-center">{error}</div>}
-        <div className="flex flex-col">
-          <Assets />
-          {selectedCrypto && (
-            <div>
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col">
-                  <label className="text-white mb-2">Spend (USD)</label>
-                  <input
-                    onChange={handleInsertAmount}
-                    ref={amountRef}
-                    type="number"
-                    className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
-                    placeholder="Enter amount"
-                    max={balance}
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="text-white mb-2">Receive (Crypto)</label>
-                  <input
-                    type="number"
-                    value={cryptoReceived}
-                    readOnly
-                    className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
-                    placeholder="Converted amount"
-                  />
-                </div>
-                <button
-                  onClick={handleBuy}
-                  className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300 mb-4"
-                  disabled={balance === 0}
-                >
-                  BUY
-                </button>
-              </div>
+        {loading ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600"></div>
+          </div>
+        ) : (
+          <>
+            <img
+              onClick={handleClick}
+              src={backArrow}
+              className="absolute top-2 left-2 px-1 max-w-10 cursor-pointer"
+            />
+            <div className="flex flex-col items-center gap-2 text-white">
+              <h1 className="text-3xl font-semibold">
+                {name}'s <br /> Crypto Exchange
+              </h1>
+              <h2>Current Balance: USD {balance.toFixed(2)}</h2>
             </div>
-          )}
-        </div>
+            {error && <div className="text-red-500 text-center">{error}</div>}
+            <div className="flex flex-col">
+              <Assets />
+              {selectedCrypto && (
+                <div>
+                  <div className="flex flex-col gap-6">
+                    <div className="flex flex-col">
+                      <label className="text-white mb-2">Spend (USD)</label>
+                      <input
+                        onChange={handleInsertAmount}
+                        ref={amountRef}
+                        type="number"
+                        className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
+                        placeholder="Enter amount"
+                        max={balance}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="text-white mb-2">
+                        Receive (Crypto)
+                      </label>
+                      <input
+                        type="number"
+                        value={cryptoReceived}
+                        readOnly
+                        className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
+                        placeholder="Converted amount"
+                      />
+                    </div>
+                    <button
+                      onClick={handleBuy}
+                      className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300 mb-4"
+                      disabled={balance === 0}
+                    >
+                      BUY
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
