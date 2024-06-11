@@ -5,20 +5,9 @@
       "name": "Raffuz",
       "email": "raffaele11596@gmail.com",
       "password": "7cf2db5ec261a0fa27a502d3196a6f60",
-      "balance": 15215153151185952,
+      "balance": 15001939,
       "hash": "R4dzN1DREuDCcaiTgczoFZNJF",
-      "wallet": [
-        {
-          "id": 1027,
-          "name": "Ethereum",
-          "amount": 0.004478861686058493
-        },
-        {
-          "id": 1839,
-          "name": "BNB",
-          "amount": 0
-        }
-      ]
+      "wallet": []
     },
     {
       "id": "9ac6",
@@ -34,6 +23,7 @@
       "name": "Simone Nataloni",
       "email": "simone.nataloni@gmail.com",
       "password": "356a693c86f1fa1b612a9d369b1fc68f",
+<<<<<<< HEAD
       "balance": 608276,
       "hash": "RMmWUtTFHanHrSvgp48Beo0xc",
       "wallet": [
@@ -56,6 +46,15 @@
           "id": 26081,
           "name": "First Digital USD",
           "amount": 77.0385272237305
+=======
+      "balance": 642400,
+      "hash": "RMmWUtTFHanHrSvgp48Beo0xc",
+      "wallet": [
+        {
+          "id": 1839,
+          "name": "BNB",
+          "amount": 0.00996655716845019
+>>>>>>> a777bfd8805d738b33dbe055f7dc1fb1696bcad5
         }
       ]
     },
@@ -124,14 +123,22 @@
       "sign": "+"
     },
     {
+<<<<<<< HEAD
       "id": "2371be1d4fb18946bdfa3aa6a1164718",
       "id_crypto": 1,
       "id_user": "9418",
       "amount": 0.00666720172668903,
+=======
+      "id": "c16c094d1443ff29d314f2abcc0b6442",
+      "id_crypto": 1839,
+      "id_user": "9418",
+      "amount": 0.00996655716845019,
+>>>>>>> a777bfd8805d738b33dbe055f7dc1fb1696bcad5
       "previous_balance": 642406,
       "sign": "+"
     },
     {
+<<<<<<< HEAD
       "id": "98c60935c13d6b10448ea0498d070f8f",
       "id_crypto": 1027,
       "id_user": "9418",
@@ -201,6 +208,13 @@
       "id_user": "9418",
       "amount": 0.000014825619738772776,
       "previous_balance": 608277,
+=======
+      "id": "099577fa4bb0f8416d153e069dfdcf9a",
+      "id_crypto": 1,
+      "id_user": "660a",
+      "amount": 3208987938.371268,
+      "previous_balance": 15215153151185952,
+>>>>>>> a777bfd8805d738b33dbe055f7dc1fb1696bcad5
       "sign": "+"
     }
   ]
