@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useRegisterUserMutation } from "../reducers/apiSlice";
 import { MD5 } from "crypto-js";
 import toast from "react-hot-toast";
-import { generateRandomString, validateEmail } from "../utils";
+import { BASE_URL, generateRandomString, validateEmail } from "../utils";
 
 export function RegisterForm({ setView }) {
   const nameRef = useRef();
@@ -31,9 +31,7 @@ export function RegisterForm({ setView }) {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/users?email=${email}`
-      );
+      const response = await fetch(`${BASE_URL}/users?email=${email}`);
       const existingUsers = await response.json();
 
       if (existingUsers.length > 0) {

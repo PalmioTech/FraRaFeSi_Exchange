@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import { Assets } from "./Assets";
 import backArrow from "../assets/backArrow.svg";
 import { createTransaction } from "../utils";
-
+import { BASE_URL } from "../utils";
 export default function Exchange({ setPage }) {
   const [userDetails, setUserDetails] = useState(null);
   const cryptoReceived = useSelector((state) => state.exchange.cryptoReceived);
@@ -63,7 +63,7 @@ export default function Exchange({ setPage }) {
   useEffect(() => {
     if (userData) {
       axios
-        .get(`http://localhost:3000/users/${userData.id}`)
+        .get(`${BASE_URL}/users/${userData.id}`)
         .then((response) => {
           setUserDetails(response.data);
         })
@@ -209,8 +209,7 @@ export default function Exchange({ setPage }) {
                   <button
                     onClick={handleBuy}
                     className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300 mb-4"
-                    disabled={balance === 0}
-                  >
+                    disabled={balance === 0}>
                     BUY
                   </button>
                 </div>

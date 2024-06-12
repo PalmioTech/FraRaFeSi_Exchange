@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../reducers/userSlice";
 import MD5 from "crypto-js/md5";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../utils";
 
 export function LoginForm({ setPageHandler }) {
   const dispatch = useDispatch();
@@ -19,9 +20,9 @@ export function LoginForm({ setPageHandler }) {
 
   async function checkAuthentication(email, password) {
     try {
-      const userArray = await fetch(
-        "http://localhost:3000/users?email=" + email
-      ).then((r) => r.json());
+      const userArray = await fetch(`${BASE_URL}/users?email=${email}`).then(
+        (r) => r.json()
+      );
       const user = userArray[0];
       console.log(user);
       const encryptedPassword = MD5(password).toString();
@@ -68,8 +69,7 @@ export function LoginForm({ setPageHandler }) {
           isShaking ? "animate-shake" : ""
         }`}
         data-rounded="rounded-lg"
-        data-rounded-max="rounded-full"
-      >
+        data-rounded-max="rounded-full">
         <input
           ref={emailRef}
           type="text"

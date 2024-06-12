@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setBalance } from "../reducers/userSlice";
 import toast from "react-hot-toast";
 import backArrow from "../assets/backArrow.svg";
+import { BASE_URL } from "../utils";
 export default function Deposit({ setPage }) {
   const [amount, setAmount] = useState("");
   const userData = useSelector((state) => state.user.data);
@@ -19,7 +20,7 @@ export default function Deposit({ setPage }) {
   const handleDeposit = () => {
     const newBalance = balance + amount;
     if (amount != 0) {
-      fetch(`http://localhost:3000/users/${id}`, {
+      fetch(`${BASE_URL}/users/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ balance: newBalance }),
@@ -68,8 +69,7 @@ export default function Deposit({ setPage }) {
         </div>
         <button
           onClick={handleDeposit}
-          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300"
-        >
+          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
           Deposit
         </button>
       </div>

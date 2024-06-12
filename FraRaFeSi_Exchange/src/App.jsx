@@ -4,6 +4,7 @@ import AppContent from "./components/AppContent";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "./reducers/userSlice";
 import { Toaster } from "react-hot-toast";
+import { BASE_URL } from "./utils";
 
 function App() {
   const [page, setPage] = useState("splash");
@@ -13,7 +14,7 @@ function App() {
     const storedUserData = sessionStorage.getItem("userDataSaved");
     if (storedUserData) {
       const userDataSaved = JSON.parse(storedUserData);
-      fetch(`http://localhost:3000/users?email=${userDataSaved.email}`)
+      fetch(`${BASE_URL}/users?email=${userDataSaved.email}`)
         .then((response) => response.json())
         .then((userArray) => {
           const user = userArray[0];

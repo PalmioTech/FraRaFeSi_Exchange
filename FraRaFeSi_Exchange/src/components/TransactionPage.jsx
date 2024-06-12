@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { transactionSlice } from "../reducers/transactionSlice";
 const { useGetTransactionByIDQuery } = transactionSlice;
 
-const ActivityRow = ({ sign, previousBalance, amount }) => (
+const ActivityRow = ({ sign, previousBalance, amount, balance }) => (
   <div className="flex justify-between p-3 border-b border-gray-300 rounded-lg">
     <div className="relative w-8 h-8">
       <img
@@ -23,22 +23,25 @@ const ActivityRow = ({ sign, previousBalance, amount }) => (
     <div className="flex  gap-4 justify-center">
       <span className="text-lg font-bold text-white text-left">{sign}</span>
       <span className="text-sm text-gray-500 text-center">
-        {previousBalance}
+        previous balance {previousBalance}`
       </span>
+      {/* <span className="text-sm text-gray-500 text-center">{balance}</span> */}
     </div>
     <div className="flex flex-col items-end justify-center">
-      <span className="text-m text-gray-500 text-left">{amount}</span>
+      <span className="text-m text-gray-500 text-left">amount {amount}</span>
     </div>
   </div>
 );
 
 export default function TransactionPage() {
   const userData = useSelector((state) => state.user.data);
+  const { balance, id } = userData;
+
   const {
     data,
     // error,
     // isLoading,
-  } = useGetTransactionByIDQuery(userData.id);
+  } = useGetTransactionByIDQuery(id);
 
   if (!data || !Array.isArray(data)) {
     return <div>No transactions found.</div>;
@@ -60,6 +63,7 @@ export default function TransactionPage() {
           previousBalance={transaction.previous_balance}
           idCrypto={transaction.id_crypto}
           amount={transaction.amount}
+          balance={balance}
         />
       ))}
     </div>
