@@ -9,8 +9,19 @@ export const transactionSlice = createApi({
     getTransactionByID: builder.query({
       query: (idUser) => `transactions?id_user=${idUser}`,
     }),
+    updateTransactionByID: builder.mutation({
+      query: ({ id, newTransacton }) => ({
+        url: `transactions/${id}`,
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ transactios: newTransacton }),
+      }),
+    }),
   }),
 });
 
-export const { useGetTransactionByIDQuery } = transactionSlice;
+export const { useGetTransactionByIDQuery, useUpdateTransactionByID } =
+  transactionSlice;
 export const { reducerPath: transactionApi } = transactionSlice;

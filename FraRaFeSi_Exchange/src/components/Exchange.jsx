@@ -9,6 +9,7 @@ import {
   setError,
   setSelectedCrypto,
 } from "../reducers/exchangeSlice";
+
 import { setWallet, setBalance } from "../reducers/userSlice";
 import toast from "react-hot-toast";
 import { Assets } from "./Assets";

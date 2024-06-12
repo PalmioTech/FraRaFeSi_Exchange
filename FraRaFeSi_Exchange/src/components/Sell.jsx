@@ -3,14 +3,28 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import backArrow from "../assets/backArrow.svg";
 import { setCryptoData } from "../reducers/exchangeSlice";
+import toast from "react-hot-toast";
+import { createTransaction } from "../utils";
+import {
+  setCryptoReceived,
+  setFilteredCryptoData,
+  setError,
+  setSelectedCrypto,
+} from "../reducers/exchangeSlice";
+import { setBalance, setWallet } from "../reducers/userSlice";
+import { useUpdateUserBalanceMutation } from "../reducers/apiSlice";
 
 export default function Sell({ setPage }) {
   const amountRef = useRef();
+  const receiveRef = useRef();
   const dispatch = useDispatch();
   const selectedCryptoSell = useSelector(
     (state) => state.exchange.selectedCryptoSell
   );
+  const [updateUserBalance] = useUpdateUserBalanceMutation();
+  const userData = useSelector((state) => state.user.data);
   const cryptoData = useSelector((state) => state.exchange.cryptoData);
+  const { wallet, balance, id } = userData;
 
   useEffect(() => {
     axios
@@ -29,6 +43,74 @@ export default function Sell({ setPage }) {
 
   const cryptoDataID = (id) => cryptoData.find((crypto) => crypto.id === id);
   console.log(cryptoDataID(selectedCryptoSell.id).quote);
+
+  const handleChange = () => {
+    const amount = amountRef.current.value;
+    const crypto = cryptoDataID(selectedCryptoSell.id);
+    const cryptoValue = crypto.quote.USD.price;
+    const usdt = amount * cryptoValue;
+    receiveRef.current.value = usdt;
+  };
+
+  const handleMax = () => {
+    const maxAmount = selectedCryptoSell.amount;
+    amountRef.current.value = maxAmount;
+    handleChange();
+  };
+
+  async function handleSell() {
+    const maxAmount = selectedCryptoSell.amount;
+    const amount = parseFloat(amountRef.current.value);
+    if (amount > maxAmount) {
+      toast.error(`You don't have enough ${selectedCryptoSell.name}`);
+      return;
+    }
+    try {
+      const updatedWallet = wallet.map((crypto) => {
+        if (crypto.id === selectedCryptoSell.id) {
+          return { ...crypto, amount: maxAmount - amount };
+        }
+        return crypto;
+      });
+
+      const transaction = await createTransaction(
+        selectedCryptoSell.id,
+        userData.id,
+        amount,
+        balance,
+        "-"
+      );
+
+      const crypto = cryptoDataID(selectedCryptoSell.id);
+      const cryptoValue = crypto.quote.USD.price;
+      const usdt = amount * cryptoValue;
+
+      const result = await updateUserBalance({
+        id,
+        newBalance: balance + usdt,
+        wallet: updatedWallet,
+      });
+
+      if (result.error) {
+        toast.error("Errore nella vendita della crypto");
+        dispatch(setError("Failed to update balance"));
+        dispatch(setSelectedCrypto(null));
+      } else {
+        toast.success("Crypto acquistata con successo!");
+        dispatch(setError(null));
+        dispatch(setWallet(updatedWallet));
+        dispatch(setBalance(balance + usdt));
+        dispatch(setSelectedCrypto(null));
+        setPage("wallet");
+      }
+    } catch (error) {
+      toast.error("Errore vedntia della crypto");
+      dispatch(setError("Failed to update balance"));
+      console.log(error);
+      dispatch(setSelectedCrypto(null));
+    }
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-gray-900">
       <div className="relative flex flex-col gap-6 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
@@ -80,18 +162,27 @@ export default function Sell({ setPage }) {
               </div>
             )}
             <div className="flex flex-col gap-6">
-              <div className="flex flex-col">
-                <label className="text-white mb-2">Amount to Sell (USD)</label>
+              <div className="flex flex-col relative">
+                <label className="text-white mb-2">
+                  Amount to Sell (crypto)
+                </label>
                 <input
                   ref={amountRef}
+                  onChange={handleChange}
                   type="number"
                   className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
                   placeholder="Enter amount"
                 />
+                <button
+                  onClick={handleMax}
+                  className="absolute right-2 bottom-3 rounded-lg  bg-violet text-white p-1">
+                  Max
+                </button>
               </div>
               <div className="flex flex-col">
-                <label className="text-white mb-2">Receive (Crypto)</label>
+                <label className="text-white mb-2">Receive (USDT)</label>
                 <input
+                  ref={receiveRef}
                   type="number"
                   readOnly
                   className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
@@ -102,7 +193,9 @@ export default function Sell({ setPage }) {
           </div>
         </div>
 
-        <button className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
+        <button
+          onClick={handleSell}
+          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
           SELL
         </button>
       </div>

@@ -42,8 +42,9 @@ const ActivityRow = ({
 
 export default function TransactionPage() {
   const userData = useSelector((state) => state.user.data);
+  // const transaction = useSelector((state) => state.user.data);
   const { balance, id } = userData;
-
+  // const [updateTransaction] = useUpdateTransactionByID();
   const {
     data,
     // error,
