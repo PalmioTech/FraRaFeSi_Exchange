@@ -1,12 +1,34 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 import backArrow from "../assets/backArrow.svg";
+import { setCryptoData } from "../reducers/exchangeSlice";
+
 export default function Sell({ setPage }) {
   const amountRef = useRef();
+  const dispatch = useDispatch();
+  const selectedCryptoSell = useSelector(
+    (state) => state.exchange.selectedCryptoSell
+  );
+  const cryptoData = useSelector((state) => state.exchange.cryptoData);
+
+  useEffect(() => {
+    axios
+      .get("api/cryptocurrency/listings/latest")
+      .then((response) => {
+        dispatch(setCryptoData(response.data.data));
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [dispatch]);
 
   const handleClick = () => {
     setPage("wallet");
   };
 
+  const cryptoDataID = (id) => cryptoData.find((crypto) => crypto.id === id);
+  console.log(cryptoDataID(selectedCryptoSell.id).quote);
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-gray-900">
       <div className="relative flex flex-col gap-6 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg w-full max-w-md">
@@ -19,27 +41,44 @@ export default function Sell({ setPage }) {
           <h1 className="text-3xl font-semibold">Sell</h1>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="flex flex-col">
-            <label className="text-white mb-1">
-              Search and Select your Cryptocurrency
-            </label>
-            <input
-              type="text"
-              className="border border-transparent shadow-sm shadow-violet-500 rounded-lg w-full p-3 bg-white bg-opacity-30 text-white placeholder-white"
-              placeholder="Type to search for a cryptocurrency"
-            />
-            <ul className="mt-2 max-h-32 overflow-auto bg-white bg-opacity-30 text-white shadow-sm shadow-violet-500 rounded-lg">
-              <li className="p-2 cursor-pointer hover:bg-violet-500 flex justify-between">
-                <span>Bitcoin (BTC)</span>
-                <span>20000$</span>
-              </li>
-              <li className="p-2 cursor-pointer hover:bg-violet-500 flex justify-between">
-                <span>Ethereum (ETH)</span>
-                <span>30000$</span>
-              </li>
-            </ul>
-          </div>
           <div>
+            {selectedCryptoSell && (
+              <div className="text-whiteText border-t-violet   mt-2 w-full rounded-xl p-4 bg-white bg-opacity-30">
+                <div className="flex items-center text-xl mb-2 justify-center">
+                  <img
+                    src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${selectedCryptoSell.id}.png`}
+                    alt={selectedCryptoSell.name}
+                    className="max-w-6 object-contain"
+                  />
+                  <span className="ml-2 text-xl font-semibold">
+                    {selectedCryptoSell.name}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Amount:</span>
+                  <span>{selectedCryptoSell.amount.toFixed(4)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Value (USD):</span>
+                  <span>
+                    $
+                    {parseFloat(
+                      selectedCryptoSell.amount *
+                        cryptoDataID(selectedCryptoSell.id).quote.USD.price
+                    ).toFixed(2)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Change il last 7d (%):</span>
+                  <span>
+                    {cryptoDataID(
+                      selectedCryptoSell.id
+                    ).quote.USD.percent_change_7d.toFixed(2)}
+                    %
+                  </span>
+                </div>
+              </div>
+            )}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col">
                 <label className="text-white mb-2">Amount to Sell (USD)</label>
@@ -62,6 +101,7 @@ export default function Sell({ setPage }) {
             </div>
           </div>
         </div>
+
         <button className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
           SELL
         </button>
