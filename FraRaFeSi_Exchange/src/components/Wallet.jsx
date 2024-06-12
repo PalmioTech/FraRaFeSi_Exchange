@@ -63,8 +63,7 @@ export function Wallet() {
                     selectedCryptoSell && selectedCryptoSell.id === crypto.id
                       ? "bg-custom-selected"
                       : ""
-                  }`}
-                >
+                  }`}>
                   <div className="flex items-center text-xl">
                     <img
                       src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
@@ -76,13 +75,13 @@ export function Wallet() {
                     </span>
                   </div>
                   <div className="flex items-center justify-end">
-                    {crypto.amount.toFixed(4)}
+                    {crypto.amount.toLocaleString()}
                   </div>
                   <div className="flex items-center justify-end text-green">
                     $
                     {parseFloat(
                       crypto.amount * latestData.quote.USD.price
-                    ).toFixed(2)}
+                    ).toLocaleString()}
                   </div>
                 </li>
               );

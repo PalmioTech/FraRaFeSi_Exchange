@@ -60,7 +60,7 @@ export default function TransactionPage() {
         <ActivityRow
           key={transaction.id}
           sign={transaction.sign}
-          previousBalance={transaction.previous_balance}
+          previousBalance={transaction.previous_balance.toLocaleString()}
           idCrypto={transaction.id_crypto}
           amount={transaction.amount}
           balance={balance}

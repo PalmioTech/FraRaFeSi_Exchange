@@ -3,6 +3,7 @@ import pointed from "../assets/pointed.svg";
 import cryptoCoin from "../assets/crypto.svg";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { BASE_URL } from "../utils";
 
 export function WalletCard() {
   const [balance, setBalance] = useState(0);
@@ -16,7 +17,7 @@ export function WalletCard() {
   useEffect(() => {
     if (userData) {
       axios
-        .get(`http://localhost:3000/users/${userData.id}`)
+        .get(`${BASE_URL}/users/${userData.id}`)
         .then((response) => {
           setBalance(response.data.balance);
           setHash(response.data.hash);
@@ -54,7 +55,7 @@ export function WalletCard() {
           </button>
         </div>
         <div className="flex justify-start mb-4">
-          <h1 className="text-4xl font-bold">${balance}</h1>
+          <h1 className="text-4xl font-bold">${balance.toLocaleString()}</h1>
         </div>
         <div className="flex justify-between">
           <p className="text-xs">{hash}</p>
@@ -66,7 +67,7 @@ export function WalletCard() {
           <h2 className="text-2xl font-extrabold text-white mb-1">
             Total in Fiat:
             <span className="px-2 text-white bg-violet rounded ml-2">
-              ${fiatTotal.toFixed(2)}
+              ${fiatTotal.toLocaleString()}
             </span>
           </h2>
         </div>
@@ -74,7 +75,7 @@ export function WalletCard() {
           <h2 className="text-2xl font-extrabold text-white mb-1">
             Total in Crypto:
             <span className="px-2 text-white bg-violet rounded ml-2">
-              {cryptoTotal.toFixed(4)} coins
+              {cryptoTotal.toLocaleString()} coins
             </span>
           </h2>
         </div>
