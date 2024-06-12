@@ -4,31 +4,38 @@ import bitcoin from "../assets/bitcoin.svg";
 import ethereum from "../assets/ethereum.svg";
 import { useSelector } from "react-redux";
 import { transactionSlice } from "../reducers/transactionSlice";
+import axios from "axios";
 const { useGetTransactionByIDQuery } = transactionSlice;
 
-const ActivityRow = ({ sign, previousBalance, amount, balance }) => (
-  <div className="flex justify-between p-3 border-b border-gray-300 rounded-lg">
-    <div className="relative w-8 h-8">
+const ActivityRow = ({
+  sign,
+  previousBalance,
+  amount,
+  balance,
+  cryptoImage,
+}) => (
+  <div className="flex justify-between p-3   border-b border-gray-300 rounded-lg">
+    <div className="relative w-8 h-8 ">
       <img
         src={avatarBatman}
         alt="Avatar"
         className="absolute top-0 left-0 w-8 h-8"
       />
       <img
-        src={bitcoin}
+        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoImage}.png`}
         alt="Bitcoin"
         className="absolute top-3 -right-4 w-8 h-8"
       />
     </div>
-    <div className="flex  gap-4 justify-center">
-      <span className="text-lg font-bold text-white text-left">{sign}</span>
-      <span className="text-sm text-gray-500 text-center">
-        previous balance {previousBalance}`
+    <div className="flex  gap-4 justify-center items-center    ">
+      <span className="text-lg font-bold text-white   leading-none">
+        {sign}
       </span>
+      <span className="text-sm text-gray-500 w-10">{previousBalance}</span>
       {/* <span className="text-sm text-gray-500 text-center">{balance}</span> */}
     </div>
-    <div className="flex flex-col items-end justify-center">
-      <span className="text-m text-gray-500 text-left">amount {amount}</span>
+    <div className="flex flex-col items-end justify-center w-20">
+      <span className="text-m text-end text-gray-500 ">amount {amount}</span>
     </div>
   </div>
 );
@@ -61,9 +68,9 @@ export default function TransactionPage() {
           key={transaction.id}
           sign={transaction.sign}
           previousBalance={transaction.previous_balance.toLocaleString()}
-          idCrypto={transaction.id_crypto}
           amount={transaction.amount}
           balance={balance}
+          cryptoImage={transaction.id_crypto}
         />
       ))}
     </div>
