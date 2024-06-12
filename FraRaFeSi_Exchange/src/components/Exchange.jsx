@@ -82,6 +82,10 @@ export default function Exchange({ setPage }) {
   function handleInsertAmount(event) {
     event.preventDefault();
     const amount = parseFloat(amountRef.current.value) || 0;
+    if (amount === 0) {
+      toast.error("Inserisci un valore positivo!");
+      dispatch(setCryptoReceived(0));
+    }
     if (amount > balance) {
       toast.error("Il tuo saldo è insufficiente per l'acquisto");
       dispatch(setError("Saldo insufficiente"));
@@ -97,6 +101,11 @@ export default function Exchange({ setPage }) {
 
   async function handleBuy() {
     const amount = parseFloat(amountRef.current.value) || 0;
+    if (amount === 0) {
+      toast.error("Inserisci un valore positivo!");
+      dispatch(setError("L'importo deve essere maggiore di zero"));
+      return;
+    }
     if (amount > balance) {
       dispatch(setError("Insufficient balance"));
       return;
