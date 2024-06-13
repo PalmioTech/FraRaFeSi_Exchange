@@ -66,12 +66,15 @@ export default function Sell({ setPage }) {
       return;
     }
     try {
-      const updatedWallet = wallet.map((crypto) => {
+      let updatedWallet = wallet.map((crypto) => {
         if (crypto.id === selectedCryptoSell.id) {
           return { ...crypto, amount: maxAmount - amount };
         }
         return crypto;
       });
+
+      // Rimuovi le criptovalute con valore 0
+      updatedWallet = updatedWallet.filter((crypto) => crypto.amount > 0);
 
       const transaction = await createTransaction(
         selectedCryptoSell.id,
@@ -96,7 +99,7 @@ export default function Sell({ setPage }) {
         dispatch(setError("Failed to update balance"));
         dispatch(setSelectedCrypto(null));
       } else {
-        toast.success("Crypto acquistata con successo!");
+        toast.success("Crypto venduta con successo!");
         dispatch(setError(null));
         dispatch(setWallet(updatedWallet));
         dispatch(setBalance(balance + usdt));
@@ -175,7 +178,8 @@ export default function Sell({ setPage }) {
                 />
                 <button
                   onClick={handleMax}
-                  className="absolute right-2 bottom-3 rounded-lg  bg-violet text-white p-1">
+                  className="absolute right-2 bottom-3 rounded-lg  bg-violet text-white p-1"
+                >
                   Max
                 </button>
               </div>
@@ -195,7 +199,8 @@ export default function Sell({ setPage }) {
 
         <button
           onClick={handleSell}
-          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300">
+          className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300"
+        >
           SELL
         </button>
       </div>

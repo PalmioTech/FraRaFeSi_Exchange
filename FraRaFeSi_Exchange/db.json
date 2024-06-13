@@ -5,20 +5,9 @@
       "name": "Raffuz",
       "email": "raffaele11596@gmail.com",
       "password": "7cf2db5ec261a0fa27a502d3196a6f60",
-      "balance": 15014054.015576838,
+      "balance": 15014054.014507309,
       "hash": "R4dzN1DREuDCcaiTgczoFZNJF",
-      "wallet": [
-        {
-          "id": 5994,
-          "name": "Shiba Inu",
-          "amount": 0
-        },
-        {
-          "id": 1027,
-          "name": "Ethereum",
-          "amount": 0
-        }
-      ]
+      "wallet": []
     },
     {
       "id": "9ac6",
@@ -425,6 +414,54 @@
       "id_user": "660a",
       "amount": 43.41416848293855,
       "previous_balance": 14862839.015576838,
+      "sign": "-"
+    },
+    {
+      "id": "849542cd2137176da01afa15efa255ba",
+      "id_crypto": 825,
+      "id_user": "660a",
+      "amount": 515305.94854561234,
+      "previous_balance": 15014054.015576838,
+      "sign": "+"
+    },
+    {
+      "id": "abd378d5734586f434afdab182b6d7bc",
+      "id_crypto": 825,
+      "id_user": "660a",
+      "amount": 515305.94854561234,
+      "previous_balance": 14498903.015576838,
+      "sign": "-"
+    },
+    {
+      "id": "4dc35719b80fbc3ca3f2f444e540e5c7",
+      "id_crypto": 1027,
+      "id_user": "660a",
+      "amount": 60.695872884333006,
+      "previous_balance": 15014054.015576838,
+      "sign": "+"
+    },
+    {
+      "id": "3272f955fd118a3766713443456245b8",
+      "id_crypto": 1027,
+      "id_user": "660a",
+      "amount": 60.695872884333006,
+      "previous_balance": 14802493.015576838,
+      "sign": "-"
+    },
+    {
+      "id": "97b9997535f287488af8c1f6e297dfe3",
+      "id_crypto": 825,
+      "id_user": "660a",
+      "amount": 150.03455992063016,
+      "previous_balance": 15014054.015576838,
+      "sign": "+"
+    },
+    {
+      "id": "68bea8e8bd1c331989bf7b80f80d0425",
+      "id_crypto": 825,
+      "id_user": "660a",
+      "amount": 150.03455992063016,
+      "previous_balance": 15013904.015576838,
       "sign": "-"
     }
   ]
