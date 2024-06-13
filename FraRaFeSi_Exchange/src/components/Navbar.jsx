@@ -8,13 +8,8 @@ import clsx from "clsx";
 export default function Navbar({ page, setPage }) {
   const navbar = [
     {
-      name: "Home",
-      icon: HomeIcon,
-      page: "home",
-    },
-    {
       name: "Wallet",
-      icon: WalletIcon,
+      icon: HomeIcon,
       page: "wallet",
     },
     {

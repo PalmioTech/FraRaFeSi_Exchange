@@ -46,38 +46,29 @@ export function WalletCard() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center  gap-4 p-4">
+    <div className="flex flex-col items-center justify-center gap-4 p-4">
       <div className="rounded-lg p-6 bg-custom-gradient text-whiteText w-full max-w-md shadow-violet shadow-md">
         <div className="flex justify-between mb-2">
           <p className="text-xs">Multi-Coin Wallet</p>
+
           <button className="max-w-6">
             <img src={pointed} alt="pointed" />
           </button>
         </div>
-        <div className="flex justify-start mb-4">
+        <div className="flex flex-col items-start mb-4">
           <h1 className="text-4xl font-bold">${balance.toLocaleString()}</h1>
+          <div>
+            <h2 className="text-l font-bold text-white mb-1 mt-2">
+              FIAT:
+              <span className="px-2 text-black bg-slate-300 rounded ml-2">
+                ${fiatTotal.toLocaleString()}
+              </span>
+            </h2>
+          </div>
         </div>
         <div className="flex justify-between">
           <p className="text-xs">{hash}</p>
           <img src={cryptoCoin} alt="crypto" className="w-6 h-6" />
-        </div>
-      </div>
-      <div className="text-center mt-2 gap-3 flex flex-col">
-        <div>
-          <h2 className="text-2xl font-extrabold text-white mb-1">
-            Total in Fiat:
-            <span className="px-2 text-white bg-violet rounded ml-2">
-              ${fiatTotal.toLocaleString()}
-            </span>
-          </h2>
-        </div>
-        <div>
-          <h2 className="text-2xl font-extrabold text-white mb-1">
-            Total in Crypto:
-            <span className="px-2 text-white bg-violet rounded ml-2">
-              {cryptoTotal.toLocaleString()} coins
-            </span>
-          </h2>
         </div>
       </div>
     </div>

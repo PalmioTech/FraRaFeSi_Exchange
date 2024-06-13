@@ -62,9 +62,15 @@
       "name": "Franco Mitrushi",
       "email": "franco.mitrushi@gmail.com",
       "password": "c2b242af10567e1d2b4b3173b255a915",
-      "balance": 140919,
+      "balance": 139919,
       "hash": "gQ6XcqHuxVH8gbTZiXXTJG9MP",
-      "wallet": []
+      "wallet": [
+        {
+          "id": 825,
+          "name": "Tether USDt",
+          "amount": 1000.3139343636499
+        }
+      ]
     },
     {
       "id": "ddcf",
@@ -463,6 +469,14 @@
       "amount": 150.03455992063016,
       "previous_balance": 15013904.015576838,
       "sign": "-"
+    },
+    {
+      "id": "e54f0d55d70162bb6d2c1f62987faa40",
+      "id_crypto": 825,
+      "id_user": "63aa",
+      "amount": 1000.3139343636499,
+      "previous_balance": 140919,
+      "sign": "+"
     }
   ]
 }

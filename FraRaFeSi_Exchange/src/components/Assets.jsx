@@ -66,7 +66,7 @@ export function Assets() {
         <div className="px-1 text-white mt-2">
           {loading && (
             <div className="flex items-center justify-center my-10">
-              <div className="border-gray-300 max-h-12 p-10 animate-spin rounded-full border-8 border-t-blue-600"></div>
+              <div className="border-gray-300 max-h-12 p-4 animate-spin rounded-full border-4 border-t-blue-600"></div>
             </div>
           )}
           {error && <p className="text-red-500">{error}</p>}
