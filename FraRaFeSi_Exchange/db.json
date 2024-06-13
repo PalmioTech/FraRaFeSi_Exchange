@@ -5,9 +5,20 @@
       "name": "Raffuz",
       "email": "raffaele11596@gmail.com",
       "password": "7cf2db5ec261a0fa27a502d3196a6f60",
-      "balance": 15001939,
+      "balance": 15014054.015576838,
       "hash": "R4dzN1DREuDCcaiTgczoFZNJF",
-      "wallet": []
+      "wallet": [
+        {
+          "id": 5994,
+          "name": "Shiba Inu",
+          "amount": 0
+        },
+        {
+          "id": 1027,
+          "name": "Ethereum",
+          "amount": 0
+        }
+      ]
     },
     {
       "id": "9ac6",
@@ -359,6 +370,62 @@
       "amount": 213.9728643302272,
       "previous_balance": 157408.0384897331,
       "sign": "+"
+    },
+    {
+      "id": "9c86d4a2903ad4b58fdfd93c154e368b",
+      "id_crypto": 5994,
+      "id_user": "660a",
+      "amount": 450935.7323802737,
+      "previous_balance": 15001939,
+      "sign": "+"
+    },
+    {
+      "id": "3728fe1ad242ddc787cfd340b7b1b863",
+      "id_crypto": 5994,
+      "id_user": "660a",
+      "amount": 450935.7323802737,
+      "previous_balance": 15001929,
+      "sign": "-"
+    },
+    {
+      "id": "96acd4a44ac6139b772e8c5fbbe8628a",
+      "id_crypto": 5994,
+      "id_user": "660a",
+      "amount": 0,
+      "previous_balance": 15014054.015576838,
+      "sign": "-"
+    },
+    {
+      "id": "4025885bfd8962aeb8c25e18d3b9d72d",
+      "id_crypto": 1027,
+      "id_user": "660a",
+      "amount": 433.96822920267465,
+      "previous_balance": 15014054.015576838,
+      "sign": "+"
+    },
+    {
+      "id": "1ebe00e4512cd11bc8d51fbca2a88a2a",
+      "id_crypto": 1027,
+      "id_user": "660a",
+      "amount": 433.96822920267465,
+      "previous_balance": 13501929.015576838,
+      "sign": "-"
+    },
+    {
+      "id": "fe7ba713c12dbcd4e960ad2de415bebc",
+      "id_crypto": 1027,
+      "id_user": "660a",
+      "amount": 43.41416848293855,
+      "previous_balance": 15014054.015576838,
+      "sign": "+"
+    },
+    {
+      "id": "782b0db6eaefc3138baf432769d1cb72",
+      "id_crypto": 1027,
+      "id_user": "660a",
+      "amount": 43.41416848293855,
+      "previous_balance": 14862839.015576838,
+      "sign": "-"
     }
   ]
 }

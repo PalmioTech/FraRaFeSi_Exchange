@@ -20,6 +20,7 @@ export function Wallet() {
   const handleCryptoClick = (crypto) => {
     dispatch(setSelectedCryptoSell(crypto));
   };
+
   useEffect(() => {
     axios
       .get("api/cryptocurrency/listings/latest")
@@ -30,9 +31,14 @@ export function Wallet() {
         console.error("Error fetching data:", error);
       });
   }, [dispatch]);
+
   if (isLoading)
     return <p className="flex justify-center text-whiteText">Loading...</p>;
   if (error) return <p>Error fetching data: {error.message}</p>;
+
+  const filteredCryptoCurrency = cryptoCurrency.filter(
+    (crypto) => crypto.amount > 0
+  );
 
   return (
     <div className="flex flex-col w-full items-center justify-center py-5">
@@ -45,13 +51,13 @@ export function Wallet() {
         </h1>
       </div>
       <div className="text-whiteText border-t-violet shadow-xl shadow-violet mt-2 w-11/12 rounded-xl">
-        {cryptoCurrency.length === 0 ? (
+        {filteredCryptoCurrency.length === 0 ? (
           <div className="text-center text-red-500 p-4 text-xl mt-2 cursor-default rounded-2xl">
             Il tuo wallet è vuoto. Vai subito a comprare Crypto!
           </div>
         ) : (
           <ul className="max-h-96 overflow-y-auto">
-            {cryptoCurrency.map((crypto, index) => {
+            {filteredCryptoCurrency.map((crypto, index) => {
               const latestData = cryptoDataID(crypto.id);
               if (!latestData) return null;
 
@@ -63,7 +69,8 @@ export function Wallet() {
                     selectedCryptoSell && selectedCryptoSell.id === crypto.id
                       ? "bg-custom-selected"
                       : ""
-                  }`}>
+                  }`}
+                >
                   <div className="flex items-center text-xl">
                     <img
                       src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
