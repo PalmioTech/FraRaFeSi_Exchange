@@ -5,10 +5,8 @@ import { BASE_URL } from "../utils";
 export const transactionSlice = createApi({
   reducerPath: "transactionApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+
   endpoints: (builder) => ({
-    getTransactionByID: builder.query({
-      query: (idUser) => `transactions?id_user=${idUser}`,
-    }),
     updateTransactionByID: builder.mutation({
       query: ({ id, newTransacton }) => ({
         url: `transactions/${id}`,

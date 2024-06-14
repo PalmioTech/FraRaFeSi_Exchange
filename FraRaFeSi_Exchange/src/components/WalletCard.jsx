@@ -56,13 +56,16 @@ export function WalletCard() {
           </button>
         </div>
         <div className="flex flex-col items-start mb-4">
-          <h1 className="text-4xl font-bold">${balance.toLocaleString()}</h1>
+          <h1 className="text-2xl font-bold">
+            {" "}
+            FIAT:
+            <span className="px-2 text-black bg-slate-300 rounded ml-2">
+              ${balance.toLocaleString()}
+            </span>
+          </h1>
           <div>
             <h2 className="text-l font-bold text-white mb-1 mt-2">
-              FIAT:
-              <span className="px-2 text-black bg-slate-300 rounded ml-2">
-                ${fiatTotal.toLocaleString()}
-              </span>
+              ${fiatTotal.toLocaleString()}
             </h2>
           </div>
         </div>

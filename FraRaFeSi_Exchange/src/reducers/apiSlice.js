@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const usersApi = createApi({
+  tagTypes: ["TRANSACTION"],
   reducerPath: "usersApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
   endpoints: (builder) => ({
@@ -23,6 +24,11 @@ export const usersApi = createApi({
         },
         body: JSON.stringify({ balance: newBalance, wallet }),
       }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
+    getTransactionByID: builder.query({
+      query: (idUser) => `transactions?id_user=${idUser}`,
+      providesTags: ["TRANSACTION"],
     }),
   }),
 });
@@ -31,4 +37,5 @@ export const {
   useGetUserByEmailQuery,
   useRegisterUserMutation,
   useUpdateUserBalanceMutation,
+  useGetTransactionByIDQuery,
 } = usersApi;

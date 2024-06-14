@@ -1,11 +1,7 @@
 import React from "react";
 import avatarBatman from "../assets/avatarBatman.svg";
-import bitcoin from "../assets/bitcoin.svg";
-import ethereum from "../assets/ethereum.svg";
 import { useSelector } from "react-redux";
-import { transactionSlice } from "../reducers/transactionSlice";
-import axios from "axios";
-const { useGetTransactionByIDQuery } = transactionSlice;
+import { useGetTransactionByIDQuery } from "../reducers/apiSlice";
 
 const ActivityRow = ({
   sign,
