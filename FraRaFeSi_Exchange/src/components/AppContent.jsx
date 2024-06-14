@@ -20,7 +20,7 @@ export default function AppContent({ page, setPage }) {
       <div>{page === "sell" && <Sell setPage={setPage} />}</div>{" "}
       <div>{page === "deposit" && <Deposit setPage={setPage} />}</div>
       <div>
-        {page !== "exchange" && page !== "sell" && (
+        {page !== "exchange" && page !== "sell" && page !== "deposit" && (
           <Navbar page={page} setPage={setPage} />
         )}
       </div>
