@@ -149,12 +149,14 @@ export default function Exchange({ setPage }) {
         toast.error("Errore nell'acquisto della crypto");
         dispatch(setError("Failed to update balance"));
         dispatch(setSelectedCrypto(null));
+        dispatch(setCryptoReceived(null));
       } else {
         toast.success("Crypto acquistata con successo!");
         dispatch(setError(null));
         dispatch(setWallet(updatedWallet));
         dispatch(setBalance(balance - amount));
         dispatch(setSelectedCrypto(null));
+        dispatch(setCryptoReceived(null));
         setPage("wallet");
       }
     } catch (error) {
@@ -162,6 +164,7 @@ export default function Exchange({ setPage }) {
       dispatch(setError("Failed to update balance"));
       console.log(error);
       dispatch(setSelectedCrypto(null));
+      dispatch(setCryptoReceived(null));
     }
   }
 
@@ -210,7 +213,8 @@ export default function Exchange({ setPage }) {
                   <button
                     onClick={handleBuy}
                     className="bg-amber-400 hover:bg-amber-500 text-violet-900 rounded-lg w-full py-3 font-bold transition duration-300 mb-4"
-                    disabled={balance === 0}>
+                    disabled={balance === 0}
+                  >
                     BUY
                   </button>
                 </div>

@@ -42,7 +42,6 @@ export default function Sell({ setPage }) {
   };
 
   const cryptoDataID = (id) => cryptoData.find((crypto) => crypto.id === id);
-  console.log(cryptoDataID(selectedCryptoSell.id).quote);
 
   const handleChange = () => {
     const amount = amountRef.current.value;
