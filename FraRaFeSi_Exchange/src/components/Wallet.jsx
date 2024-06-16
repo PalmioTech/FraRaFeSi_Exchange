@@ -18,7 +18,11 @@ export function Wallet() {
   );
 
   const handleCryptoClick = (crypto) => {
-    dispatch(setSelectedCryptoSell(crypto));
+    if (selectedCryptoSell && selectedCryptoSell.id === crypto.id) {
+      dispatch(setSelectedCryptoSell(null));
+    } else {
+      dispatch(setSelectedCryptoSell(crypto));
+    }
   };
 
   useEffect(() => {
