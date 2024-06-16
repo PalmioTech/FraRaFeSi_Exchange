@@ -14,9 +14,15 @@
       "name": "Federico Palmieri",
       "email": "fede-palma@hotmail.it",
       "password": "fc2a36b07f5bf1c68ed52b636b74fe45",
-      "balance": 10002,
+      "balance": 8802,
       "hash": "JmpIQw2D9wIcXUDcT6XPEb0x6",
-      "wallet": []
+      "wallet": [
+        {
+          "id": 1,
+          "name": "Bitcoin",
+          "amount": 0.018360122465216278
+        }
+      ]
     },
     {
       "id": "9418",
@@ -107,6 +113,21 @@
       "balance": 104701,
       "hash": "ISibdKVx9yHyWMCgkqzGHdIz8",
       "wallet": []
+    },
+    {
+      "id": "b462",
+      "name": "utente",
+      "email": "utente@utente.com",
+      "password": "3ce98305181b1bac59d024a49b0ffd73",
+      "balance": 8800.45788970486,
+      "hash": "ImcxP7VfDsGWyo4uo30s1F73B",
+      "wallet": [
+        {
+          "id": 1,
+          "name": "Bitcoin",
+          "amount": 0.01835395472828241
+        }
+      ]
     }
   ],
   "transactions": [
@@ -476,6 +497,38 @@
       "id_user": "63aa",
       "amount": 1000.3139343636499,
       "previous_balance": 140919,
+      "sign": "+"
+    },
+    {
+      "id": "1591502e2a8b8b56ce47710365276f86",
+      "id_crypto": 1,
+      "id_user": "b462",
+      "amount": 0.01835395472828241,
+      "previous_balance": 10000,
+      "sign": "+"
+    },
+    {
+      "id": "b0737026c927c87e722bd632cf83def8",
+      "id_crypto": 1027,
+      "id_user": "b462",
+      "amount": 0.3541250628857931,
+      "previous_balance": 8800,
+      "sign": "+"
+    },
+    {
+      "id": "12545bd6dccf3b6dc0b6b013679fe8a1",
+      "id_crypto": 1027,
+      "id_user": "b462",
+      "amount": 0.3541250628857931,
+      "previous_balance": 7600,
+      "sign": "-"
+    },
+    {
+      "id": "d4c57c57e2792f302199973499c8e8c2",
+      "id_crypto": 1,
+      "id_user": "9ac6",
+      "amount": 0.018360122465216278,
+      "previous_balance": 10002,
       "sign": "+"
     }
   ]

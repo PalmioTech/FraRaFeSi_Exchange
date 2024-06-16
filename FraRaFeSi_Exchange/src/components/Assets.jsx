@@ -79,7 +79,7 @@ export function Assets() {
                     onClick={() => handleItemClick(token)}
                     className={`mb-4 p-1 shadow-lg rounded border-b hover:border-violet grid grid-cols-3 truncate cursor-pointer ${
                       selectedCrypto?.id === token.id
-                        ? "bg-white bg-opacity-30 text-black"
+                        ? "bg-white bg-opacity-20 text-whiteText"
                         : "bg-transparent"
                     }`}
                     style={{
@@ -98,7 +98,7 @@ export function Assets() {
                       <span
                         className={`ml-2 text-xl font-semibold ${
                           selectedCrypto?.id === token.id
-                            ? "text-black font-bold"
+                            ? "text-whiteText font-bold"
                             : ""
                         }`}
                       >
@@ -109,7 +109,7 @@ export function Assets() {
                     <div
                       className={`flex items-center justify-end ${
                         selectedCrypto?.id === token.id
-                          ? "text-black font-bold"
+                          ? "text-whiteText font-bold"
                           : ""
                       }`}
                     >
@@ -119,7 +119,7 @@ export function Assets() {
                     <div
                       className={`flex items-center justify-end ${
                         selectedCrypto?.id === token.id
-                          ? "text-black font-bold"
+                          ? "text-whiteText font-bold"
                           : "text-green"
                       }`}
                     >
