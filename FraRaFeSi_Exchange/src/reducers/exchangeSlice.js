@@ -1,10 +1,9 @@
-// exchangeSlice.js
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cryptoReceived: 0,
   cryptoData: [],
+  spentAmount: 0,
   filteredCryptoData: [],
   selectedCrypto: null,
   searchTerm: "",
@@ -18,6 +17,9 @@ export const exchangeSlice = createSlice({
   reducers: {
     setCryptoReceived: (state, action) => {
       state.cryptoReceived = action.payload;
+    },
+    setSpentAmount: (state, action) => {
+      state.spentAmount = action.payload;
     },
     setCryptoData: (state, action) => {
       state.cryptoData = action.payload;
@@ -42,6 +44,7 @@ export const exchangeSlice = createSlice({
 
 export const {
   setCryptoReceived,
+  setSpentAmount,
   setCryptoData,
   setFilteredCryptoData,
   setSelectedCrypto,

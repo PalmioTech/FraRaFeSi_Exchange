@@ -8,25 +8,26 @@ import {
   setFilteredCryptoData,
   setError,
   setSelectedCrypto,
+  setSpentAmount,
 } from "../reducers/exchangeSlice";
-
 import { setWallet, setBalance } from "../reducers/userSlice";
 import toast from "react-hot-toast";
 import { Assets } from "./Assets";
 import backArrow from "../assets/backArrow.svg";
 import { createTransaction } from "../utils";
 import { BASE_URL } from "../utils";
+
 export default function Exchange({ setPage }) {
   const [userDetails, setUserDetails] = useState(null);
   const cryptoReceived = useSelector((state) => state.exchange.cryptoReceived);
   const cryptoData = useSelector((state) => state.exchange.cryptoData);
-
   const filteredCryptoData = useSelector(
     (state) => state.exchange.filteredCryptoData
   );
   const selectedCrypto = useSelector((state) => state.exchange.selectedCrypto);
   const searchTerm = useSelector((state) => state.exchange.searchTerm);
   const error = useSelector((state) => state.exchange.error);
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -35,7 +36,6 @@ export default function Exchange({ setPage }) {
   };
 
   const userData = useSelector((state) => state.user.data);
-
   const amountRef = useRef();
   const [updateUserBalance] = useUpdateUserBalanceMutation();
 
@@ -81,22 +81,28 @@ export default function Exchange({ setPage }) {
   const { id, name, balance, wallet } = userDetails;
 
   function handleInsertAmount(event) {
-    event.preventDefault();
-    const amount = parseFloat(amountRef.current.value) || 0;
-    if (amount === 0) {
-      toast.error("Inserisci un valore positivo!");
-      dispatch(setCryptoReceived(0));
-    }
-    if (amount > balance) {
-      toast.error("Il tuo saldo è insufficiente per l'acquisto");
-      dispatch(setError("Saldo insufficiente"));
-      dispatch(setCryptoReceived(0));
-    } else {
-      dispatch(setError(null));
-      const cryptoAmount = selectedCrypto
-        ? amount / selectedCrypto.quote.USD.price
-        : 0;
-      dispatch(setCryptoReceived(cryptoAmount));
+    const amount = parseFloat(event.target.value) || 0;
+    //  const spentAmount = useSelector((state) => state.exchange.spentAmount);
+    const selectedCryptoId = selectedCrypto ? selectedCrypto.id : null;
+
+    if (selectedCryptoId) {
+      if (amount === 0) {
+        toast.error("Inserisci un valore positivo!");
+        dispatch(setCryptoReceived(0));
+        setSpentAmounts((prev) => ({ ...prev, [selectedCryptoId]: 0 }));
+      } else if (amount > balance) {
+        toast.error("Il tuo saldo è insufficiente per l'acquisto");
+        dispatch(setError("Saldo insufficiente"));
+        dispatch(setCryptoReceived(0));
+        setSpentAmounts((prev) => ({ ...prev, [selectedCryptoId]: 0 }));
+      } else {
+        dispatch(setError(null));
+        const cryptoAmount = selectedCrypto
+          ? amount / selectedCrypto.quote.USD.price
+          : 0;
+        dispatch(setCryptoReceived(cryptoAmount));
+        setSpentAmount((prev) => ({ ...prev, [selectedCryptoId]: amount }));
+      }
     }
   }
 
@@ -135,7 +141,8 @@ export default function Exchange({ setPage }) {
         userDetails.id,
         cryptoAmount,
         balance,
-        "+"
+        "+",
+        amount
       );
       const result = await updateUserBalance({
         id,
@@ -155,6 +162,7 @@ export default function Exchange({ setPage }) {
         dispatch(setError(null));
         dispatch(setWallet(updatedWallet));
         dispatch(setBalance(balance - amount));
+        dispatch(addTransaction(transaction));
         dispatch(setSelectedCrypto(null));
         dispatch(setCryptoReceived(null));
         setPage("wallet");

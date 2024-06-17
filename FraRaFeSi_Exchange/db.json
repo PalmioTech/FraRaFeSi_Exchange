@@ -68,13 +68,23 @@
       "name": "Franco Mitrushi",
       "email": "franco.mitrushi@gmail.com",
       "password": "c2b242af10567e1d2b4b3173b255a915",
-      "balance": 139919,
+      "balance": 128885.35774402147,
       "hash": "gQ6XcqHuxVH8gbTZiXXTJG9MP",
       "wallet": [
         {
-          "id": 825,
-          "name": "Tether USDt",
-          "amount": 1000.3139343636499
+          "id": 1027,
+          "name": "Ethereum",
+          "amount": 2.0227998864708794
+        },
+        {
+          "id": 1,
+          "name": "Bitcoin",
+          "amount": 0.05336877566068006
+        },
+        {
+          "id": 5426,
+          "name": "Solana",
+          "amount": 6.95242742199894
         }
       ]
     },
@@ -529,6 +539,86 @@
       "id_user": "9ac6",
       "amount": 0.018360122465216278,
       "previous_balance": 10002,
+      "sign": "+"
+    },
+    {
+      "id": "d8ba362a5e338b2cb6ae46a30195c34b",
+      "id_crypto": 1027,
+      "id_user": "63aa",
+      "amount": 0.03552736221914185,
+      "previous_balance": 129500.75031608406,
+      "sign": "+"
+    },
+    {
+      "id": "ddcb1adb7db4fd12b6e02df073aa41ab",
+      "id_crypto": 1,
+      "id_user": "63aa",
+      "amount": 0.03048547334175327,
+      "previous_balance": 129375.75031608406,
+      "sign": "+"
+    },
+    {
+      "id": "2235cf6bc80e038332d4a7883cca9f38",
+      "id_crypto": 1027,
+      "id_user": "63aa",
+      "amount": 0.2838790807353286,
+      "previous_balance": 127375.75031608406,
+      "sign": "+"
+    },
+    {
+      "id": "f42c57d56a323a17097733904fb830fa",
+      "id_crypto": 1,
+      "id_user": "63aa",
+      "amount": 0.02288330231892679,
+      "previous_balance": 126375.75031608406,
+      "sign": "+"
+    },
+    {
+      "id": "b2b38fb13310a42609e8db074527126f",
+      "id_crypto": 825,
+      "id_user": "63aa",
+      "amount": 2001.6533144587895,
+      "previous_balance": 124875.75031608406,
+      "sign": "+"
+    },
+    {
+      "id": "504356ff50c19793a3c6ba1d3596a270",
+      "id_crypto": 825,
+      "id_user": "63aa",
+      "amount": 2000.9336892283875,
+      "previous_balance": 122875.75031608406,
+      "sign": "+"
+    },
+    {
+      "id": "465c3f610f2c09548ab7b3824fb77093",
+      "id_crypto": 825,
+      "id_user": "63aa",
+      "amount": 1000.2584877449045,
+      "previous_balance": 120875.75031608406,
+      "sign": "+"
+    },
+    {
+      "id": "301ce9ba60fd318dd57907aa4aef5ad9",
+      "id_crypto": 825,
+      "id_user": "63aa",
+      "amount": 9015.910984693568,
+      "previous_balance": 119875.75031608406,
+      "sign": "-"
+    },
+    {
+      "id": "f45be564b21238cee277282cb28149dd",
+      "id_crypto": 5426,
+      "id_user": "63aa",
+      "amount": 6.941030803938391,
+      "previous_balance": 128886.80891740829,
+      "sign": "-"
+    },
+    {
+      "id": "dd693a378242398c78c8dbbd71ea3a07",
+      "id_crypto": 5426,
+      "id_user": "63aa",
+      "amount": 6.95242742199894,
+      "previous_balance": 129885.35774402147,
       "sign": "+"
     }
   ]

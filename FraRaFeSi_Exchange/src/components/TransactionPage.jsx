@@ -7,49 +7,55 @@ const ActivityRow = ({
   sign,
   previousBalance,
   amount,
-  balance,
+  spentAmount,
   cryptoImage,
-}) => (
-  <div className="flex justify-between p-3   border-b border-gray-300 rounded-lg">
-    <div className="relative w-8 h-8 ">
-      <img
-        src={avatarBatman}
-        alt="Avatar"
-        className="absolute top-0 left-0 w-8 h-8"
-      />
-      <img
-        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoImage}.png`}
-        alt="Bitcoin"
-        className="absolute top-3 -right-4 w-8 h-8"
-      />
+  cryptoName,
+}) => {
+  const formattedSign = sign === "+" ? "Buy" : "Sell";
+  const formattedAmount = parseFloat(amount).toFixed(2);
+  const formattedSpentAmount = parseFloat(spentAmount).toFixed(2);
+
+  return (
+    <div className="flex justify-between p-3 border-b border-gray-300 rounded-lg  mb-2">
+      <div className="relative w-8 h-8">
+        <img
+          src={avatarBatman}
+          alt="Avatar"
+          className="absolute top-0 left-0 w-8 h-8"
+        />
+        <img
+          src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoImage}.png`}
+          alt="Crypto"
+          className="absolute top-3 -right-4 w-8 h-8"
+        />
+      </div>
+      <div className="flex gap-4 justify-center items-center">
+        <span className="text-lg font-bold text-white leading-none">
+          {formattedSign}
+        </span>
+        <span className="text-sm text-white w-10">{previousBalance}</span>
+      </div>
+      <div className="flex flex-col items-end justify-center w-20">
+        <span className="text-m text-end text-white">
+          {formattedAmount} {cryptoName}
+        </span>
+        <span className="text-sm text-end text-green">
+          {formattedSpentAmount} USD
+        </span>
+      </div>
     </div>
-    <div className="flex  gap-4 justify-center items-center    ">
-      <span className="text-lg font-bold text-white   leading-none">
-        {sign}
-      </span>
-      <span className="text-sm text-gray-500 w-10">{previousBalance}</span>
-      {/* <span className="text-sm text-gray-500 text-center">{balance}</span> */}
-    </div>
-    <div className="flex flex-col items-end justify-center w-20">
-      <span className="text-m text-end text-gray-500 ">amount {amount}</span>
-    </div>
-  </div>
-);
+  );
+};
 
 export default function TransactionPage() {
   const userData = useSelector((state) => state.user.data);
-  // const transaction = useSelector((state) => state.user.data);
-  const { balance, id } = userData;
-  // const [updateTransaction] = useUpdateTransactionByID();
-  const {
-    data,
-    // error,
-    // isLoading,
-  } = useGetTransactionByIDQuery(id);
+  const { id } = userData;
+  const { data } = useGetTransactionByIDQuery(id);
 
   if (!data || !Array.isArray(data)) {
     return <div>No transactions found.</div>;
   }
+
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="flex justify-center mt-2 mb-5 border-b-2 border-violet">
@@ -64,10 +70,11 @@ export default function TransactionPage() {
         <ActivityRow
           key={transaction.id}
           sign={transaction.sign}
-          previousBalance={transaction.previous_balance.toLocaleString()}
+          previousBalance={transaction.previous_balance?.toFixed(2) || "0.00"}
           amount={transaction.amount}
-          balance={balance}
+          spentAmount={transaction.spentAmount}
           cryptoImage={transaction.id_crypto}
+          cryptoName={transaction.cryptoName}
         />
       ))}
     </div>
