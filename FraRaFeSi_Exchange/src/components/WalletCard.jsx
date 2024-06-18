@@ -19,9 +19,11 @@ export function WalletCard() {
       axios
         .get(`${BASE_URL}/users/${userData.id}`)
         .then((response) => {
-          setBalance(response.data.balance);
-          setHash(response.data.hash);
-          calculateTotals(response.data.wallet);
+          setBalance(response.data.balance || 0);
+          setHash(response.data.hash || "");
+          if (response.data.wallet) {
+            calculateTotals(response.data.wallet);
+          }
         })
         .catch((error) => {
           console.error("Error fetching user details:", error);
@@ -50,27 +52,25 @@ export function WalletCard() {
       <div className="rounded-lg p-6 bg-custom-gradient text-whiteText w-full max-w-md shadow-violet shadow-md">
         <div className="flex justify-between mb-2">
           <p className="text-xs">Multi-Coin Wallet</p>
-
           <button className="max-w-6">
             <img src={pointed} alt="pointed" />
           </button>
         </div>
         <div className="flex flex-col items-start mb-4">
           <h1 className="text-2xl font-bold">
-            {" "}
             FIAT:
             <span className="px-2 text-black bg-slate-300 rounded ml-2">
-              ${balance.toLocaleString()}
+              ${balance ? balance.toLocaleString() : "0"}
             </span>
           </h1>
           <div>
             <h2 className="text-l font-bold text-white mb-1 mt-2">
-              ${fiatTotal.toLocaleString()}
+              ${fiatTotal ? fiatTotal.toLocaleString() : "0"}
             </h2>
           </div>
         </div>
         <div className="flex justify-between">
-          <p className="text-xs">{hash}</p>
+          <p className="text-xs">{hash || ""}</p>
           <img src={cryptoCoin} alt="crypto" className="w-6 h-6" />
         </div>
       </div>

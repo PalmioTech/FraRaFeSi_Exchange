@@ -8,9 +8,8 @@ import {
   setFilteredCryptoData,
   setError,
   setSelectedCrypto,
-  setSpentAmount,
 } from "../reducers/exchangeSlice";
-import { setWallet, setBalance } from "../reducers/userSlice";
+import { setWallet, setBalance, addTransaction } from "../reducers/userSlice";
 import toast from "react-hot-toast";
 import { Assets } from "./Assets";
 import backArrow from "../assets/backArrow.svg";
@@ -20,6 +19,7 @@ import { BASE_URL } from "../utils";
 export default function Exchange({ setPage }) {
   const [userDetails, setUserDetails] = useState(null);
   const cryptoReceived = useSelector((state) => state.exchange.cryptoReceived);
+  const spentAmount = useSelector((state) => state.exchange.spentAmount);
   const cryptoData = useSelector((state) => state.exchange.cryptoData);
   const filteredCryptoData = useSelector(
     (state) => state.exchange.filteredCryptoData
@@ -82,45 +82,46 @@ export default function Exchange({ setPage }) {
 
   function handleInsertAmount(event) {
     const amount = parseFloat(event.target.value) || 0;
-    //  const spentAmount = useSelector((state) => state.exchange.spentAmount);
     const selectedCryptoId = selectedCrypto ? selectedCrypto.id : null;
 
     if (selectedCryptoId) {
       if (amount === 0) {
         toast.error("Inserisci un valore positivo!");
         dispatch(setCryptoReceived(0));
-        setSpentAmounts((prev) => ({ ...prev, [selectedCryptoId]: 0 }));
       } else if (amount > balance) {
         toast.error("Il tuo saldo è insufficiente per l'acquisto");
         dispatch(setError("Saldo insufficiente"));
         dispatch(setCryptoReceived(0));
-        setSpentAmounts((prev) => ({ ...prev, [selectedCryptoId]: 0 }));
       } else {
         dispatch(setError(null));
         const cryptoAmount = selectedCrypto
           ? amount / selectedCrypto.quote.USD.price
           : 0;
         dispatch(setCryptoReceived(cryptoAmount));
-        setSpentAmount((prev) => ({ ...prev, [selectedCryptoId]: amount }));
       }
     }
   }
 
   async function handleBuy() {
     const amount = parseFloat(amountRef.current.value) || 0;
+
     if (amount === 0) {
       toast.error("Inserisci un valore positivo!");
       dispatch(setError("L'importo deve essere maggiore di zero"));
       return;
     }
+
     if (amount > balance) {
-      dispatch(setError("Insufficient balance"));
+      toast.error("Il tuo saldo è insufficiente per l'acquisto");
+      dispatch(setError("Saldo insufficiente"));
       return;
     }
+
     try {
       const cryptoAmount = selectedCrypto
         ? amount / selectedCrypto.quote.USD.price
         : 0;
+      const spentAmount = amount; // This is the USD value spent
       let updatedWallet = [...wallet];
       const cryptoIndex = updatedWallet.findIndex(
         (crypto) => crypto.id === selectedCrypto.id
@@ -136,43 +137,40 @@ export default function Exchange({ setPage }) {
           imageUrl: selectedCrypto.imageUrl,
         });
       }
+
       const transaction = await createTransaction(
         selectedCrypto.id,
         userDetails.id,
         cryptoAmount,
         balance,
-        "+",
-        amount
+        spentAmount,
+        "+"
       );
+
       const result = await updateUserBalance({
         id,
         newBalance: balance - amount,
         wallet: updatedWallet,
       });
 
-      console.log("Result from updateUserBalance:", result);
-
       if (result.error) {
-        toast.error("Errore nell'acquisto della crypto");
-        dispatch(setError("Failed to update balance"));
-        dispatch(setSelectedCrypto(null));
-        dispatch(setCryptoReceived(null));
-      } else {
-        toast.success("Crypto acquistata con successo!");
-        dispatch(setError(null));
-        dispatch(setWallet(updatedWallet));
-        dispatch(setBalance(balance - amount));
-        dispatch(addTransaction(transaction));
-        dispatch(setSelectedCrypto(null));
-        dispatch(setCryptoReceived(null));
-        setPage("wallet");
+        throw new Error("Failed to update balance");
       }
-    } catch (error) {
-      toast.error("Errore nell'acquisto della crypto");
-      dispatch(setError("Failed to update balance"));
-      console.log(error);
+
+      toast.success("Crypto acquistata con successo!");
+      dispatch(setError(null));
+      dispatch(setWallet(updatedWallet));
+      dispatch(setBalance(balance - amount));
+      dispatch(addTransaction(transaction));
       dispatch(setSelectedCrypto(null));
       dispatch(setCryptoReceived(null));
+      setPage("wallet");
+    } catch (error) {
+      toast.error("Errore nell'acquisto della crypto");
+      dispatch(setError(error.message));
+      dispatch(setSelectedCrypto(null));
+      dispatch(setCryptoReceived(null));
+      console.log(error);
     }
   }
 
@@ -189,7 +187,7 @@ export default function Exchange({ setPage }) {
             <h1 className="text-3xl font-semibold">
               {name}'s <br /> Crypto Exchange
             </h1>
-            <h2>Current Balance: USD {balance.toFixed(2)}</h2>
+            <h2>Current Balance: USD {balance?.toFixed(2)}</h2>
           </div>
           {error && <div className="text-red-500 text-center">{error}</div>}
           <div className="flex flex-col">

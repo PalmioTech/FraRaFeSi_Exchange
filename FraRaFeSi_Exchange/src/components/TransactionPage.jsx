@@ -16,7 +16,7 @@ const ActivityRow = ({
   const formattedSpentAmount = parseFloat(spentAmount).toFixed(2);
 
   return (
-    <div className="flex justify-between p-3 border-b border-gray-300 rounded-lg  mb-2">
+    <div className="flex justify-between p-3 border-b border-gray-300 rounded-lg mb-2">
       <div className="relative w-8 h-8">
         <img
           src={avatarBatman}
@@ -39,9 +39,6 @@ const ActivityRow = ({
         <span className="text-m text-end text-white">
           {formattedAmount} {cryptoName}
         </span>
-        <span className="text-sm text-end text-green">
-          {formattedSpentAmount} USD
-        </span>
       </div>
     </div>
   );
@@ -57,7 +54,7 @@ export default function TransactionPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
       <div className="flex justify-center mt-2 mb-5 border-b-2 border-violet">
         <h1 className="text-3xl font-extrabold text-white text-center mb-5">
           Your{" "}
@@ -66,17 +63,19 @@ export default function TransactionPage() {
           </mark>
         </h1>
       </div>
-      {data.map((transaction) => (
-        <ActivityRow
-          key={transaction.id}
-          sign={transaction.sign}
-          previousBalance={transaction.previous_balance?.toFixed(2) || "0.00"}
-          amount={transaction.amount}
-          spentAmount={transaction.spentAmount}
-          cryptoImage={transaction.id_crypto}
-          cryptoName={transaction.cryptoName}
-        />
-      ))}
+      <div className="flex-1 overflow-y-scroll">
+        {data.map((transaction) => (
+          <ActivityRow
+            key={transaction.id}
+            sign={transaction.sign}
+            previousBalance={transaction.previous_balance?.toFixed(2) || "0.00"}
+            amount={transaction.amount}
+            spentAmount={transaction.spentAmount}
+            cryptoImage={transaction.id_crypto}
+            cryptoName={transaction.cryptoName}
+          />
+        ))}
+      </div>
     </div>
   );
 }

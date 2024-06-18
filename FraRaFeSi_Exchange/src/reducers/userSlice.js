@@ -15,9 +15,13 @@ export const userSlice = createSlice({
     setWallet: (state, action) => {
       state.data.wallet = action.payload;
     },
+    addTransaction(state, action) {
+      state.data.transactions = action.payload;
+    },
   },
 });
 
-export const { setUser, setBalance, setWallet } = userSlice.actions;
+export const { setUser, setBalance, setWallet, addTransaction } =
+  userSlice.actions;
 
 export default userSlice.reducer;

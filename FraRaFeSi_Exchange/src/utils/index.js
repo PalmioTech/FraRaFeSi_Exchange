@@ -28,7 +28,8 @@ export async function createTransaction(
   id_user,
   amount,
   previous_balance,
-  sign
+  sign,
+  spentAmount
 ) {
   const payload = {
     id: createTransactionHash(id_crypto, id_user, amount, sign),

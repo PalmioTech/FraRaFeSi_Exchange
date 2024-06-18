@@ -179,7 +179,7 @@ export default function Sell({ setPage }) {
                   onClick={handleMax}
                   className="absolute right-2 bottom-3 rounded-lg  bg-violet text-white p-1"
                 >
-                  Max
+                  MAX
                 </button>
               </div>
               <div className="flex flex-col">
