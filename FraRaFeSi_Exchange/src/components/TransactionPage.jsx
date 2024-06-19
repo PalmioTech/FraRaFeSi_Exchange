@@ -39,6 +39,9 @@ const ActivityRow = ({
         <span className="text-m text-end text-white">
           {formattedAmount} {cryptoName}
         </span>
+        <span className="text-sm text-end text-green">
+          {formattedSpentAmount} USD
+        </span>
       </div>
     </div>
   );
