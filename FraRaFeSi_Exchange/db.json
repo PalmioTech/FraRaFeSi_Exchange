@@ -14,13 +14,18 @@
       "name": "Federico Palmieri",
       "email": "fede-palma@hotmail.it",
       "password": "fc2a36b07f5bf1c68ed52b636b74fe45",
-      "balance": 8802,
+      "balance": 8679,
       "hash": "JmpIQw2D9wIcXUDcT6XPEb0x6",
       "wallet": [
         {
           "id": 1,
           "name": "Bitcoin",
           "amount": 0.018360122465216278
+        },
+        {
+          "id": 825,
+          "name": "Tether USDt",
+          "amount": 123.04031580760784
         }
       ]
     },
@@ -646,6 +651,14 @@
       "amount": 0.4617221764167935,
       "previous_balance": 37933.69870165422,
       "sign": 1580
+    },
+    {
+      "id": "7b77ceac19376c0c999936a93cf2bec8",
+      "id_crypto": 825,
+      "id_user": "9ac6",
+      "amount": 123.04031580760784,
+      "previous_balance": 8802,
+      "sign": 123
     }
   ]
 }

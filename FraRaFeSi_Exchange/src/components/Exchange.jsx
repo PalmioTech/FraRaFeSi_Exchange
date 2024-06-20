@@ -33,6 +33,7 @@ export default function Exchange({ setPage }) {
   const handleClick = () => {
     setPage("wallet");
     dispatch(setSelectedCrypto(null));
+    dispatch(setError(null));
   };
 
   const userData = useSelector((state) => state.user.data);
