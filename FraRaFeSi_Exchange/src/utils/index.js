@@ -28,8 +28,8 @@ export async function createTransaction(
   id_user,
   amount,
   previous_balance,
-  sign,
-  spentAmount
+  spentAmount,
+  sign
 ) {
   const payload = {
     id: createTransactionHash(id_crypto, id_user, amount, sign),
@@ -37,10 +37,14 @@ export async function createTransaction(
     id_user,
     amount,
     previous_balance,
+    spentAmount,
     sign,
   };
   return await fetch(BASE_URL + "/transactions", {
     method: "POST",
     body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((res) => res.json());
 }

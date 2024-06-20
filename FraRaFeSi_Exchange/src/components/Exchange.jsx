@@ -127,7 +127,6 @@ export default function Exchange({ setPage }) {
       const cryptoIndex = updatedWallet.findIndex(
         (crypto) => crypto.id === selectedCrypto.id
       );
-
       if (cryptoIndex >= 0) {
         updatedWallet[cryptoIndex].amount += cryptoAmount;
       } else {
@@ -147,7 +146,6 @@ export default function Exchange({ setPage }) {
         spentAmount,
         "+"
       );
-
       const result = await updateUserBalance({
         id,
         newBalance: balance - amount,
@@ -162,7 +160,7 @@ export default function Exchange({ setPage }) {
       dispatch(setError(null));
       dispatch(setWallet(updatedWallet));
       dispatch(setBalance(balance - amount));
-      dispatch(addTransaction(transaction));
+
       dispatch(setSelectedCrypto(null));
       dispatch(setCryptoReceived(null));
       setPage("wallet");

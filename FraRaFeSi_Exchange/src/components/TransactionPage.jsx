@@ -14,6 +14,8 @@ const ActivityRow = ({
   const formattedSign = sign === "+" ? "Buy" : "Sell";
   const formattedAmount = parseFloat(amount).toFixed(2);
   const formattedSpentAmount = parseFloat(spentAmount).toFixed(2);
+  const spentAmountClass =
+    formattedSign === "Buy" ? "text-green" : "text-red-500";
 
   return (
     <div className="flex justify-between p-3 border-b border-gray-300 rounded-lg mb-2">
@@ -39,7 +41,7 @@ const ActivityRow = ({
         <span className="text-m text-end text-white">
           {formattedAmount} {cryptoName}
         </span>
-        <span className="text-sm text-end text-green">
+        <span className={`text-sm text-end ${spentAmountClass} w-max`}>
           {formattedSpentAmount} USD
         </span>
       </div>
@@ -55,7 +57,6 @@ export default function TransactionPage() {
   if (!data || !Array.isArray(data)) {
     return <div>No transactions found.</div>;
   }
-
   return (
     <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
       <div className="flex justify-center mt-2 mb-5 border-b-2 border-violet">

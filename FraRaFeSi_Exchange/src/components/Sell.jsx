@@ -5,12 +5,7 @@ import backArrow from "../assets/backArrow.svg";
 import { setCryptoData } from "../reducers/exchangeSlice";
 import toast from "react-hot-toast";
 import { createTransaction } from "../utils";
-import {
-  setCryptoReceived,
-  setFilteredCryptoData,
-  setError,
-  setSelectedCrypto,
-} from "../reducers/exchangeSlice";
+import { setError, setSelectedCrypto } from "../reducers/exchangeSlice";
 import { setBalance, setWallet } from "../reducers/userSlice";
 import { useUpdateUserBalanceMutation } from "../reducers/apiSlice";
 
@@ -72,7 +67,6 @@ export default function Sell({ setPage }) {
         return crypto;
       });
 
-      // Rimuovi le criptovalute con valore 0
       updatedWallet = updatedWallet.filter((crypto) => crypto.amount > 0);
 
       const transaction = await createTransaction(
@@ -80,6 +74,7 @@ export default function Sell({ setPage }) {
         userData.id,
         amount,
         balance,
+        amount,
         "-"
       );
 
